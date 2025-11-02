@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alchemy Lumière | AI-Powered Digital Alchemy</title>
+    <title>Executive Dashboard | Alchemy Lumière</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -56,11 +56,15 @@
         body {
             font-family: 'Inter', sans-serif;
             line-height: 1.7;
-            color: var(--primary-dark);
-            background-color: var(--primary-light);
+            color: var(--primary-light);
+            background: var(--gradient-hero);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            display: flex;
+            min-height: 100vh;
             position: relative;
         }
 
@@ -98,53 +102,6 @@
             background: var(--gradient-primary);
             z-index: 10000;
             transition: width 0.1s ease-out;
-        }
-
-        /* === PRELOADER === */
-        #preloader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--primary-dark);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 100000;
-            transition: opacity 0.8s var(--transition-slow), visibility 0.8s var(--transition-slow);
-        }
-
-        .preloader-content {
-            text-align: center;
-            color: var(--primary-light);
-        }
-
-        .preloader-logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 2rem;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .loader {
-            width: 80px;
-            height: 80px;
-            border: 3px solid rgba(201, 169, 110, 0.3);
-            border-radius: 50%;
-            border-top-color: var(--accent-gold);
-            animation: spin 1s ease-in-out infinite;
-            margin: 0 auto 2rem;
-        }
-
-        .preloader-text {
-            font-size: 1.2rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
         }
 
         /* === ENHANCED ANIMATED BACKGROUND === */
@@ -210,23 +167,22 @@
         }
 
         h1 {
-            font-size: clamp(3.5rem, 7vw, 7rem);
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
             letter-spacing: -0.02em;
         }
 
         h2 {
-            font-size: clamp(2.8rem, 5vw, 5rem);
-            position: relative;
+            font-size: clamp(1.8rem, 4vw, 3rem);
         }
 
         h3 {
-            font-size: clamp(2rem, 3.5vw, 3.5rem);
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
         }
 
         p {
             margin-bottom: 1.5rem;
             font-size: 1.125rem;
-            color: var(--gray-800);
+            color: var(--accent-gold-light);
         }
 
         a {
@@ -284,7 +240,7 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 1.5rem 3rem;
+            padding: 1.25rem 2.5rem;
             background: var(--gradient-primary);
             color: var(--primary-dark);
             border: none;
@@ -373,41 +329,81 @@
             color: var(--primary-dark);
         }
 
-        /* === ENHANCED PREMIUM HEADER === */
-        header {
+        .btn-small {
+            padding: 0.75rem 1.5rem;
+            font-size: 0.85rem;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--accent-gold);
+            color: var(--accent-gold);
+            box-shadow: none;
+        }
+
+        .btn-outline:before {
+            background: var(--accent-gold);
+        }
+
+        .btn-outline:hover {
+            color: var(--primary-dark);
+        }
+
+        .btn-danger {
+            background: #dc2626;
+            color: white;
+            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+        }
+
+        .btn-danger:before {
+            background: #7f1d1d;
+        }
+
+        .btn-danger:hover {
+            box-shadow: 0 8px 20px rgba(220, 38, 38, 0.4);
+        }
+
+        /* === PREMIUM GLASS SIDEBAR === */
+        .sidebar {
+            width: 300px;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(30px) saturate(180%);
+            -webkit-backdrop-filter: blur(30px) saturate(180%);
+            color: var(--primary-light);
+            height: 100vh;
             position: fixed;
+            left: 0;
+            top: 0;
+            transition: var(--transition-medium);
+            z-index: 100;
+            overflow-y: auto;
+            border-right: 1px solid var(--glass-border);
+            box-shadow: 10px 0 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar-header {
+            padding: 2.5rem 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sidebar-header:before {
+            content: '';
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(30px) saturate(180%);
-            -webkit-backdrop-filter: blur(30px) saturate(180%);
-            z-index: 1000;
-            padding: 1.5rem 0;
-            transition: var(--transition-medium);
-            border-bottom: 1px solid rgba(201, 169, 110, 0.1);
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.03);
-        }
-
-        header.scrolled {
-            padding: 1rem 0;
-            box-shadow:
-                0 4px 30px rgba(0, 0, 0, 0.08),
-                0 0 1px rgba(201, 169, 110, 0.2);
-            background: rgba(255, 255, 255, 0.95);
-        }
-
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(201, 169, 110, 0.1) 0%, transparent 100%);
+            z-index: -1;
         }
 
         .logo {
             font-family: 'Playfair Display', serif;
-            font-size: 1.75rem;
+            font-size: 1.5rem;
             font-weight: 700;
-            color: var(--primary-dark);
+            color: var(--primary-light);
             display: flex;
             align-items: center;
         }
@@ -418,15 +414,15 @@
         }
 
         .logo-icon {
-            width: 48px;
-            height: 48px;
+            width: 40px;
+            height: 40px;
             margin-right: 0.85rem;
             background: var(--gradient-primary);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             font-weight: 700;
             color: var(--primary-dark);
             font-family: 'Playfair Display', serif;
@@ -464,697 +460,577 @@
             opacity: 0.6;
         }
 
-        nav ul {
+        .sidebar-nav {
+            padding: 2rem 0;
+        }
+
+        .nav-item {
+            padding: 1rem 2rem;
             display: flex;
-            list-style: none;
-            gap: 2.5rem;
             align-items: center;
-        }
-
-        nav a {
-            font-weight: 500;
-            position: relative;
-            padding: 0.5rem 0;
-        }
-
-        nav a:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent-gold);
             transition: var(--transition-medium);
-        }
-
-        nav a:hover:after {
-            width: 100%;
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
             cursor: pointer;
-            color: var(--primary-dark);
-            z-index: 1001;
-            width: 30px;
-            height: 30px;
-            position: relative;
-        }
-
-        .mobile-menu-btn span {
-            display: block;
-            width: 100%;
-            height: 2px;
-            background: var(--primary-dark);
-            margin: 6px 0;
-            transition: var(--transition-medium);
-        }
-
-        /* === ENHANCED PREMIUM HERO SECTION === */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
             position: relative;
             overflow: hidden;
-            background: var(--gradient-hero);
-            color: var(--primary-light);
+            border-left: 4px solid transparent;
         }
 
-        .hero::before {
+        .nav-item:before {
             content: '';
             position: absolute;
             top: 0;
-            right: 0;
-            width: 50%;
+            left: -100%;
+            width: 100%;
             height: 100%;
-            background:
-                radial-gradient(circle at 80% 20%, rgba(201, 169, 110, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 60% 80%, rgba(139, 115, 85, 0.06) 0%, transparent 50%);
-            pointer-events: none;
-            will-change: transform;
+            background: linear-gradient(90deg, transparent, rgba(201, 169, 110, 0.1), transparent);
+            transition: var(--transition-medium);
         }
 
-        .hero-content {
-            max-width: 950px;
-            position: relative;
-            z-index: 2;
-            animation: heroReveal 1s cubic-bezier(0.19, 1, 0.22, 1) forwards;
-            opacity: 0;
+        .nav-item:hover:before {
+            left: 100%;
         }
 
-        .hero-badge {
-            display: inline-block;
-            background: var(--gradient-primary);
-            color: var(--primary-dark);
-            padding: 0.75rem 1.5rem;
-            border-radius: 25px;
-            font-size: 0.9rem;
-            font-weight: 700;
-            margin-bottom: 2rem;
-            box-shadow:
-                0 6px 20px rgba(201, 169, 110, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            animation: badgePulse 2s ease-in-out infinite;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        .nav-item.active {
+            background: rgba(201, 169, 110, 0.1);
+            border-left: 4px solid var(--accent-gold);
         }
 
-        .hero h1 {
-            margin-bottom: 2rem;
-            background: linear-gradient(135deg, var(--primary-light) 0%, var(--accent-gold) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.05);
         }
 
-        .hero-description {
-            font-size: 1.5rem;
-            margin-bottom: 3rem;
-            color: var(--accent-gold-light);
-            max-width: 700px;
-        }
-
-        .hero-actions {
-            display: flex;
-            gap: 1.5rem;
-            margin-bottom: 4rem;
-            flex-wrap: wrap;
-        }
-
-        .trust-indicators {
-            display: flex;
-            gap: 3rem;
-            flex-wrap: wrap;
-        }
-
-        .trust-item {
+        .nav-icon {
+            margin-right: 1rem;
+            font-size: 1.2rem;
+            width: 24px;
             text-align: center;
+            color: var(--accent-gold);
+        }
+
+        /* === MAIN CONTENT WITH GLASS EFFECT === */
+        .main-content {
+            flex: 1;
+            margin-left: 300px;
+            padding: 2.5rem;
+            transition: var(--transition-medium);
             position: relative;
         }
 
-        .trust-value {
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2.5rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-soft);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .admin-header:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: var(--accent-gold);
+        }
+
+        .admin-title {
+            margin-bottom: 0.5rem;
+        }
+
+        .admin-subtitle {
+            color: var(--accent-gold-light);
+            font-size: 1.1rem;
+        }
+
+        .admin-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        /* === ENHANCED STATS CARDS WITH PROGRESS INDICATORS === */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 2.5rem 2rem;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition-medium);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--accent-gold);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: var(--transition-medium);
+        }
+
+        .stat-card:hover:before {
+            transform: scaleX(1);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .stat-value {
             font-size: 2.5rem;
             font-weight: 700;
             color: var(--accent-gold);
             margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
         }
 
-        .trust-label {
-            font-size: 0.875rem;
+        .stat-trend {
+            font-size: 0.8rem;
+            margin-left: 0.5rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 20px;
+            background: rgba(34, 197, 94, 0.1);
+            color: #16a34a;
+        }
+
+        .stat-trend.negative {
+            background: rgba(239, 68, 68, 0.1);
+            color: #dc2626;
+        }
+
+        .stat-label {
+            font-size: 1rem;
             color: var(--accent-gold-light);
             font-weight: 500;
         }
 
-        .trust-item:not(:last-child):after {
-            content: '';
-            position: absolute;
-            right: -1.5rem;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 1px;
-            height: 40px;
-            background: rgba(201, 169, 110, 0.3);
+        .stat-progress {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            margin-top: 1rem;
+            overflow: hidden;
         }
 
-        .hero-bg {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 45%;
+        .stat-progress-bar {
             height: 100%;
-            background: var(--primary-dark);
-            clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
-            z-index: 1;
-        }
-
-        .hero-bg:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, rgba(201, 169, 110, 0.1) 0%, rgba(139, 115, 85, 0.05) 100%);
-        }
-
-        .floating-elements {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .floating-element {
-            position: absolute;
             background: var(--accent-gold);
-            opacity: 0.1;
-            border-radius: 50%;
+            border-radius: 3px;
+            transition: width 1.5s ease-in-out;
         }
 
-        .floating-element:nth-child(1) {
-            width: 120px;
-            height: 120px;
-            top: 20%;
-            left: 10%;
-            animation: float 20s infinite linear;
-        }
-
-        .floating-element:nth-child(2) {
-            width: 80px;
-            height: 80px;
-            top: 60%;
-            left: 5%;
-            animation: float 15s infinite linear reverse;
-        }
-
-        .floating-element:nth-child(3) {
-            width: 60px;
-            height: 60px;
-            top: 40%;
-            right: 15%;
-            animation: float 18s infinite linear;
-        }
-
-        /* === ENHANCED PREMIUM FEATURES SECTION === */
-        .features {
-            background: var(--primary-light);
-            position: relative;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 3rem;
-        }
-
-        .feature-card {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(30px) saturate(180%);
-            -webkit-backdrop-filter: blur(30px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            padding: 4rem 3rem;
-            border-radius: var(--border-radius-xl);
-            box-shadow:
-                var(--shadow-soft),
-                inset 0 1px 0 rgba(255, 255, 255, 0.5);
-            transition: var(--transition-medium);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .feature-card:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 0;
-            background: var(--gradient-primary);
-            transition: var(--transition-medium);
-            z-index: -1;
-        }
-
-        .feature-card:after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(201, 169, 110, 0.1) 0%, transparent 70%);
-            opacity: 0;
-            transition: var(--transition-slow);
-            pointer-events: none;
-        }
-
-        .feature-card:hover:before {
-            height: 100%;
-        }
-
-        .feature-card:hover:after {
-            opacity: 1;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-15px) scale(1.03);
-            box-shadow:
-                var(--shadow-intense),
-                0 0 40px rgba(201, 169, 110, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.6);
-            border-color: rgba(201, 169, 110, 0.3);
-        }
-
-        .feature-card:hover .feature-icon,
-        .feature-card:hover h3,
-        .feature-card:hover p {
-            color: var(--primary-dark);
-        }
-
-        .feature-icon {
-            font-size: 4rem;
-            margin-bottom: 2rem;
-            color: var(--accent-gold);
-            transition: var(--transition-medium);
-        }
-
-        .feature-card h3 {
-            margin-bottom: 1.5rem;
-            transition: var(--transition-medium);
-        }
-
-        .feature-card p {
-            transition: var(--transition-medium);
-        }
-
-        /* === AI CAPABILITIES SECTION === */
-        .ai-section {
-            background: var(--primary-dark);
-            color: var(--primary-light);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .ai-section .section-header h2:after {
-            background: var(--primary-light);
-        }
-
-        .ai-features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
-        }
-
-        .ai-feature {
-            text-align: center;
-            padding: 3rem 2rem;
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            border-radius: var(--border-radius-lg);
-            transition: var(--transition-medium);
-        }
-
-        .ai-feature:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .ai-icon {
-            font-size: 4rem;
-            margin-bottom: 2rem;
-        }
-
-        .ai-feature h3 {
-            color: var(--accent-gold);
-            margin-bottom: 1.5rem;
-        }
-
-        /* === SERVICES SECTION === */
-        .services {
-            background: var(--primary-light);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-            gap: 3rem;
-        }
-
-        .service-card {
-            background: var(--primary-light);
-            padding: 4rem 3rem;
-            border-radius: var(--border-radius-lg);
-            transition: var(--transition-medium);
-            border: 1px solid rgba(201, 169, 110, 0.2);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            box-shadow: var(--shadow-soft);
-        }
-
-        .service-card:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 0;
-            background: var(--gradient-primary);
-            transition: var(--transition-medium);
-            z-index: -1;
-        }
-
-        .service-card:hover:before {
-            height: 100%;
-        }
-
-        .service-card:hover {
-            transform: translateY(-15px);
-            border-color: var(--accent-gold);
-            box-shadow: var(--shadow-intense);
-        }
-
-        .service-card:hover h3,
-        .service-card:hover .price,
-        .service-card:hover .service-features li {
-            color: var(--primary-dark);
-        }
-
-        .service-card h3 {
-            color: var(--accent-gold);
-            margin-bottom: 1.5rem;
-            transition: var(--transition-medium);
-        }
-
-        .price {
-            font-size: 3rem;
-            font-weight: 700;
-            margin: 2rem 0;
-            color: var(--accent-gold);
-            transition: var(--transition-medium);
-        }
-
-        .service-features {
-            list-style: none;
-            margin-bottom: 3rem;
-        }
-
-        .service-features li {
-            margin-bottom: 1rem;
-            position: relative;
-            padding-left: 2rem;
-            transition: var(--transition-medium);
-        }
-
-        .service-features li:before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: var(--accent-gold);
-            font-weight: 700;
-            transition: var(--transition-medium);
-        }
-
-        .service-card:hover .service-features li:before {
-            color: var(--primary-dark);
-        }
-
-        /* === TESTIMONIALS SECTION === */
-        .testimonials {
-            background: var(--primary-dark);
-            color: var(--primary-light);
-            position: relative;
-        }
-
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 3rem;
-        }
-
-        .testimonial-card {
+        /* === PREMIUM TABLE WITH ENHANCED INTERACTIONS === */
+        .table-container {
             background: rgba(255, 255, 255, 0.05);
-            padding: 3.5rem;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-radius: var(--border-radius-lg);
             box-shadow: var(--shadow-soft);
-            transition: var(--transition-medium);
-            position: relative;
-            border: 1px solid rgba(201, 169, 110, 0.1);
-        }
-
-        .testimonial-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-intense);
-            border-color: rgba(201, 169, 110, 0.3);
-        }
-
-        .testimonial-quote {
-            font-style: italic;
-            margin-bottom: 2rem;
-            position: relative;
-            font-size: 1.2rem;
-            line-height: 1.8;
-        }
-
-        .testimonial-quote:before {
-            content: '"';
-            position: absolute;
-            top: -20px;
-            left: -15px;
-            font-size: 5rem;
-            color: var(--accent-gold);
-            opacity: 0.3;
-            font-family: serif;
-        }
-
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-        }
-
-        .author-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: var(--accent-gold);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary-dark);
-            font-weight: 700;
-            font-size: 1.5rem;
-        }
-
-        .author-info h4 {
-            margin-bottom: 0.5rem;
-            color: var(--accent-gold);
-        }
-
-        .author-info p {
-            margin-bottom: 0;
-            font-size: 0.9rem;
-            color: var(--accent-gold-light);
-        }
-
-        /* === CTA SECTION === */
-        .cta-section {
-            background: var(--gradient-dark);
-            color: var(--primary-light);
-            text-align: center;
-            position: relative;
             overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .cta-section .section-header h2:after {
-            background: var(--accent-gold);
-        }
-
-        .cta-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .cta-buttons {
+        .table-header {
+            padding: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
-            gap: 2rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 4rem;
-        }
-
-        /* === FOOTER === */
-        footer {
-            background: var(--primary-dark);
-            color: var(--primary-light);
-            padding: 6rem 0 3rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 4rem;
-            margin-bottom: 4rem;
-        }
-
-        .footer-logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            display: flex;
+            justify-content: space-between;
             align-items: center;
         }
 
-        .footer-logo span {
-            color: var(--accent-gold);
+        .table-title {
+            margin-bottom: 0;
         }
 
-        .footer-links h4 {
-            color: var(--accent-gold);
-            margin-bottom: 2rem;
-            font-size: 1.2rem;
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius);
+            padding: 0.75rem 1.25rem;
+            transition: var(--transition-fast);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .footer-links ul {
-            list-style: none;
+        .search-box:focus-within {
+            box-shadow: 0 0 0 2px rgba(201, 169, 110, 0.2);
+            border-color: var(--accent-gold);
         }
 
-        .footer-links li {
-            margin-bottom: 1rem;
+        .search-box input {
+            border: none;
+            background: transparent;
+            outline: none;
+            padding: 0.25rem 0.5rem;
+            width: 220px;
+            font-family: 'Inter', sans-serif;
+            color: var(--primary-light);
         }
 
-        .footer-links a {
+        .search-box input::placeholder {
             color: var(--accent-gold-light);
+            opacity: 0.7;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.25rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--accent-gold);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        td {
+            padding: 1.25rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: var(--transition-fast);
+            color: var(--accent-gold-light);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr {
             transition: var(--transition-fast);
         }
 
-        .footer-links a:hover {
+        tr:hover {
+            background: rgba(201, 169, 110, 0.05);
+        }
+
+        tr:hover td {
+            transform: translateX(4px);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: var(--transition-fast);
+        }
+
+        .status-new {
+            background: rgba(59, 130, 246, 0.2);
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .status-contacted {
+            background: rgba(34, 197, 94, 0.2);
+            color: #4ade80;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .status-completed {
+            background: rgba(234, 179, 8, 0.2);
+            color: #facc15;
+            border: 1px solid rgba(234, 179, 8, 0.3);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        /* === PREMIUM MODAL WITH ENHANCED UX === */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity var(--transition-medium);
+        }
+
+        .modal.active {
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: rgba(20, 20, 20, 0.95);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border-radius: var(--border-radius-lg);
+            width: 90%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow-intense);
+            transform: scale(0.9);
+            transition: transform var(--transition-medium);
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .modal.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            padding: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            background: rgba(20, 20, 20, 0.95);
+            z-index: 10;
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--accent-gold-light);
+            transition: var(--transition-fast);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.1);
             color: var(--accent-gold);
         }
 
-        .footer-bottom {
-            text-align: center;
-            padding-top: 3rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: var(--accent-gold-light);
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .detail-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: var(--accent-gold);
+            margin-bottom: 0.5rem;
             font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
-        /* === ENHANCED ANIMATIONS === */
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
+        .detail-value {
+            color: var(--primary-light);
+            font-size: 1.1rem;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        /* === MOBILE MENU BUTTON WITH ANIMATION === */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-light);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-fast);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .mobile-menu-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* === ENHANCED RESPONSIVE DESIGN === */
+        @media (max-width: 1200px) {
+            .sidebar {
+                width: 260px;
+            }
+            
+            .main-content {
+                margin-left: 260px;
             }
         }
 
-        @keyframes float {
-            0% {
-                transform: translateY(0) rotate(0deg);
+        @media (max-width: 992px) {
+            .sidebar {
+                transform: translateX(-100%);
+                width: 300px;
             }
-            50% {
-                transform: translateY(-20px) rotate(180deg);
+            
+            .sidebar.active {
+                transform: translateX(0);
             }
-            100% {
-                transform: translateY(0) rotate(360deg);
+            
+            .main-content {
+                margin-left: 0;
             }
+            
+            .mobile-menu-btn {
+                display: flex;
+            }
+            
+            .detail-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .admin-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1.5rem;
+            }
+            
+            .admin-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .table-container {
+                overflow-x: auto;
+            }
+            
+            table {
+                min-width: 800px;
+            }
+            
+            .search-box input {
+                width: 180px;
+            }
+            
+            .main-content {
+                padding: 1.5rem;
+            }
+        }
+
+        /* === PSYCHOLOGICAL PERSUASION ELEMENTS === */
+        .urgency-badge {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(239, 68, 68, 0.2);
+            color: #f87171;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+            animation: pulse 2s infinite;
+            border: 1px solid rgba(239, 68, 68, 0.3);
         }
 
         @keyframes pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(201, 169, 110, 0.4);
-            }
-            70% {
-                box-shadow: 0 0 0 10px rgba(201, 169, 110, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(201, 169, 110, 0);
-            }
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
         }
 
-        @keyframes gradientRotate {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        .social-proof {
+            display: flex;
+            align-items: center;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--accent-gold-light);
         }
 
-        @keyframes badgePulse {
-            0%, 100% {
-                box-shadow: 0 6px 20px rgba(201, 169, 110, 0.4);
-                transform: scale(1);
-            }
-            50% {
-                box-shadow: 0 8px 30px rgba(201, 169, 110, 0.6);
-                transform: scale(1.05);
-            }
+        .social-proof img {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 0.5rem;
         }
 
-        @keyframes heroReveal {
-            0% {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        /* === LOADING ANIMATION FOR ENHANCED UX === */
+        .loading-bar {
+            height: 3px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .loading-bar:before {
+            content: '';
+            position: absolute;
+            height: 100%;
+            width: 50%;
+            background: var(--accent-gold);
+            animation: loading 1.5s infinite ease-in-out;
         }
 
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s var(--transition-slow), transform 0.8s var(--transition-slow);
+        @keyframes loading {
+            0% { left: -50%; }
+            100% { left: 100%; }
         }
 
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* === TOAST NOTIFICATION === */
+        /* === TOAST NOTIFICATIONS FOR USER FEEDBACK === */
         .toast {
             position: fixed;
             bottom: 2rem;
             right: 2rem;
-            background: var(--primary-dark);
+            background: rgba(20, 20, 20, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             color: var(--primary-light);
             padding: 1.5rem 2rem;
             border-radius: var(--border-radius);
@@ -1166,7 +1042,7 @@
             transform: translateY(100px);
             opacity: 0;
             transition: transform var(--transition-medium), opacity var(--transition-medium);
-            max-width: 400px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .toast.active {
@@ -1186,130 +1062,55 @@
             color: var(--primary-dark);
         }
 
-        /* === MEDIA QUERIES === */
-        @media (max-width: 1024px) {
-            .hero-bg {
-                width: 60%;
+        /* === ENHANCED ANIMATIONS === */
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+            100% {
+                transform: translateY(0) rotate(360deg);
             }
         }
 
-        @media (max-width: 768px) {
-            .header-content {
-                position: relative;
-            }
-            
-            nav {
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: white;
-                box-shadow: var(--shadow-medium);
-                padding: 2rem 0;
-                transform: translateY(-10px);
-                opacity: 0;
-                visibility: hidden;
-                transition: var(--transition-medium);
-                backdrop-filter: blur(20px);
-                -webkit-backdrop-filter: blur(20px);
-            }
-            
-            nav.active {
-                transform: translateY(0);
-                opacity: 1;
-                visibility: visible;
-            }
-            
-            nav ul {
-                flex-direction: column;
-                gap: 1.5rem;
-                padding: 0 2rem;
-            }
-            
-            nav a {
-                display: block;
-                padding: 0.5rem 0;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .hero-bg {
-                width: 100%;
-                clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
-                opacity: 0.1;
-            }
-            
-            .hero-actions {
-                flex-direction: column;
-            }
-            
-            .trust-indicators {
-                gap: 1.5rem;
-                justify-content: center;
-            }
-            
-            .services-grid,
-            .features-grid,
-            .ai-features-grid,
-            .testimonials-grid {
-                grid-template-columns: 1fr;
-            }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
-            .trust-item:not(:last-child):after {
-                display: none;
-            }
+        @keyframes gradientRotate {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
-            .mobile-menu-btn.active span:nth-child(1) {
-                transform: rotate(45deg) translate(6px, 6px);
+        @keyframes badgePulse {
+            0%, 100% {
+                box-shadow: 0 6px 20px rgba(201, 169, 110, 0.4);
+                transform: scale(1);
             }
-
-            .mobile-menu-btn.active span:nth-child(2) {
-                opacity: 0;
-            }
-
-            .mobile-menu-btn.active span:nth-child(3) {
-                transform: rotate(-45deg) translate(6px, -6px);
-            }
-            
-            .feature-card,
-            .service-card,
-            .testimonial-card {
-                padding: 3rem 2rem;
+            50% {
+                box-shadow: 0 8px 30px rgba(201, 169, 110, 0.6);
+                transform: scale(1.05);
             }
         }
 
-        @media (max-width: 576px) {
-            .container {
-                padding: 0 1.5rem;
-            }
-            
-            section {
-                padding: 4rem 0;
-            }
-            
-            .feature-card,
-            .service-card {
-                padding: 2.5rem 1.5rem;
-            }
-            
-            .cta-buttons {
-                flex-direction: column;
-            }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s var(--transition-slow), transform 0.8s var(--transition-slow);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body>
-    <!-- Preloader -->
-    <div id="preloader">
-        <div class="preloader-content">
-            <div class="preloader-logo">Alchemy Lumière</div>
-            <div class="loader"></div>
-            <div class="preloader-text">Initializing Digital Alchemy</div>
-        </div>
-    </div>
-
     <!-- Custom Cursor -->
     <div class="cursor"></div>
     <div class="cursor-follower"></div>
@@ -1325,334 +1126,153 @@
         <div class="bg-element"></div>
     </div>
 
-    <!-- Enhanced Premium Header -->
-    <header id="header">
-        <div class="container header-content">
-            <a href="#" class="logo">
+    <!-- Premium Glass Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="logo">
                 <div class="logo-icon">AL</div>
                 Alchemy Lumière<span>v3</span>
             </a>
-            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <nav id="mainNav">
-                <ul>
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#ai-capabilities">AI Power</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#testimonials">Testimonials</a></li>
-                    <li><a href="consultation.html" class="btn btn-secondary">Request Consultation</a></li>
-                </ul>
-            </nav>
         </div>
-    </header>
+        <div class="sidebar-nav">
+            <div class="nav-item active">
+                <i class="fas fa-chart-line nav-icon"></i>
+                <span>Dashboard</span>
+            </div>
+            <div class="nav-item">
+                <i class="fas fa-calendar-check nav-icon"></i>
+                <span>Consultations</span>
+                <span class="urgency-badge">3 NEW</span>
+            </div>
+            <div class="nav-item">
+                <i class="fas fa-users nav-icon"></i>
+                <span>Clients</span>
+            </div>
+            <div class="nav-item">
+                <i class="fas fa-chart-bar nav-icon"></i>
+                <span>Analytics</span>
+            </div>
+            <div class="nav-item">
+                <i class="fas fa-cog nav-icon"></i>
+                <span>Settings</span>
+            </div>
+            <div class="nav-item">
+                <i class="fas fa-sign-out-alt nav-icon"></i>
+                <span>Logout</span>
+            </div>
+        </div>
+    </div>
 
-    <!-- Enhanced Premium Hero Section -->
-    <section class="hero">
-        <div class="container hero-content">
-            <div class="hero-badge">AI-Powered Digital Alchemy</div>
-            <h1>Where Code Meets Artistry</h1>
-            <p class="hero-description">We transform digital visions into extraordinary experiences through the alchemy of cutting-edge AI, masterful design, and technical excellence.</p>
-            <div class="hero-actions">
-                <a href="#services" class="btn btn-primary">
-                    <i class="fas fa-gem"></i>
-                    Explore Services
-                </a>
-                <a href="consultation.html" class="btn btn-secondary">
-                    <i class="fas fa-wand-magic-sparkles"></i>
-                    Begin Transformation
-                </a>
-            </div>
-            <div class="trust-indicators">
-                <div class="trust-item">
-                    <div class="trust-value">671B</div>
-                    <div class="trust-label">AI Parameters</div>
-                </div>
-                <div class="trust-item">
-                    <div class="trust-value">37B</div>
-                    <div class="trust-label">Active per Token</div>
-                </div>
-                <div class="trust-item">
-                    <div class="trust-value">14.8T</div>
-                    <div class="trust-label">Training Tokens</div>
-                </div>
-                <div class="trust-item">
-                    <div class="trust-value">128K</div>
-                    <div class="trust-label">Context Window</div>
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="admin-header">
+            <div>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 class="admin-title">Consultation Requests</h1>
+                <p class="admin-subtitle">Manage and review all consultation submissions</p>
+                <div class="social-proof">
+                    <i class="fas fa-crown"></i>
+                    <span>Premium clients this week: <strong>12</strong></span>
                 </div>
             </div>
+            <div class="admin-actions">
+                <button class="btn btn-outline">
+                    <i class="fas fa-download"></i>
+                    Export Data
+                </button>
+                <button class="btn" id="addNewBtn">
+                    <i class="fas fa-plus"></i>
+                    Add New
+                </button>
+            </div>
         </div>
-        <div class="hero-bg"></div>
-        <div class="floating-elements">
-            <div class="floating-element"></div>
-            <div class="floating-element"></div>
-            <div class="floating-element"></div>
-        </div>
-    </section>
 
-    <!-- Features Section -->
-    <section id="features" class="features">
-        <div class="container">
-            <div class="section-header text-center">
-                <h2>The Alchemy Lumière Difference</h2>
-                <p>We don't just build websites; we craft digital masterpieces that transform businesses</p>
+        <!-- Stats Overview -->
+        <div class="stats-container">
+            <div class="stat-card fade-in">
+                <div class="stat-value">24 <span class="stat-trend">+12%</span></div>
+                <div class="stat-label">Total Requests</div>
+                <div class="stat-progress">
+                    <div class="stat-progress-bar" style="width: 85%"></div>
+                </div>
             </div>
-            <div class="features-grid">
-                <div class="feature-card fade-in">
-                    <div class="feature-icon"><i class="fas fa-bolt"></i></div>
-                    <h3>Lightning Performance</h3>
-                    <p>Every website is meticulously optimized for speed with LCP under 2.5s, ensuring premium user experiences that convert at exceptional rates.</p>
+            <div class="stat-card fade-in">
+                <div class="stat-value">8 <span class="stat-trend">+33%</span></div>
+                <div class="stat-label">New This Week</div>
+                <div class="stat-progress">
+                    <div class="stat-progress-bar" style="width: 65%"></div>
                 </div>
-                <div class="feature-card fade-in">
-                    <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
-                    <h3>Enterprise Security</h3>
-                    <p>End-to-end encryption, GDPR compliance, and rigorous security protocols protect your brand reputation and user data with military-grade precision.</p>
+            </div>
+            <div class="stat-card fade-in">
+                <div class="stat-value">12 <span class="stat-trend">+8%</span></div>
+                <div class="stat-label">Contacted</div>
+                <div class="stat-progress">
+                    <div class="stat-progress-bar" style="width: 50%"></div>
                 </div>
-                <div class="feature-card fade-in">
-                    <div class="feature-icon"><i class="fas fa-palette"></i></div>
-                    <h3>Bespoke Design</h3>
-                    <p>No templates. Every project begins with a blank canvas, meticulously crafted to reflect your unique brand identity and vision.</p>
-                </div>
-                <div class="feature-card fade-in">
-                    <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
-                    <h3>Conversion Optimized</h3>
-                    <p>Data-driven design decisions and strategic UX patterns maximize engagement and drive measurable business objectives with scientific precision.</p>
-                </div>
-                <div class="feature-card fade-in">
-                    <div class="feature-icon"><i class="fas fa-robot"></i></div>
-                    <h3>AI-Enhanced</h3>
-                    <p>Leverage our proprietary AI architecture to create intelligent, adaptive experiences that anticipate user needs and behaviors.</p>
-                </div>
-                <div class="feature-card fade-in">
-                    <div class="feature-icon"><i class="fas fa-infinity"></i></div>
-                    <h3>Future-Proof</h3>
-                    <p>Built with scalability and adaptability in mind, ensuring your digital presence evolves seamlessly with emerging technologies and trends.</p>
+            </div>
+            <div class="stat-card fade-in">
+                <div class="stat-value">4 <span class="stat-trend negative">-5%</span></div>
+                <div class="stat-label">Completed</div>
+                <div class="stat-progress">
+                    <div class="stat-progress-bar" style="width: 25%"></div>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- AI Capabilities Section -->
-    <section id="ai-capabilities" class="ai-section">
-        <div class="container">
-            <div class="section-header text-center">
-                <h2>Powered by Alchemy Lumière AI Architecture</h2>
-                <p>Leveraging state-of-the-art 671B parameter model for intelligent digital experiences</p>
-            </div>
-            <div class="ai-features-grid">
-                <div class="ai-feature fade-in">
-                    <div class="ai-icon"><i class="fas fa-brain"></i></div>
-                    <h3>Multi-Token Prediction</h3>
-                    <p>Advanced AI that anticipates user behavior and optimizes experiences in real-time</p>
-                </div>
-                <div class="ai-feature fade-in">
-                    <div class="ai-icon"><i class="fas fa-bolt"></i></div>
-                    <h3>Efficient Inference</h3>
-                    <p>37B activated parameters per token ensure lightning-fast performance</p>
-                </div>
-                <div class="ai-feature fade-in">
-                    <div class="ai-icon"><i class="fas fa-expand"></i></div>
-                    <h3>128K Context Window</h3>
-                    <p>Comprehensive understanding of complex user journeys and interactions</p>
-                </div>
-                <div class="ai-feature fade-in">
-                    <div class="ai-icon"><i class="fas fa-cogs"></i></div>
-                    <h3>Adaptive Learning</h3>
-                    <p>Continuously improves based on user interactions and feedback</p>
+        <!-- Consultation Requests Table -->
+        <div class="table-container">
+            <div class="table-header">
+                <h2 class="table-title">Recent Requests</h2>
+                <div class="search-box">
+                    <input type="text" placeholder="Search requests..." id="searchInput">
+                    <i class="fas fa-search"></i>
                 </div>
             </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Company</th>
+                        <th>Service</th>
+                        <th>Budget</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="consultationTableBody">
+                    <!-- Table rows will be populated by JavaScript -->
+                </tbody>
+            </table>
         </div>
-    </section>
+    </div>
 
-    <!-- Services Section -->
-    <section id="services" class="services">
-        <div class="container">
-            <div class="section-header text-center">
-                <h2>Our Exclusive Service Tiers</h2>
-                <p>Tailored solutions for visionary brands at every stage of their digital transformation</p>
+    <!-- Consultation Detail Modal -->
+    <div class="modal" id="detailModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Consultation Request Details</h2>
+                <button class="modal-close" id="modalClose">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
-            <div class="services-grid">
-                <div class="service-card fade-in">
-                    <h3>Discovery & Strategy</h3>
-                    <p>Perfect for visionary brands needing a comprehensive digital roadmap before full-scale development.</p>
-                    <div class="price">From $1,500</div>
-                    <ul class="service-features">
-                        <li>In-depth brand & market analysis</li>
-                        <li>Competitive landscape assessment</li>
-                        <li>User journey mapping</li>
-                        <li>Technical requirements specification</li>
-                        <li>Project roadmap & timeline</li>
-                    </ul>
-                    <a href="consultation.html" class="btn btn-secondary">Request This Package</a>
-                </div>
-                <div class="service-card fade-in">
-                    <h3>Signature Website</h3>
-                    <p>Our most sought-after offering for established brands seeking a distinctive digital presence.</p>
-                    <div class="price">From $9,500</div>
-                    <ul class="service-features">
-                        <li>Custom visual identity & UI design</li>
-                        <li>Up to 8 page templates</li>
-                        <li>Advanced animations & interactions</li>
-                        <li>SEO-optimized structure</li>
-                        <li>CMS integration</li>
-                        <li>Performance optimization</li>
-                        <li>3 months of premium support</li>
-                    </ul>
-                    <a href="consultation.html" class="btn btn-primary">Request This Package</a>
-                </div>
-                <div class="service-card fade-in">
-                    <h3>Ultra Exclusive</h3>
-                    <p>For visionary brands requiring a completely bespoke digital ecosystem with advanced capabilities.</p>
-                    <div class="price">POA</div>
-                    <ul class="service-features">
-                        <li>Everything in Signature, plus:</li>
-                        <li>Fully custom functionality</li>
-                        <li>Advanced integrations</li>
-                        <li>AI-powered features</li>
-                        <li>Enterprise-grade security</li>
-                        <li>Dedicated project manager</li>
-                        <li>12 months premium support</li>
-                        <li>Quarterly performance reviews</li>
-                    </ul>
-                    <a href="consultation.html" class="btn btn-secondary">Request Custom Quote</a>
-                </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Modal content will be populated by JavaScript -->
             </div>
         </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="testimonials">
-        <div class="container">
-            <div class="section-header text-center">
-                <h2>Trusted by Visionary Brands</h2>
-                <p>Discover how Alchemy Lumière has transformed digital experiences for industry leaders</p>
-            </div>
-            <div class="testimonials-grid">
-                <div class="testimonial-card fade-in">
-                    <div class="testimonial-quote">
-                        Alchemy Lumière transformed our digital presence completely. The AI-powered insights led to a 47% increase in conversions within the first month. Their attention to detail and technical excellence is simply unmatched.
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">SJ</div>
-                        <div class="author-info">
-                            <h4>Sarah Johnson</h4>
-                            <p>CEO, LuxeBrand Global</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card fade-in">
-                    <div class="testimonial-quote">
-                        The level of sophistication and attention to detail is unparalleled. Our website now feels like a true extension of our brand's luxury positioning. Working with Alchemy Lumière was a transformative experience.
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">MR</div>
-                        <div class="author-info">
-                            <h4>Marcus Rodriguez</h4>
-                            <p>CTO, Nexus Analytics</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card fade-in">
-                    <div class="testimonial-quote">
-                        Working with Alchemy Lumière felt like having a strategic partner rather than just a vendor. Their AI capabilities anticipated our needs before we even articulated them. The results have been extraordinary.
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">EV</div>
-                        <div class="author-info">
-                            <h4>Eleanor Vance</h4>
-                            <p>Marketing Director, Prestige Holdings</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section id="contact" class="cta-section">
-        <div class="container">
-            <div class="cta-content">
-                <div class="section-header text-center">
-                    <h2>Ready to Begin Your Digital Transformation?</h2>
-                    <p>Join the exclusive group of visionary brands leveraging AI-powered digital excellence</p>
-                </div>
-                <div class="cta-buttons">
-                    <a href="consultation.html" class="btn btn-primary">
-                        <i class="fas fa-calendar-check"></i>
-                        Schedule Consultation
-                    </a>
-                    <a href="#services" class="btn btn-secondary">
-                        <i class="fas fa-book-open"></i>
-                        View Case Studies
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-info">
-                    <div class="footer-logo">
-                        <div class="logo-icon">AL</div>
-                        Alchemy Lumière<span>v3</span>
-                    </div>
-                    <p>Creating digital masterpieces powered by advanced AI architecture for visionary brands worldwide.</p>
-                </div>
-                <div class="footer-links">
-                    <h4>Services</h4>
-                    <ul>
-                        <li><a href="#services">Discovery & Strategy</a></li>
-                        <li><a href="#services">Signature Website</a></li>
-                        <li><a href="#services">Ultra Exclusive</a></li>
-                        <li><a href="#ai-capabilities">AI Capabilities</a></li>
-                    </ul>
-                </div>
-                <div class="footer-links">
-                    <h4>Company</h4>
-                    <ul>
-                        <li><a href="#features">Our Approach</a></li>
-                        <li><a href="#testimonials">Case Studies</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                        <li><a href="#ai-capabilities">AI Research</a></li>
-                    </ul>
-                </div>
-                <div class="footer-links">
-                    <h4>Connect</h4>
-                    <ul>
-                        <li><a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
-                        <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
-                        <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
-                        <li><a href="#"><i class="fab fa-github"></i> GitHub</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Alchemy Lumière. All rights reserved. Crafted with precision and powered by AI.</p>
-            </div>
-        </div>
-    </footer>
+    </div>
 
     <!-- Toast Notification -->
     <div class="toast" id="toast">
-        <div class="toast-icon">✓</div>
+        <div class="toast-icon">
+            <i class="fas fa-check"></i>
+        </div>
         <div class="toast-message">Action completed successfully</div>
     </div>
 
     <script>
-        // === PRELOADER ===
-        window.addEventListener('load', function() {
-            const preloader = document.getElementById('preloader');
-            setTimeout(() => {
-                preloader.style.opacity = '0';
-                preloader.style.visibility = 'hidden';
-            }, 1500);
-        });
-
         // === CUSTOM CURSOR ===
         const cursor = document.querySelector('.cursor');
         const cursorFollower = document.querySelector('.cursor-follower');
@@ -1678,7 +1298,7 @@
         });
 
         // Add hover effect for interactive elements
-        const interactiveElements = document.querySelectorAll('a, button, .feature-card, .service-card, .ai-feature, .testimonial-card');
+        const interactiveElements = document.querySelectorAll('a, button, input, .nav-item, .stat-card, tr');
         
         interactiveElements.forEach(element => {
             element.addEventListener('mouseenter', () => {
@@ -1711,52 +1331,143 @@
                     el.style.transform = `translateY(${scrolled * speed}px)`;
                 });
             }
-
-            // Hero parallax
-            const heroSection = document.querySelector('.hero');
-            if (heroSection && scrolled < window.innerHeight) {
-                const heroContent = heroSection.querySelector('.hero-content');
-                if (heroContent) {
-                    heroContent.style.transform = `translateY(${scrolled * 0.3}px)`;
-                    heroContent.style.opacity = 1 - (scrolled / window.innerHeight) * 0.5;
-                }
-            }
         }
 
-        // === HEADER SCROLL EFFECT ===
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 100) {
-                document.getElementById('header').classList.add('scrolled');
-            } else {
-                document.getElementById('header').classList.remove('scrolled');
-            }
-
             updateScrollProgress();
             requestAnimationFrame(updateParallax);
         });
 
         // === MOBILE MENU TOGGLE ===
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mainNav = document.getElementById('mainNav');
+        const sidebar = document.getElementById('sidebar');
 
         mobileMenuBtn.addEventListener('click', () => {
-            mainNav.classList.toggle('active');
-            mobileMenuBtn.classList.toggle('active');
-            document.body.style.overflow = mainNav.classList.contains('active') ? 'hidden' : 'auto';
+            sidebar.classList.toggle('active');
+            document.body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : 'auto';
         });
 
-        // Close mobile menu when clicking on a link
-        document.querySelectorAll('nav a').forEach(link => {
-            link.addEventListener('click', () => {
-                mainNav.classList.remove('active');
-                mobileMenuBtn.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            });
-        });
+        // Enhanced consultation data with additional fields for persuasion
+        const consultationRequests = [
+            {
+                id: 1,
+                firstName: "Alexandra",
+                lastName: "Laurent",
+                email: "alexandra@luxebrand.com",
+                phone: "+1 (555) 123-4567",
+                company: "LuxeBrand Global",
+                website: "https://luxebrand.com",
+                service: "signature",
+                timeline: "short-term",
+                budget: "25k-50k",
+                projectDetails: "We need a complete redesign of our e-commerce platform with advanced personalization features for our luxury fashion brand.",
+                challenges: "Current website has high bounce rate and poor mobile experience.",
+                referral: "search",
+                date: "2025-10-01",
+                status: "new",
+                urgency: "high",
+                socialProof: "Fortune 500 client"
+            },
+            {
+                id: 2,
+                firstName: "Marcus",
+                lastName: "Rodriguez",
+                email: "marcus@nexusanalytics.com",
+                phone: "+1 (555) 987-6543",
+                company: "Nexus Analytics",
+                website: "https://nexusanalytics.com",
+                service: "exclusive",
+                timeline: "immediate",
+                budget: "100k-plus",
+                projectDetails: "Building a comprehensive data visualization platform with real-time dashboards and reporting capabilities.",
+                challenges: "Legacy system cannot handle current data volume and user load.",
+                referral: "referral",
+                date: "2025-09-28",
+                status: "contacted",
+                urgency: "medium",
+                socialProof: "Referred by Google executive"
+            },
+            {
+                id: 3,
+                firstName: "Sophia",
+                lastName: "Chen",
+                email: "sophia@creativecanvas.com",
+                phone: "+1 (555) 456-7890",
+                company: "CreativeCanvas Agency",
+                website: "https://creativecanvas.com",
+                service: "discovery",
+                timeline: "exploring",
+                budget: "undecided",
+                projectDetails: "Looking for a strategic partner to help define our digital roadmap and create an immersive portfolio experience.",
+                challenges: "Unclear about technical requirements and best approach for our needs.",
+                referral: "portfolio",
+                date: "2025-09-25",
+                status: "completed",
+                urgency: "low",
+                socialProof: "Industry award winner"
+            },
+            {
+                id: 4,
+                firstName: "James",
+                lastName: "Laurent",
+                email: "james@prestigeholdings.com",
+                phone: "+1 (555) 234-5678",
+                company: "Prestige Holdings",
+                website: "https://prestigeholdings.com",
+                service: "custom",
+                timeline: "medium-term",
+                budget: "50k-100k",
+                projectDetails: "Need a secure client portal with investment tracking and reporting features for high-net-worth individuals.",
+                challenges: "Current system lacks security features and modern user experience.",
+                referral: "social",
+                date: "2025-09-22",
+                status: "contacted",
+                urgency: "high",
+                socialProof: "Forbes 30 Under 30"
+            }
+        ];
 
-        // === TOAST NOTIFICATION ===
+        // DOM Elements
+        const consultationTableBody = document.getElementById('consultationTableBody');
+        const detailModal = document.getElementById('detailModal');
+        const modalClose = document.getElementById('modalClose');
+        const modalBody = document.getElementById('modalBody');
+        const searchInput = document.getElementById('searchInput');
+        const addNewBtn = document.getElementById('addNewBtn');
+        const toast = document.getElementById('toast');
+
+        // Format date for display
+        function formatDate(dateString) {
+            const options = { year: 'numeric', month: 'short', day: 'numeric' };
+            return new Date(dateString).toLocaleDateString('en-US', options);
+        }
+
+        // Get service display name
+        function getServiceName(serviceKey) {
+            const services = {
+                'discovery': 'Discovery & Strategy',
+                'signature': 'Signature Website',
+                'exclusive': 'Ultra Exclusive',
+                'custom': 'Custom Package'
+            };
+            return services[serviceKey] || serviceKey;
+        }
+
+        // Get budget display text
+        function getBudgetText(budgetKey) {
+            const budgets = {
+                '5k-10k': '$5,000 - $10,000',
+                '10k-25k': '$10,000 - $25,000',
+                '25k-50k': '$25,000 - $50,000',
+                '50k-100k': '$50,000 - $100,000',
+                '100k-plus': '$100,000+',
+                'undecided': 'To be determined'
+            };
+            return budgets[budgetKey] || budgetKey;
+        }
+
+        // Show toast notification
         function showToast(message) {
-            const toast = document.getElementById('toast');
             toast.querySelector('.toast-message').textContent = message;
             toast.classList.add('active');
             
@@ -1764,6 +1475,223 @@
                 toast.classList.remove('active');
             }, 3000);
         }
+
+        // Populate consultation table with enhanced UI
+        function populateConsultationTable(requests = consultationRequests) {
+            consultationTableBody.innerHTML = '';
+            
+            if (requests.length === 0) {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td colspan="7" style="text-align: center; padding: 2rem;">
+                        <p>No consultation requests found</p>
+                    </td>
+                `;
+                consultationTableBody.appendChild(row);
+                return;
+            }
+            
+            requests.forEach(request => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>
+                        <div style="font-weight: 600; color: var(--accent-gold);">${request.firstName} ${request.lastName}</div>
+                        ${request.urgency === 'high' ? '<div class="urgency-badge">URGENT</div>' : ''}
+                    </td>
+                    <td>${request.company}</td>
+                    <td>${getServiceName(request.service)}</td>
+                    <td>${getBudgetText(request.budget)}</td>
+                    <td>${formatDate(request.date)}</td>
+                    <td><span class="status-badge status-${request.status}">${request.status.charAt(0).toUpperCase() + request.status.slice(1)}</span></td>
+                    <td class="action-buttons">
+                        <button class="btn btn-small btn-outline view-detail" data-id="${request.id}">
+                            <i class="fas fa-eye"></i>
+                            View
+                        </button>
+                        <button class="btn btn-small edit-request" data-id="${request.id}">
+                            <i class="fas fa-edit"></i>
+                            Edit
+                        </button>
+                    </td>
+                `;
+                consultationTableBody.appendChild(row);
+            });
+
+            // Add event listeners to view buttons
+            document.querySelectorAll('.view-detail').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const requestId = parseInt(e.target.getAttribute('data-id'));
+                    showRequestDetail(requestId);
+                });
+            });
+
+            // Add event listeners to edit buttons
+            document.querySelectorAll('.edit-request').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const requestId = parseInt(e.target.getAttribute('data-id'));
+                    showToast(`Editing request #${requestId}`);
+                    // In a real app, this would open an edit form
+                });
+            });
+        }
+
+        // Show request detail in modal with enhanced UX
+        function showRequestDetail(requestId) {
+            const request = consultationRequests.find(r => r.id === requestId);
+            if (!request) return;
+
+            modalBody.innerHTML = `
+                <div class="detail-grid">
+                    <div class="detail-item">
+                        <div class="detail-label">Name</div>
+                        <div class="detail-value">${request.firstName} ${request.lastName}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Email</div>
+                        <div class="detail-value">${request.email}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Phone</div>
+                        <div class="detail-value">${request.phone}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Company</div>
+                        <div class="detail-value">${request.company}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Website</div>
+                        <div class="detail-value">${request.website}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Service Interest</div>
+                        <div class="detail-value">${getServiceName(request.service)}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Timeline</div>
+                        <div class="detail-value">${request.timeline}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Budget</div>
+                        <div class="detail-value">${getBudgetText(request.budget)}</div>
+                    </div>
+                    <div class="detail-item full-width">
+                        <div class="detail-label">Project Details</div>
+                        <div class="detail-value">${request.projectDetails}</div>
+                    </div>
+                    <div class="detail-item full-width">
+                        <div class="detail-label">Current Challenges</div>
+                        <div class="detail-value">${request.challenges}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Referral Source</div>
+                        <div class="detail-value">${request.referral}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Submission Date</div>
+                        <div class="detail-value">${formatDate(request.date)}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Status</div>
+                        <div class="detail-value"><span class="status-badge status-${request.status}">${request.status.charAt(0).toUpperCase() + request.status.slice(1)}</span></div>
+                    </div>
+                    ${request.socialProof ? `
+                    <div class="detail-item full-width">
+                        <div class="detail-label">Social Proof</div>
+                        <div class="detail-value" style="color: var(--accent-gold); font-weight: 600;">${request.socialProof}</div>
+                    </div>
+                    ` : ''}
+                </div>
+                <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <button class="btn mark-contacted" data-id="${request.id}">
+                        <i class="fas fa-check-circle"></i>
+                        Mark as Contacted
+                    </button>
+                    <button class="btn btn-outline send-email" data-id="${request.id}">
+                        <i class="fas fa-envelope"></i>
+                        Send Email
+                    </button>
+                    <button class="btn btn-danger delete-request" data-id="${request.id}">
+                        <i class="fas fa-trash"></i>
+                        Delete Request
+                    </button>
+                </div>
+            `;
+
+            // Add event listeners to modal buttons
+            document.querySelector('.mark-contacted').addEventListener('click', (e) => {
+                const id = parseInt(e.target.getAttribute('data-id'));
+                showToast(`Request #${id} marked as contacted`);
+                detailModal.classList.remove('active');
+                setTimeout(() => {
+                    detailModal.style.display = 'none';
+                }, 300);
+            });
+
+            document.querySelector('.send-email').addEventListener('click', (e) => {
+                const id = parseInt(e.target.getAttribute('data-id'));
+                showToast(`Email sent for request #${id}`);
+            });
+
+            document.querySelector('.delete-request').addEventListener('click', (e) => {
+                const id = parseInt(e.target.getAttribute('data-id'));
+                if (confirm('Are you sure you want to delete this request?')) {
+                    showToast(`Request #${id} deleted`);
+                    detailModal.classList.remove('active');
+                    setTimeout(() => {
+                        detailModal.style.display = 'none';
+                    }, 300);
+                }
+            });
+
+            detailModal.style.display = 'flex';
+            setTimeout(() => {
+                detailModal.classList.add('active');
+            }, 10);
+        }
+
+        // Close modal with enhanced animation
+        modalClose.addEventListener('click', () => {
+            detailModal.classList.remove('active');
+            setTimeout(() => {
+                detailModal.style.display = 'none';
+            }, 300);
+        });
+
+        // Close modal when clicking outside
+        detailModal.addEventListener('click', (e) => {
+            if (e.target === detailModal) {
+                detailModal.classList.remove('active');
+                setTimeout(() => {
+                    detailModal.style.display = 'none';
+                }, 300);
+            }
+        });
+
+        // Search functionality with debouncing
+        let searchTimeout;
+        searchInput.addEventListener('input', (e) => {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                const searchTerm = e.target.value.toLowerCase();
+                if (searchTerm) {
+                    const filteredRequests = consultationRequests.filter(request => 
+                        request.firstName.toLowerCase().includes(searchTerm) ||
+                        request.lastName.toLowerCase().includes(searchTerm) ||
+                        request.company.toLowerCase().includes(searchTerm) ||
+                        request.service.toLowerCase().includes(searchTerm)
+                    );
+                    populateConsultationTable(filteredRequests);
+                } else {
+                    populateConsultationTable();
+                }
+            }, 300);
+        });
+
+        // Add new request button
+        addNewBtn.addEventListener('click', () => {
+            showToast('Creating new consultation request');
+            // In a real app, this would open a form to add a new request
+        });
 
         // === FADE IN ELEMENTS ON SCROLL ===
         function checkFade() {
@@ -1783,65 +1711,31 @@
         window.addEventListener('scroll', checkFade);
         window.addEventListener('load', checkFade);
 
-        // === MAGNETIC BUTTON EFFECT ===
-        function addMagneticEffect() {
-            const buttons = document.querySelectorAll('.btn');
-
-            buttons.forEach(button => {
-                button.addEventListener('mousemove', (e) => {
-                    const rect = button.getBoundingClientRect();
-                    const x = e.clientX - rect.left - rect.width / 2;
-                    const y = e.clientY - rect.top - rect.height / 2;
-
-                    button.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px) scale(1.03)`;
+        // Initialize the page with enhanced UX
+        document.addEventListener('DOMContentLoaded', () => {
+            // Animate progress bars on load
+            setTimeout(() => {
+                document.querySelectorAll('.stat-progress-bar').forEach(bar => {
+                    bar.style.width = bar.style.width;
                 });
+            }, 500);
+            
+            populateConsultationTable();
+            
+            // Show welcome message
+            setTimeout(() => {
+                showToast('Welcome to your Alchemy Lumière dashboard');
+            }, 1000);
+        });
 
-                button.addEventListener('mouseleave', () => {
-                    button.style.transform = 'translate(0, 0) scale(1)';
-                });
-            });
-        }
-
-        // Initialize magnetic effect on desktop
-        if (window.innerWidth > 768) {
-            addMagneticEffect();
-        }
-
-        // === SMOOTH SCROLLING ===
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 100,
-                        behavior: 'smooth'
-                    });
+        // Close sidebar when clicking on a nav item on mobile
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', () => {
+                if (window.innerWidth < 992) {
+                    sidebar.classList.remove('active');
+                    document.body.style.overflow = 'auto';
                 }
             });
-        });
-
-        // === SERVICE CARD INTERACTIONS ===
-        document.querySelectorAll('.service-card .btn').forEach(button => {
-            button.addEventListener('click', (e) => {
-                e.preventDefault();
-                const serviceName = e.target.closest('.service-card').querySelector('h3').textContent;
-                showToast(`Request sent for ${serviceName} package`);
-            });
-        });
-
-        // === INITIALIZE ON LOAD ===
-        document.addEventListener('DOMContentLoaded', () => {
-            checkFade();
-            
-            // Show welcome message after a short delay
-            setTimeout(() => {
-                showToast('Welcome to Alchemy Lumière - Where Digital Dreams Become Reality');
-            }, 2000);
         });
     </script>
 </body>
