@@ -871,7 +871,7 @@
             <div class="nav-item">
                 <span class="nav-icon">📋</span>
                 <span>Consultations</span>
-                <span class="urgency-badge">3 NEW</span>
+                <span class="urgency-badge" id="newRequestsBadge">0 NEW</span>
             </div>
             <div class="nav-item">
                 <span class="nav-icon">👥</span>
@@ -900,11 +900,11 @@
                 <h1 class="admin-title">Consultation Requests</h1>
                 <p>Manage and review all consultation submissions</p>
                 <div class="social-proof">
-                    <span>👑 Premium clients this week: <strong>12</strong></span>
+                    <span>👑 Premium clients this week: <strong id="premiumCount">0</strong></span>
                 </div>
             </div>
             <div class="admin-actions">
-                <button class="btn btn-outline">Export Data</button>
+                <button class="btn btn-outline" id="refreshBtn">Refresh Data</button>
                 <button class="btn" id="addNewBtn">Add New</button>
             </div>
         </div>
@@ -912,31 +912,31 @@
         <!-- Stats Overview -->
         <div class="stats-container">
             <div class="stat-card">
-                <div class="stat-value">24 <span class="stat-trend">+12%</span></div>
+                <div class="stat-value" id="totalRequests">0 <span class="stat-trend">+0%</span></div>
                 <div class="stat-label">Total Requests</div>
                 <div class="stat-progress">
-                    <div class="stat-progress-bar" style="width: 85%"></div>
+                    <div class="stat-progress-bar" style="width: 0%"></div>
                 </div>
             </div>
             <div class="stat-card">
-                <div class="stat-value">8 <span class="stat-trend">+33%</span></div>
+                <div class="stat-value" id="newRequests">0 <span class="stat-trend">+0%</span></div>
                 <div class="stat-label">New This Week</div>
                 <div class="stat-progress">
-                    <div class="stat-progress-bar" style="width: 65%"></div>
+                    <div class="stat-progress-bar" style="width: 0%"></div>
                 </div>
             </div>
             <div class="stat-card">
-                <div class="stat-value">12 <span class="stat-trend">+8%</span></div>
+                <div class="stat-value" id="contactedRequests">0 <span class="stat-trend">+0%</span></div>
                 <div class="stat-label">Contacted</div>
                 <div class="stat-progress">
-                    <div class="stat-progress-bar" style="width: 50%"></div>
+                    <div class="stat-progress-bar" style="width: 0%"></div>
                 </div>
             </div>
             <div class="stat-card">
-                <div class="stat-value">4 <span class="stat-trend negative">-5%</span></div>
+                <div class="stat-value" id="completedRequests">0 <span class="stat-trend negative">-0%</span></div>
                 <div class="stat-label">Completed</div>
                 <div class="stat-progress">
-                    <div class="stat-progress-bar" style="width: 25%"></div>
+                    <div class="stat-progress-bar" style="width: 0%"></div>
                 </div>
             </div>
         </div>
@@ -989,86 +989,6 @@
     </div>
 
     <script>
-        // Enhanced consultation data with additional fields for persuasion
-        const consultationRequests = [
-            {
-                id: 1,
-                firstName: "Alexandra",
-                lastName: "Laurent",
-                email: "alexandra@luxebrand.com",
-                phone: "+1 (555) 123-4567",
-                company: "LuxeBrand Global",
-                website: "https://luxebrand.com",
-                service: "signature",
-                timeline: "short-term",
-                budget: "25k-50k",
-                projectDetails: "We need a complete redesign of our e-commerce platform with advanced personalization features for our luxury fashion brand.",
-                challenges: "Current website has high bounce rate and poor mobile experience.",
-                referral: "search",
-                date: "2025-10-01",
-                status: "new",
-                urgency: "high",
-                socialProof: "Fortune 500 client"
-            },
-            {
-                id: 2,
-                firstName: "Marcus",
-                lastName: "Rodriguez",
-                email: "marcus@nexusanalytics.com",
-                phone: "+1 (555) 987-6543",
-                company: "Nexus Analytics",
-                website: "https://nexusanalytics.com",
-                service: "exclusive",
-                timeline: "immediate",
-                budget: "100k-plus",
-                projectDetails: "Building a comprehensive data visualization platform with real-time dashboards and reporting capabilities.",
-                challenges: "Legacy system cannot handle current data volume and user load.",
-                referral: "referral",
-                date: "2025-09-28",
-                status: "contacted",
-                urgency: "medium",
-                socialProof: "Referred by Google executive"
-            },
-            {
-                id: 3,
-                firstName: "Sophia",
-                lastName: "Chen",
-                email: "sophia@creativecanvas.com",
-                phone: "+1 (555) 456-7890",
-                company: "CreativeCanvas Agency",
-                website: "https://creativecanvas.com",
-                service: "discovery",
-                timeline: "exploring",
-                budget: "undecided",
-                projectDetails: "Looking for a strategic partner to help define our digital roadmap and create an immersive portfolio experience.",
-                challenges: "Unclear about technical requirements and best approach for our needs.",
-                referral: "portfolio",
-                date: "2025-09-25",
-                status: "completed",
-                urgency: "low",
-                socialProof: "Industry award winner"
-            },
-            {
-                id: 4,
-                firstName: "James",
-                lastName: "Laurent",
-                email: "james@prestigeholdings.com",
-                phone: "+1 (555) 234-5678",
-                company: "Prestige Holdings",
-                website: "https://prestigeholdings.com",
-                service: "custom",
-                timeline: "medium-term",
-                budget: "50k-100k",
-                projectDetails: "Need a secure client portal with investment tracking and reporting features for high-net-worth individuals.",
-                challenges: "Current system lacks security features and modern user experience.",
-                referral: "social",
-                date: "2025-09-22",
-                status: "contacted",
-                urgency: "high",
-                socialProof: "Forbes 30 Under 30"
-            }
-        ];
-
         // DOM Elements
         const sidebar = document.getElementById('sidebar');
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
@@ -1078,7 +998,16 @@
         const modalBody = document.getElementById('modalBody');
         const searchInput = document.getElementById('searchInput');
         const addNewBtn = document.getElementById('addNewBtn');
+        const refreshBtn = document.getElementById('refreshBtn');
         const toast = document.getElementById('toast');
+        const newRequestsBadge = document.getElementById('newRequestsBadge');
+        
+        // Stats elements
+        const totalRequestsEl = document.getElementById('totalRequests');
+        const newRequestsEl = document.getElementById('newRequests');
+        const contactedRequestsEl = document.getElementById('contactedRequests');
+        const completedRequestsEl = document.getElementById('completedRequests');
+        const premiumCountEl = document.getElementById('premiumCount');
 
         // Mobile menu toggle with enhanced interaction
         mobileMenuBtn.addEventListener('click', () => {
@@ -1126,8 +1055,45 @@
             }, 3000);
         }
 
+        // Update stats based on current data
+        function updateStats(consultationRequests) {
+            const total = consultationRequests.length;
+            const newCount = consultationRequests.filter(request => request.status === 'new').length;
+            const contacted = consultationRequests.filter(request => request.status === 'contacted').length;
+            const completed = consultationRequests.filter(request => request.status === 'completed').length;
+            
+            // Calculate new requests this week
+            const oneWeekAgo = new Date();
+            oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+            const newThisWeek = consultationRequests.filter(request => {
+                const requestDate = new Date(request.date);
+                return requestDate >= oneWeekAgo && request.status === 'new';
+            }).length;
+            
+            // Update the stat cards
+            totalRequestsEl.innerHTML = `${total} <span class="stat-trend">+0%</span>`;
+            newRequestsEl.innerHTML = `${newThisWeek} <span class="stat-trend">+0%</span>`;
+            contactedRequestsEl.innerHTML = `${contacted} <span class="stat-trend">+0%</span>`;
+            completedRequestsEl.innerHTML = `${completed} <span class="stat-trend negative">-0%</span>`;
+            
+            // Update progress bars
+            document.querySelectorAll('.stat-progress-bar')[0].style.width = `${Math.min(100, (total / 50) * 100)}%`;
+            document.querySelectorAll('.stat-progress-bar')[1].style.width = `${Math.min(100, (newThisWeek / 10) * 100)}%`;
+            document.querySelectorAll('.stat-progress-bar')[2].style.width = `${Math.min(100, (contacted / total) * 100)}%`;
+            document.querySelectorAll('.stat-progress-bar')[3].style.width = `${Math.min(100, (completed / total) * 100)}%`;
+            
+            // Update new requests badge
+            newRequestsBadge.textContent = `${newCount} NEW`;
+            
+            // Update premium clients count (assuming premium clients have higher budgets)
+            const premiumClients = consultationRequests.filter(request => 
+                request.budget === '50k-100k' || request.budget === '100k-plus'
+            ).length;
+            premiumCountEl.textContent = premiumClients;
+        }
+
         // Populate consultation table with enhanced UI
-        function populateConsultationTable(requests = consultationRequests) {
+        function populateConsultationTable(requests) {
             consultationTableBody.innerHTML = '';
             
             if (requests.length === 0) {
@@ -1140,6 +1106,9 @@
                 consultationTableBody.appendChild(row);
                 return;
             }
+            
+            // Sort by date (newest first)
+            requests.sort((a, b) => new Date(b.date) - new Date(a.date));
             
             requests.forEach(request => {
                 const row = document.createElement('tr');
@@ -1165,7 +1134,7 @@
             document.querySelectorAll('.view-detail').forEach(button => {
                 button.addEventListener('click', (e) => {
                     const requestId = parseInt(e.target.getAttribute('data-id'));
-                    showRequestDetail(requestId);
+                    showRequestDetail(requestId, requests);
                 });
             });
 
@@ -1177,11 +1146,14 @@
                     // In a real app, this would open an edit form
                 });
             });
+            
+            // Update the stats
+            updateStats(requests);
         }
 
         // Show request detail in modal with enhanced UX
-        function showRequestDetail(requestId) {
-            const request = consultationRequests.find(r => r.id === requestId);
+        function showRequestDetail(requestId, requests) {
+            const request = requests.find(r => r.id === requestId);
             if (!request) return;
 
             modalBody.innerHTML = `
@@ -1238,12 +1210,6 @@
                         <div class="detail-label">Status</div>
                         <div class="detail-value"><span class="status-badge status-${request.status}">${request.status.charAt(0).toUpperCase() + request.status.slice(1)}</span></div>
                     </div>
-                    ${request.socialProof ? `
-                    <div class="detail-item full-width">
-                        <div class="detail-label">Social Proof</div>
-                        <div class="detail-value" style="color: var(--accent-gold); font-weight: 600;">${request.socialProof}</div>
-                    </div>
-                    ` : ''}
                 </div>
                 <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
                     <button class="btn mark-contacted" data-id="${request.id}">Mark as Contacted</button>
@@ -1255,6 +1221,7 @@
             // Add event listeners to modal buttons
             document.querySelector('.mark-contacted').addEventListener('click', (e) => {
                 const id = parseInt(e.target.getAttribute('data-id'));
+                updateRequestStatus(id, 'contacted');
                 showToast(`Request #${id} marked as contacted`);
                 detailModal.classList.remove('active');
                 setTimeout(() => {
@@ -1270,6 +1237,7 @@
             document.querySelector('.delete-request').addEventListener('click', (e) => {
                 const id = parseInt(e.target.getAttribute('data-id'));
                 if (confirm('Are you sure you want to delete this request?')) {
+                    deleteRequest(id);
                     showToast(`Request #${id} deleted`);
                     detailModal.classList.remove('active');
                     setTimeout(() => {
@@ -1282,6 +1250,25 @@
             setTimeout(() => {
                 detailModal.classList.add('active');
             }, 10);
+        }
+
+        // Update request status
+        function updateRequestStatus(requestId, newStatus) {
+            const requests = JSON.parse(localStorage.getItem('consultationRequests')) || [];
+            const requestIndex = requests.findIndex(r => r.id === requestId);
+            if (requestIndex !== -1) {
+                requests[requestIndex].status = newStatus;
+                localStorage.setItem('consultationRequests', JSON.stringify(requests));
+                loadConsultationData();
+            }
+        }
+
+        // Delete request
+        function deleteRequest(requestId) {
+            let requests = JSON.parse(localStorage.getItem('consultationRequests')) || [];
+            requests = requests.filter(r => r.id !== requestId);
+            localStorage.setItem('consultationRequests', JSON.stringify(requests));
+            loadConsultationData();
         }
 
         // Close modal with enhanced animation
@@ -1308,8 +1295,10 @@
             clearTimeout(searchTimeout);
             searchTimeout = setTimeout(() => {
                 const searchTerm = e.target.value.toLowerCase();
+                const requests = JSON.parse(localStorage.getItem('consultationRequests')) || [];
+                
                 if (searchTerm) {
-                    const filteredRequests = consultationRequests.filter(request => 
+                    const filteredRequests = requests.filter(request => 
                         request.firstName.toLowerCase().includes(searchTerm) ||
                         request.lastName.toLowerCase().includes(searchTerm) ||
                         request.company.toLowerCase().includes(searchTerm) ||
@@ -1317,7 +1306,7 @@
                     );
                     populateConsultationTable(filteredRequests);
                 } else {
-                    populateConsultationTable();
+                    populateConsultationTable(requests);
                 }
             }, 300);
         });
@@ -1328,6 +1317,18 @@
             // In a real app, this would open a form to add a new request
         });
 
+        // Refresh data button
+        refreshBtn.addEventListener('click', () => {
+            loadConsultationData();
+            showToast('Data refreshed successfully');
+        });
+
+        // Load consultation data from localStorage
+        function loadConsultationData() {
+            const requests = JSON.parse(localStorage.getItem('consultationRequests')) || [];
+            populateConsultationTable(requests);
+        }
+
         // Initialize the page with enhanced UX
         document.addEventListener('DOMContentLoaded', () => {
             // Animate progress bars on load
@@ -1337,12 +1338,15 @@
                 });
             }, 500);
             
-            populateConsultationTable();
+            loadConsultationData();
             
             // Show welcome message
             setTimeout(() => {
                 showToast('Welcome to your premium dashboard');
             }, 1000);
+            
+            // Set up auto-refresh every 30 seconds
+            setInterval(loadConsultationData, 30000);
         });
 
         // Close sidebar when clicking on a nav item on mobile
