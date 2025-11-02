@@ -3,31 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exclusive Consultation | DeepSeek v3</title>
+    <title>Alchemy Lumière | Begin Your Transformation</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* === CSS RESET & GLOBAL VARIABLES === */
         :root {
             --primary-dark: #0A0A0A;
             --primary-light: #FFFFFF;
-            --accent-gold: #D4AF37;
-            --accent-gold-light: #F4E4A6;
+            --accent-gold: #C9A96E;
+            --accent-gold-light: #F4EBD0;
             --accent-bronze: #8B7355;
             --accent-silver: #C0C0C0;
-            --gray-100: #F5F5F5;
-            --gray-200: #E5E5E5;
-            --gray-800: #262626;
+            --accent-emerald: #143627;
+            --gradient-primary: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-bronze) 100%);
+            --gradient-dark: linear-gradient(135deg, var(--primary-dark) 0%, #1a1a1a 100%);
+            --gradient-hero: linear-gradient(135deg, #0A0A0A 0%, #143627 50%, #0A0A0A 100%);
+            
             --transition-slow: 0.8s cubic-bezier(0.19, 1, 0.22, 1);
             --transition-medium: 0.5s cubic-bezier(0.19, 1, 0.22, 1);
             --transition-fast: 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+            
             --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.08);
             --shadow-medium: 0 20px 40px rgba(0, 0, 0, 0.12);
             --shadow-intense: 0 30px 60px rgba(0, 0, 0, 0.18);
-            --shadow-glow: 0 0 60px rgba(212, 175, 55, 0.15);
-            --border-radius: 12px;
+            --shadow-glow: 0 0 60px rgba(201, 169, 110, 0.15);
+            --shadow-gold-intense: 0 0 100px rgba(201, 169, 110, 0.3);
+            
+            --border-radius: 16px;
             --border-radius-lg: 24px;
-            --section-padding: 8rem 0;
+            --border-radius-xl: 36px;
+            
+            --section-padding: clamp(6rem, 12vw, 12rem) 0;
             --glass-bg: rgba(255, 255, 255, 0.08);
             --glass-border: rgba(255, 255, 255, 0.12);
         }
@@ -41,6 +50,7 @@
         html {
             scroll-behavior: smooth;
             font-size: 16px;
+            scroll-padding-top: 100px;
         }
 
         body {
@@ -54,7 +64,90 @@
             position: relative;
         }
 
-        /* Enhanced Animated Background Elements */
+        /* === CUSTOM CURSOR === */
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--accent-gold);
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: transform 0.2s ease;
+        }
+
+        .cursor-follower {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 2px solid rgba(201, 169, 110, 0.3);
+            pointer-events: none;
+            z-index: 9998;
+            transition: all 0.6s ease;
+        }
+
+        /* === SCROLL PROGRESS === */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: var(--gradient-primary);
+            z-index: 10000;
+            transition: width 0.1s ease-out;
+        }
+
+        /* === PRELOADER === */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100000;
+            transition: opacity 0.8s var(--transition-slow), visibility 0.8s var(--transition-slow);
+        }
+
+        .preloader-content {
+            text-align: center;
+            color: var(--primary-light);
+        }
+
+        .preloader-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .loader {
+            width: 80px;
+            height: 80px;
+            border: 3px solid rgba(201, 169, 110, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--accent-gold);
+            animation: spin 1s ease-in-out infinite;
+            margin: 0 auto 2rem;
+        }
+
+        .preloader-text {
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* === ENHANCED ANIMATED BACKGROUND === */
         .bg-elements {
             position: fixed;
             top: 0;
@@ -69,55 +162,65 @@
         .bg-element {
             position: absolute;
             border-radius: 50%;
-            background: radial-gradient(circle, var(--accent-gold-light) 0%, rgba(212, 175, 55, 0.3) 40%, transparent 70%);
+            background: radial-gradient(circle, var(--accent-gold-light) 0%, rgba(201, 169, 110, 0.3) 40%, transparent 70%);
             opacity: 0.04;
             animation: float 20s infinite ease-in-out;
             filter: blur(60px);
+            will-change: transform;
         }
 
         .bg-element:nth-child(1) {
-            width: 500px;
-            height: 500px;
-            top: -150px;
-            left: -150px;
+            width: 600px;
+            height: 600px;
+            top: -200px;
+            left: -200px;
             animation-delay: 0s;
         }
 
         .bg-element:nth-child(2) {
-            width: 400px;
-            height: 400px;
+            width: 500px;
+            height: 500px;
             top: 50%;
-            right: -100px;
+            right: -150px;
             animation-delay: -5s;
         }
 
         .bg-element:nth-child(3) {
-            width: 350px;
-            height: 350px;
-            bottom: -100px;
+            width: 400px;
+            height: 400px;
+            bottom: -150px;
             left: 30%;
             animation-delay: -10s;
         }
 
+        .bg-element:nth-child(4) {
+            width: 350px;
+            height: 350px;
+            top: 30%;
+            left: 50%;
+            animation-delay: -7s;
+        }
+
+        /* === TYPOGRAPHY === */
         h1, h2, h3, h4, h5, h6 {
             font-family: 'Playfair Display', serif;
-            font-weight: 600;
+            font-weight: 700;
             line-height: 1.2;
             margin-bottom: 1.5rem;
         }
 
         h1 {
-            font-size: clamp(3rem, 5vw, 5.5rem);
+            font-size: clamp(3.5rem, 7vw, 7rem);
             letter-spacing: -0.02em;
         }
 
         h2 {
-            font-size: clamp(2.5rem, 4vw, 4rem);
+            font-size: clamp(2.8rem, 5vw, 5rem);
             position: relative;
         }
 
         h3 {
-            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            font-size: clamp(2rem, 3.5vw, 3.5rem);
         }
 
         p {
@@ -132,11 +235,12 @@
             transition: var(--transition-fast);
         }
 
+        /* === LAYOUT === */
         .container {
             width: 100%;
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 clamp(1.5rem, 4vw, 3rem);
         }
 
         section {
@@ -144,12 +248,44 @@
             position: relative;
         }
 
+        .text-center {
+            text-align: center;
+        }
+
+        .text-accent {
+            color: var(--accent-gold);
+        }
+
+        .section-header {
+            margin-bottom: 6rem;
+        }
+
+        .section-header h2 {
+            display: inline-block;
+        }
+
+        .section-header h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--accent-gold);
+        }
+
+        .text-center .section-header h2:after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* === ENHANCED PREMIUM BUTTONS === */
         .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 1.35rem 2.75rem;
-            background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-bronze) 100%);
+            padding: 1.5rem 3rem;
+            background: var(--gradient-primary);
             color: var(--primary-dark);
             border: none;
             border-radius: var(--border-radius);
@@ -159,12 +295,14 @@
             position: relative;
             overflow: hidden;
             z-index: 1;
+            gap: 0.75rem;
             box-shadow:
-                0 6px 20px rgba(212, 175, 55, 0.4),
+                0 8px 25px rgba(201, 169, 110, 0.4),
                 inset 0 1px 0 rgba(255, 255, 255, 0.3);
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
             font-size: 0.95rem;
+            font-family: 'Inter', sans-serif;
         }
 
         .btn:before {
@@ -174,7 +312,7 @@
             left: 0;
             width: 0;
             height: 100%;
-            background: linear-gradient(135deg, var(--primary-dark) 0%, #1a1a1a 100%);
+            background: var(--gradient-dark);
             transition: var(--transition-medium);
             z-index: -1;
         }
@@ -198,9 +336,9 @@
 
         .btn:hover {
             color: var(--accent-gold);
-            transform: translateY(-4px) scale(1.03);
+            transform: translateY(-5px);
             box-shadow:
-                0 12px 35px rgba(212, 175, 55, 0.5),
+                0 15px 40px rgba(201, 169, 110, 0.5),
                 inset 0 1px 0 rgba(255, 255, 255, 0.4);
         }
 
@@ -215,70 +353,48 @@
             transition: 0s;
         }
 
-        .btn-outline {
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: var(--primary-dark);
+        }
+
+        .btn-secondary {
             background: transparent;
             border: 2px solid var(--accent-gold);
             color: var(--accent-gold);
             box-shadow: none;
         }
 
-        .btn-outline:before {
+        .btn-secondary:before {
             background: var(--accent-gold);
         }
 
-        .btn-outline:hover {
+        .btn-secondary:hover {
             color: var(--primary-dark);
         }
 
-        .text-center {
-            text-align: center;
-        }
-
-        .text-accent {
-            color: var(--accent-gold);
-        }
-
-        .section-header {
-            margin-bottom: 4rem;
-        }
-
-        .section-header h2 {
-            display: inline-block;
-        }
-
-        .section-header h2:after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 60px;
-            height: 3px;
-            background: var(--accent-gold);
-        }
-
-        .text-center .section-header h2:after {
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        /* Enhanced Premium Header */
+        /* === ENHANCED PREMIUM HEADER === */
         header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(30px) saturate(180%);
+            -webkit-backdrop-filter: blur(30px) saturate(180%);
             z-index: 1000;
             padding: 1.5rem 0;
             transition: var(--transition-medium);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            border-bottom: 1px solid rgba(201, 169, 110, 0.1);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.03);
         }
 
         header.scrolled {
             padding: 1rem 0;
-            box-shadow: var(--shadow-soft);
+            box-shadow:
+                0 4px 30px rgba(0, 0, 0, 0.08),
+                0 0 1px rgba(201, 169, 110, 0.2);
+            background: rgba(255, 255, 255, 0.95);
         }
 
         .header-content {
@@ -302,18 +418,50 @@
         }
 
         .logo-icon {
-            width: 32px;
-            height: 32px;
-            margin-right: 0.75rem;
-            background: var(--accent-gold);
+            width: 48px;
+            height: 48px;
+            margin-right: 0.85rem;
+            background: var(--gradient-primary);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1rem;
+            font-size: 1.4rem;
             font-weight: 700;
             color: var(--primary-dark);
-            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+            font-family: 'Playfair Display', serif;
+            box-shadow:
+                0 6px 20px rgba(201, 169, 110, 0.4),
+                inset 0 -2px 8px rgba(0, 0, 0, 0.1),
+                inset 0 2px 8px rgba(255, 255, 255, 0.3);
+            transition: var(--transition-medium);
+            position: relative;
+        }
+
+        .logo-icon::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--accent-gold), var(--accent-silver), var(--accent-bronze), var(--accent-gold));
+            background-size: 300% 300%;
+            animation: gradientRotate 4s linear infinite;
+            z-index: -1;
+            opacity: 0;
+            filter: blur(6px);
+            transition: var(--transition-medium);
+        }
+
+        .logo:hover .logo-icon {
+            transform: scale(1.1) rotate(360deg);
+            box-shadow:
+                0 8px 25px rgba(201, 169, 110, 0.6),
+                inset 0 -2px 8px rgba(0, 0, 0, 0.15),
+                inset 0 2px 8px rgba(255, 255, 255, 0.4);
+        }
+
+        .logo:hover .logo-icon::before {
+            opacity: 0.6;
         }
 
         nav ul {
@@ -348,7 +496,6 @@
             display: none;
             background: none;
             border: none;
-            font-size: 1.5rem;
             cursor: pointer;
             color: var(--primary-dark);
             z-index: 1001;
@@ -366,44 +513,75 @@
             transition: var(--transition-medium);
         }
 
-        /* Enhanced Consultation Hero */
+        /* === ENHANCED PREMIUM HERO SECTION === */
         .consultation-hero {
-            min-height: 80vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             position: relative;
             overflow: hidden;
-            background: linear-gradient(135deg, var(--primary-light) 0%, var(--gray-100) 100%);
-            margin-top: 80px;
+            background: var(--gradient-hero);
+            color: var(--primary-light);
+            margin-top: 0;
+        }
+
+        .consultation-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 80% 20%, rgba(201, 169, 110, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 60% 80%, rgba(139, 115, 85, 0.06) 0%, transparent 50%);
+            pointer-events: none;
+            will-change: transform;
         }
 
         .consultation-hero-content {
-            max-width: 800px;
+            max-width: 950px;
             position: relative;
             z-index: 2;
+            animation: heroReveal 1s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+            opacity: 0;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--gradient-primary);
+            color: var(--primary-dark);
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            box-shadow:
+                0 6px 20px rgba(201, 169, 110, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            animation: badgePulse 2s ease-in-out infinite;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .consultation-hero h1 {
-            margin-bottom: 1.5rem;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 1s var(--transition-slow) forwards;
-        }
-
-        .consultation-hero p {
-            font-size: 1.375rem;
             margin-bottom: 2rem;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 1s var(--transition-slow) 0.2s forwards;
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--accent-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        /* Enhanced Trust Indicators */
+        .hero-description {
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+            color: var(--accent-gold-light);
+            max-width: 700px;
+        }
+
         .trust-indicators {
             display: flex;
-            justify-content: center;
             gap: 3rem;
-            margin-top: 3rem;
             flex-wrap: wrap;
         }
 
@@ -413,7 +591,7 @@
         }
 
         .trust-value {
-            font-size: 1.5rem;
+            font-size: 2.5rem;
             font-weight: 700;
             color: var(--accent-gold);
             margin-bottom: 0.5rem;
@@ -421,7 +599,7 @@
 
         .trust-label {
             font-size: 0.875rem;
-            color: var(--gray-800);
+            color: var(--accent-gold-light);
             font-weight: 500;
         }
 
@@ -433,31 +611,95 @@
             transform: translateY(-50%);
             width: 1px;
             height: 40px;
-            background: var(--gray-200);
+            background: rgba(201, 169, 110, 0.3);
         }
 
-        /* Enhanced Consultation Process */
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 45%;
+            height: 100%;
+            background: var(--primary-dark);
+            clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
+            z-index: 1;
+        }
+
+        .hero-bg:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(201, 169, 110, 0.1) 0%, rgba(139, 115, 85, 0.05) 100%);
+        }
+
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .floating-element {
+            position: absolute;
+            background: var(--accent-gold);
+            opacity: 0.1;
+            border-radius: 50%;
+        }
+
+        .floating-element:nth-child(1) {
+            width: 120px;
+            height: 120px;
+            top: 20%;
+            left: 10%;
+            animation: float 20s infinite linear;
+        }
+
+        .floating-element:nth-child(2) {
+            width: 80px;
+            height: 80px;
+            top: 60%;
+            left: 5%;
+            animation: float 15s infinite linear reverse;
+        }
+
+        .floating-element:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            top: 40%;
+            right: 15%;
+            animation: float 18s infinite linear;
+        }
+
+        /* === ENHANCED CONSULTATION PROCESS === */
         .consultation-process {
-            background: var(--gray-100);
+            background: var(--primary-light);
+            position: relative;
         }
 
         .process-steps {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
             margin-top: 3rem;
         }
 
         .process-step {
             text-align: center;
-            padding: 2.5rem;
+            padding: 4rem 3rem;
             background: var(--primary-light);
-            border-radius: var(--border-radius);
+            border-radius: var(--border-radius-xl);
             box-shadow: var(--shadow-soft);
             transition: var(--transition-medium);
             position: relative;
             overflow: hidden;
             z-index: 1;
+            border: 1px solid rgba(201, 169, 110, 0.1);
         }
 
         .process-step:before {
@@ -467,7 +709,7 @@
             left: 0;
             width: 100%;
             height: 0;
-            background: var(--accent-gold);
+            background: var(--gradient-primary);
             transition: var(--transition-medium);
             z-index: -1;
         }
@@ -477,8 +719,8 @@
         }
 
         .process-step:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-medium);
+            transform: translateY(-15px);
+            box-shadow: var(--shadow-intense);
         }
 
         .process-step:hover .step-number,
@@ -488,8 +730,8 @@
         }
 
         .step-number {
-            width: 60px;
-            height: 60px;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
             background: var(--accent-gold);
             color: var(--primary-dark);
@@ -497,13 +739,14 @@
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            margin: 0 auto 1.5rem;
-            font-size: 1.25rem;
+            margin: 0 auto 2rem;
+            font-size: 1.5rem;
             transition: var(--transition-medium);
-            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+            box-shadow: 0 6px 20px rgba(201, 169, 110, 0.4);
         }
 
         .process-step h3 {
+            margin-bottom: 1.5rem;
             transition: var(--transition-medium);
         }
 
@@ -511,33 +754,36 @@
             transition: var(--transition-medium);
         }
 
-        /* Enhanced Consultation Form Section */
+        /* === ENHANCED CONSULTATION FORM SECTION === */
         .consultation-form-section {
-            background: var(--primary-light);
+            background: var(--gradient-dark);
+            color: var(--primary-light);
+            position: relative;
+            overflow: hidden;
         }
 
         .form-container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(30px) saturate(180%);
             -webkit-backdrop-filter: blur(30px) saturate(180%);
-            border-radius: var(--border-radius-lg);
+            border-radius: var(--border-radius-xl);
             box-shadow:
                 var(--shadow-intense),
                 var(--shadow-glow),
-                inset 0 1px 0 rgba(255, 255, 255, 0.5);
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
             overflow: hidden;
             position: relative;
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             animation: formReveal 0.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
             opacity: 0;
         }
 
         .form-header {
-            background: linear-gradient(135deg, var(--primary-dark) 0%, #1a1a1a 100%);
-            color: var(--primary-light);
-            padding: 3.5rem;
+            background: var(--gradient-primary);
+            color: var(--primary-dark);
+            padding: 4rem 3.5rem;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -562,34 +808,34 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+            background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
             pointer-events: none;
         }
 
         .form-header h2 {
-            color: var(--primary-light);
-            margin-bottom: 0.5rem;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
         }
 
         .form-header h2:after {
-            background: var(--accent-gold);
+            background: var(--primary-dark);
             left: 50%;
             transform: translateX(-50%);
         }
 
         .form-content {
-            padding: 3rem;
+            padding: 4rem 3rem;
         }
 
         .form-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
+            gap: 2rem;
             margin-bottom: 2rem;
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             position: relative;
         }
 
@@ -599,48 +845,50 @@
 
         .form-label {
             display: block;
-            margin-bottom: 0.75rem;
+            margin-bottom: 1rem;
             font-weight: 600;
-            color: var(--primary-dark);
+            color: var(--accent-gold-light);
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.75rem;
+            font-size: 1.1rem;
         }
 
         .form-control {
             width: 100%;
-            padding: 1.35rem 1.65rem;
-            border: 2px solid var(--gray-200);
+            padding: 1.5rem 2rem;
+            border: 2px solid rgba(201, 169, 110, 0.2);
             border-radius: var(--border-radius);
             font-family: 'Inter', sans-serif;
             font-size: 1rem;
             transition: var(--transition-medium);
-            background: rgba(255, 255, 255, 0.98);
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--primary-light);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
         }
 
         .form-control:hover {
-            border-color: rgba(212, 175, 55, 0.4);
+            border-color: rgba(201, 169, 110, 0.5);
         }
 
         .form-control:focus {
             outline: none;
             border-color: var(--accent-gold);
             box-shadow:
-                0 0 0 4px rgba(212, 175, 55, 0.15),
-                0 4px 12px rgba(212, 175, 55, 0.2);
+                0 0 0 4px rgba(201, 169, 110, 0.15),
+                0 4px 12px rgba(201, 169, 110, 0.2);
             transform: translateY(-2px);
-            background: var(--primary-light);
+            background: rgba(255, 255, 255, 0.08);
         }
 
         textarea.form-control {
             resize: vertical;
-            min-height: 120px;
+            min-height: 150px;
         }
 
         select.form-control {
             appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%230A0A0A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23C9A96E' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
             background-repeat: no-repeat;
             background-position: right 1rem center;
             background-size: 16px;
@@ -648,14 +896,15 @@
 
         .form-hint {
             font-size: 0.875rem;
-            color: var(--gray-800);
-            margin-top: 0.25rem;
+            color: var(--accent-gold-light);
+            margin-top: 0.5rem;
+            opacity: 0.8;
         }
 
         .service-options {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
             margin-bottom: 2rem;
         }
 
@@ -670,9 +919,9 @@
 
         .service-option label {
             display: block;
-            padding: 1.5rem;
-            background: var(--gray-100);
-            border: 2px solid var(--gray-200);
+            padding: 2rem 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(201, 169, 110, 0.2);
             border-radius: var(--border-radius);
             cursor: pointer;
             transition: var(--transition-medium);
@@ -680,6 +929,7 @@
             position: relative;
             overflow: hidden;
             z-index: 1;
+            color: var(--accent-gold-light);
         }
 
         .service-option label:before {
@@ -705,7 +955,7 @@
 
         .service-option label:hover {
             border-color: var(--accent-gold);
-            transform: translateY(-2px);
+            transform: translateY(-5px);
             box-shadow: var(--shadow-soft);
         }
 
@@ -713,7 +963,8 @@
             display: block;
             font-weight: 700;
             color: var(--accent-gold);
-            margin-top: 0.5rem;
+            margin-top: 0.75rem;
+            font-size: 1.2rem;
             transition: var(--transition-medium);
         }
 
@@ -723,7 +974,7 @@
 
         .form-submit {
             text-align: center;
-            margin-top: 2rem;
+            margin-top: 3rem;
         }
 
         .btn-loading {
@@ -756,66 +1007,80 @@
 
         .privacy-notice {
             text-align: center;
-            margin-top: 1.5rem;
+            margin-top: 2rem;
             font-size: 0.875rem;
-            color: var(--gray-800);
+            color: var(--accent-gold-light);
+            opacity: 0.8;
         }
 
-        /* Enhanced Success Message */
+        /* === ENHANCED SUCCESS MESSAGE === */
         .form-success {
             display: none;
             text-align: center;
-            padding: 4rem 2rem;
+            padding: 6rem 3rem;
             background: var(--primary-light);
             border-radius: var(--border-radius);
+            color: var(--primary-dark);
         }
 
         .success-icon {
-            width: 80px;
-            height: 80px;
+            width: 100px;
+            height: 100px;
             background: var(--accent-gold);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 2rem;
-            font-size: 2rem;
+            margin: 0 auto 3rem;
+            font-size: 3rem;
             color: var(--primary-dark);
-            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
+            box-shadow: 0 10px 30px rgba(201, 169, 110, 0.4);
             animation: bounce 0.6s ease-in-out;
         }
 
-        /* Enhanced Footer */
+        /* === ENHANCED FOOTER === */
         footer {
             background: var(--primary-dark);
             color: var(--primary-light);
-            padding: 5rem 0 2rem;
-            position: relative;
-            overflow: hidden;
+            padding: 6rem 0 3rem;
         }
 
         .footer-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 4rem;
             margin-bottom: 4rem;
         }
 
-        .footer-column h4 {
-            color: var(--accent-gold);
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
             margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
         }
 
-        .footer-links {
+        .footer-logo span {
+            color: var(--accent-gold);
+        }
+
+        .footer-links h4 {
+            color: var(--accent-gold);
+            margin-bottom: 2rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-links ul {
             list-style: none;
         }
 
         .footer-links li {
-            margin-bottom: 0.75rem;
+            margin-bottom: 1rem;
         }
 
         .footer-links a {
-            color: var(--gray-200);
+            color: var(--accent-gold-light);
             transition: var(--transition-fast);
         }
 
@@ -825,55 +1090,13 @@
 
         .footer-bottom {
             text-align: center;
-            padding-top: 2rem;
+            padding-top: 3rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--accent-gold-light);
             font-size: 0.9rem;
-            color: var(--gray-200);
         }
 
-        /* Toast Notification */
-        .toast {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            background: var(--primary-dark);
-            color: var(--primary-light);
-            padding: 1rem 1.5rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-medium);
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            z-index: 1000;
-            transform: translateY(100px);
-            opacity: 0;
-            transition: transform var(--transition-medium), opacity var(--transition-medium);
-            max-width: 400px;
-        }
-
-        .toast.active {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        .toast-icon {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background: var(--accent-gold);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-            color: var(--primary-dark);
-            flex-shrink: 0;
-        }
-
-        .toast-message {
-            flex: 1;
-        }
-
-        /* Enhanced Animations */
+        /* === ENHANCED ANIMATIONS === */
         @keyframes fadeInUp {
             to {
                 opacity: 1;
@@ -893,21 +1116,49 @@
             }
         }
 
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(201, 169, 110, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(201, 169, 110, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(201, 169, 110, 0);
+            }
+        }
+
+        @keyframes gradientRotate {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes badgePulse {
+            0%, 100% {
+                box-shadow: 0 6px 20px rgba(201, 169, 110, 0.4);
+                transform: scale(1);
+            }
+            50% {
+                box-shadow: 0 8px 30px rgba(201, 169, 110, 0.6);
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes heroReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            100% {
+                opacity: 1;
                 transform: translateY(0);
-            }
-            40% {
-                transform: translateY(-10px);
-            }
-            60% {
-                transform: translateY(-5px);
             }
         }
 
         @keyframes spin {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         @keyframes formReveal {
@@ -937,7 +1188,50 @@
             transform: translateY(0);
         }
 
-        /* Media Queries */
+        /* === TOAST NOTIFICATION === */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--primary-dark);
+            color: var(--primary-light);
+            padding: 1.5rem 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-medium);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            z-index: 1000;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: transform var(--transition-medium), opacity var(--transition-medium);
+            max-width: 400px;
+        }
+
+        .toast.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--accent-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            color: var(--primary-dark);
+        }
+
+        /* === MEDIA QUERIES === */
+        @media (max-width: 1024px) {
+            .hero-bg {
+                width: 60%;
+            }
+        }
+
         @media (max-width: 768px) {
             .header-content {
                 position: relative;
@@ -980,28 +1274,24 @@
                 display: block;
             }
             
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .service-options {
-                grid-template-columns: 1fr;
+            .hero-bg {
+                width: 100%;
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+                opacity: 0.1;
             }
             
             .trust-indicators {
                 gap: 1.5rem;
+                justify-content: center;
             }
             
+            .process-steps,
+            .service-options {
+                grid-template-columns: 1fr;
+            }
+
             .trust-item:not(:last-child):after {
                 display: none;
-            }
-            
-            .form-content {
-                padding: 2rem;
-            }
-            
-            .form-header {
-                padding: 2rem;
             }
 
             .mobile-menu-btn.active span:nth-child(1) {
@@ -1016,10 +1306,17 @@
                 transform: rotate(-45deg) translate(6px, -6px);
             }
             
-            .toast {
-                right: 1rem;
-                left: 1rem;
-                max-width: none;
+            .process-step,
+            .form-content {
+                padding: 3rem 2rem;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-header {
+                padding: 3rem 2rem;
             }
         }
 
@@ -1032,26 +1329,44 @@
                 padding: 4rem 0;
             }
             
-            .consultation-hero {
-                min-height: 60vh;
+            .process-step,
+            .form-content {
+                padding: 2.5rem 1.5rem;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <div class="preloader-logo">Alchemy Lumière</div>
+            <div class="loader"></div>
+            <div class="preloader-text">Preparing Your Consultation</div>
+        </div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
     <!-- Animated Background Elements -->
-    <div class="bg-elements">
+    <div class="bg-elements" id="bgElements">
+        <div class="bg-element"></div>
         <div class="bg-element"></div>
         <div class="bg-element"></div>
         <div class="bg-element"></div>
     </div>
 
-    <!-- Header -->
+    <!-- Enhanced Premium Header -->
     <header id="header">
         <div class="container header-content">
             <a href="index.html" class="logo">
-                <div class="logo-icon">D</div>
-                DeepSeek<span>v3</span>
+                <div class="logo-icon">AL</div>
+                Alchemy Lumière<span>v3</span>
             </a>
             <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
                 <span></span>
@@ -1061,21 +1376,21 @@
             <nav id="mainNav">
                 <ul>
                     <li><a href="index.html#features">Features</a></li>
+                    <li><a href="index.html#ai-capabilities">AI Power</a></li>
                     <li><a href="index.html#services">Services</a></li>
-                    <li><a href="index.html#portfolio">Portfolio</a></li>
-                    <li><a href="index.html#team">Team</a></li>
-                    <li><a href="index.html#contact">Contact</a></li>
-                    <li><a href="consultation.html" class="btn btn-outline">Request Consultation</a></li>
+                    <li><a href="index.html#testimonials">Testimonials</a></li>
+                    <li><a href="consultation.html" class="btn btn-secondary">Request Consultation</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- Consultation Hero -->
+    <!-- Enhanced Premium Consultation Hero -->
     <section class="consultation-hero">
         <div class="container consultation-hero-content">
-            <h1>Start Your Project</h1>
-            <p>Begin your journey to exceptional digital excellence. Our consultation process is designed to understand your vision and transform it into a strategic roadmap for success.</p>
+            <div class="hero-badge">Begin Your Transformation</div>
+            <h1>Craft Your Digital Masterpiece</h1>
+            <p class="hero-description">Your vision deserves an extraordinary digital presence. Let's collaborate to create something truly remarkable that reflects your brand's unique essence.</p>
             <div class="trust-indicators">
                 <div class="trust-item">
                     <div class="trust-value">24h</div>
@@ -1089,7 +1404,17 @@
                     <div class="trust-value">Free</div>
                     <div class="trust-label">Initial Consultation</div>
                 </div>
+                <div class="trust-item">
+                    <div class="trust-value">AI</div>
+                    <div class="trust-label">Enhanced Strategy</div>
+                </div>
             </div>
+        </div>
+        <div class="hero-bg"></div>
+        <div class="floating-elements">
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
         </div>
     </section>
 
@@ -1097,29 +1422,29 @@
     <section class="consultation-process">
         <div class="container">
             <div class="section-header text-center">
-                <h2>Our Consultation Process</h2>
-                <p>We follow a structured approach to ensure we fully understand your needs and can provide the most value</p>
+                <h2>Our Alchemical Process</h2>
+                <p>Transforming your vision into digital reality through a meticulous, collaborative approach</p>
             </div>
             <div class="process-steps">
                 <div class="process-step fade-in">
                     <div class="step-number">1</div>
-                    <h3>Initial Discussion</h3>
-                    <p>We listen to your vision, challenges, and objectives to understand your unique requirements.</p>
+                    <h3>Vision Discovery</h3>
+                    <p>We immerse ourselves in your world, understanding your brand, goals, and vision to establish a foundation for success.</p>
                 </div>
                 <div class="process-step fade-in">
                     <div class="step-number">2</div>
-                    <h3>Needs Analysis</h3>
-                    <p>Our experts analyze your requirements and identify opportunities for innovation and growth.</p>
+                    <h3>Strategic Alchemy</h3>
+                    <p>Our experts analyze your requirements through the lens of AI-enhanced insights, identifying opportunities for innovation.</p>
                 </div>
                 <div class="process-step fade-in">
                     <div class="step-number">3</div>
-                    <h3>Strategy Development</h3>
-                    <p>We create a customized roadmap with clear milestones, deliverables, and success metrics.</p>
+                    <h3>Creative Synthesis</h3>
+                    <p>We craft a bespoke digital strategy with clear milestones, deliverables, and measurable success metrics tailored to your vision.</p>
                 </div>
                 <div class="process-step fade-in">
                     <div class="step-number">4</div>
-                    <h3>Proposal & Planning</h3>
-                    <p>Receive a detailed proposal outlining scope, timeline, and investment for your project.</p>
+                    <h3>Masterpiece Delivery</h3>
+                    <p>Receive a comprehensive proposal outlining scope, timeline, and investment, setting the stage for your digital transformation.</p>
                 </div>
             </div>
         </div>
@@ -1130,58 +1455,59 @@
         <div class="container">
             <div class="form-container">
                 <div class="form-header">
-                    <h2>Request Your Consultation</h2>
-                    <p>Complete the form below and we'll contact you within 24 hours</p>
+                    <h2>Begin Your Transformation</h2>
+                    <p>Share your vision with us and we'll craft a bespoke strategy within 24 hours</p>
                 </div>
                 <div class="form-content">
                     <form id="consultationForm">
                         <div class="form-grid">
                             <div class="form-group">
                                 <label for="firstName" class="form-label">
-                                    <span>👤</span> First Name *
+                                    <i class="fas fa-user"></i> First Name *
                                 </label>
-                                <input type="text" id="firstName" class="form-control" required>
+                                <input type="text" id="firstName" class="form-control" required placeholder="Enter your first name">
                             </div>
                             <div class="form-group">
                                 <label for="lastName" class="form-label">
-                                    <span>👤</span> Last Name *
+                                    <i class="fas fa-user"></i> Last Name *
                                 </label>
-                                <input type="text" id="lastName" class="form-control" required>
+                                <input type="text" id="lastName" class="form-control" required placeholder="Enter your last name">
                             </div>
                             <div class="form-group">
                                 <label for="email" class="form-label">
-                                    <span>✉️</span> Email Address *
+                                    <i class="fas fa-envelope"></i> Email Address *
                                 </label>
-                                <input type="email" id="email" class="form-control" required>
+                                <input type="email" id="email" class="form-control" required placeholder="your.email@example.com">
                             </div>
                             <div class="form-group">
                                 <label for="phone" class="form-label">
-                                    <span>📞</span> Phone Number
+                                    <i class="fas fa-phone"></i> Phone Number
                                 </label>
-                                <input type="tel" id="phone" class="form-control">
+                                <input type="tel" id="phone" class="form-control" placeholder="+1 (555) 123-4567">
                             </div>
                             <div class="form-group">
                                 <label for="company" class="form-label">
-                                    <span>🏢</span> Company / Organization *
+                                    <i class="fas fa-building"></i> Company / Organization *
                                 </label>
-                                <input type="text" id="company" class="form-control" required>
+                                <input type="text" id="company" class="form-control" required placeholder="Your company name">
                             </div>
                             <div class="form-group">
                                 <label for="website" class="form-label">
-                                    <span>🌐</span> Current Website (if applicable)
+                                    <i class="fas fa-globe"></i> Current Website (if applicable)
                                 </label>
-                                <input type="url" id="website" class="form-control" placeholder="https://">
+                                <input type="url" id="website" class="form-control" placeholder="https://yourwebsite.com">
                             </div>
                         </div>
 
                         <div class="form-group full-width">
                             <label class="form-label">
-                                <span>🎯</span> Which services are you interested in? *
+                                <i class="fas fa-star"></i> Which services ignite your interest? *
                             </label>
                             <div class="service-options">
                                 <div class="service-option">
                                     <input type="radio" id="service-discovery" name="service" value="discovery" required>
                                     <label for="service-discovery">
+                                        <i class="fas fa-compass"></i>
                                         Discovery & Strategy
                                         <span class="service-price">From $1,500</span>
                                     </label>
@@ -1189,6 +1515,7 @@
                                 <div class="service-option">
                                     <input type="radio" id="service-signature" name="service" value="signature" required>
                                     <label for="service-signature">
+                                        <i class="fas fa-gem"></i>
                                         Signature Website
                                         <span class="service-price">From $9,500</span>
                                     </label>
@@ -1196,6 +1523,7 @@
                                 <div class="service-option">
                                     <input type="radio" id="service-exclusive" name="service" value="exclusive" required>
                                     <label for="service-exclusive">
+                                        <i class="fas fa-crown"></i>
                                         Ultra Exclusive
                                         <span class="service-price">POA</span>
                                     </label>
@@ -1203,6 +1531,7 @@
                                 <div class="service-option">
                                     <input type="radio" id="service-custom" name="service" value="custom" required>
                                     <label for="service-custom">
+                                        <i class="fas fa-wand-magic-sparkles"></i>
                                         Custom Package
                                         <span class="service-price">Let's Discuss</span>
                                     </label>
@@ -1212,7 +1541,7 @@
 
                         <div class="form-group full-width">
                             <label for="timeline" class="form-label">
-                                <span>⏰</span> Project Timeline *
+                                <i class="fas fa-clock"></i> Project Timeline *
                             </label>
                             <select id="timeline" class="form-control" required>
                                 <option value="">Select your timeline</option>
@@ -1220,13 +1549,13 @@
                                 <option value="short-term">Short-term (1-3 months)</option>
                                 <option value="medium-term">Medium-term (3-6 months)</option>
                                 <option value="long-term">Long-term (6+ months)</option>
-                                <option value="exploring">Just exploring options</option>
+                                <option value="exploring">Just exploring possibilities</option>
                             </select>
                         </div>
 
                         <div class="form-group full-width">
                             <label for="budget" class="form-label">
-                                <span>💰</span> Project Budget *
+                                <i class="fas fa-coins"></i> Project Budget *
                             </label>
                             <select id="budget" class="form-control" required>
                                 <option value="">Select your budget range</option>
@@ -1241,22 +1570,22 @@
 
                         <div class="form-group full-width">
                             <label for="projectDetails" class="form-label">
-                                <span>📋</span> Project Details & Objectives *
+                                <i class="fas fa-lightbulb"></i> Project Vision & Objectives *
                             </label>
-                            <textarea id="projectDetails" class="form-control" placeholder="Please describe your project, key objectives, target audience, and any specific requirements..." required></textarea>
-                            <div class="form-hint">Be as detailed as possible to help us understand your vision</div>
+                            <textarea id="projectDetails" class="form-control" placeholder="Describe your vision, key objectives, target audience, and any specific requirements that will make your project extraordinary..." required></textarea>
+                            <div class="form-hint">The more detail you provide, the better we can understand and bring your vision to life</div>
                         </div>
 
                         <div class="form-group full-width">
                             <label for="challenges" class="form-label">
-                                <span>🚧</span> Current Challenges
+                                <i class="fas fa-puzzle-piece"></i> Current Challenges & Aspirations
                             </label>
-                            <textarea id="challenges" class="form-control" placeholder="What challenges are you currently facing with your digital presence?"></textarea>
+                            <textarea id="challenges" class="form-control" placeholder="What challenges are you currently facing? What would your ideal digital solution accomplish?"></textarea>
                         </div>
 
                         <div class="form-group full-width">
                             <label for="referral" class="form-label">
-                                <span>🔍</span> How did you hear about us?
+                                <i class="fas fa-handshake"></i> How did you discover Alchemy Lumière?
                             </label>
                             <select id="referral" class="form-control">
                                 <option value="">Please select</option>
@@ -1270,20 +1599,23 @@
                         </div>
 
                         <div class="form-submit">
-                            <button type="submit" class="btn" id="submitBtn">
-                                <span class="btn-text">Submit Consultation Request</span>
+                            <button type="submit" class="btn btn-primary" id="submitBtn">
+                                <span class="btn-text">Begin Transformation</span>
                                 <div class="btn-spinner"></div>
                             </button>
-                            <p class="privacy-notice">We respect your privacy. Your information will never be shared with third parties.</p>
+                            <p class="privacy-notice">Your information is sacred. We respect your privacy and will never share your details with third parties.</p>
                         </div>
                     </form>
 
                     <div class="form-success" id="formSuccess">
-                        <div class="success-icon">✓</div>
-                        <h3>Thank You for Your Request!</h3>
-                        <p>We've received your consultation request and will contact you within 24 hours to discuss your project.</p>
-                        <p>In the meantime, feel free to explore our <a href="index.html#portfolio">portfolio</a> or learn more about our <a href="index.html#process">process</a>.</p>
-                        <a href="index.html" class="btn" style="margin-top: 2rem;">Return to Homepage</a>
+                        <div class="success-icon"><i class="fas fa-check"></i></div>
+                        <h3>Transformation Initiated!</h3>
+                        <p>We've received your consultation request and will contact you within 24 hours to discuss your vision.</p>
+                        <p>In the meantime, explore our <a href="index.html#portfolio">portfolio</a> or learn more about our <a href="index.html#process">alchemical process</a>.</p>
+                        <a href="index.html" class="btn btn-primary" style="margin-top: 2rem;">
+                            <i class="fas fa-home"></i>
+                            Return to Homepage
+                        </a>
                     </div>
                 </div>
             </div>
@@ -1294,40 +1626,43 @@
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-column">
-                    <h4>DeepSeek v3</h4>
-                    <p>Creating exclusive digital experiences for visionary brands since 2025.</p>
+                <div class="footer-info">
+                    <div class="footer-logo">
+                        <div class="logo-icon">AL</div>
+                        Alchemy Lumière<span>v3</span>
+                    </div>
+                    <p>Creating digital masterpieces powered by advanced AI architecture for visionary brands worldwide.</p>
                 </div>
-                <div class="footer-column">
+                <div class="footer-links">
                     <h4>Services</h4>
-                    <ul class="footer-links">
+                    <ul>
                         <li><a href="index.html#services">Discovery & Strategy</a></li>
                         <li><a href="index.html#services">Signature Website</a></li>
                         <li><a href="index.html#services">Ultra Exclusive</a></li>
-                        <li><a href="consultation.html">Custom Packages</a></li>
+                        <li><a href="index.html#ai-capabilities">AI Capabilities</a></li>
                     </ul>
                 </div>
-                <div class="footer-column">
+                <div class="footer-links">
                     <h4>Company</h4>
-                    <ul class="footer-links">
-                        <li><a href="index.html#process">Our Process</a></li>
-                        <li><a href="index.html#portfolio">Portfolio</a></li>
-                        <li><a href="index.html#team">Our Team</a></li>
-                        <li><a href="consultation.html">Consultation</a></li>
+                    <ul>
+                        <li><a href="index.html#features">Our Approach</a></li>
+                        <li><a href="index.html#testimonials">Case Studies</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                        <li><a href="index.html#ai-capabilities">AI Research</a></li>
                     </ul>
                 </div>
-                <div class="footer-column">
+                <div class="footer-links">
                     <h4>Connect</h4>
-                    <ul class="footer-links">
-                        <li><a href="#">LinkedIn</a></li>
-                        <li><a href="#">Instagram</a></li>
-                        <li><a href="#">Twitter</a></li>
-                        <li><a href="#">Dribbble</a></li>
+                    <ul>
+                        <li><a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+                        <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                        <li><a href="#"><i class="fab fa-github"></i> GitHub</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 DeepSeek v3. All rights reserved. | By request only.</p>
+                <p>&copy; 2025 Alchemy Lumière. All rights reserved. Crafted with precision and powered by AI.</p>
             </div>
         </div>
     </footer>
@@ -1339,26 +1674,101 @@
     </div>
 
     <script>
-        // DOM Elements
-        const header = document.getElementById('header');
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mainNav = document.getElementById('mainNav');
-        const consultationForm = document.getElementById('consultationForm');
-        const formSuccess = document.getElementById('formSuccess');
-        const fadeElements = document.querySelectorAll('.fade-in');
-        const submitBtn = document.getElementById('submitBtn');
-        const toast = document.getElementById('toast');
-
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 100) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
+        // === PRELOADER ===
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            setTimeout(() => {
+                preloader.style.opacity = '0';
+                preloader.style.visibility = 'hidden';
+            }, 1500);
         });
 
-        // Enhanced Mobile menu toggle
+        // === CUSTOM CURSOR ===
+        const cursor = document.querySelector('.cursor');
+        const cursorFollower = document.querySelector('.cursor-follower');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            setTimeout(() => {
+                cursorFollower.style.left = e.clientX + 'px';
+                cursorFollower.style.top = e.clientY + 'px';
+            }, 100);
+        });
+
+        document.addEventListener('mousedown', () => {
+            cursor.style.transform = 'scale(0.8)';
+            cursorFollower.style.transform = 'scale(1.2)';
+        });
+
+        document.addEventListener('mouseup', () => {
+            cursor.style.transform = 'scale(1)';
+            cursorFollower.style.transform = 'scale(1)';
+        });
+
+        // Add hover effect for interactive elements
+        const interactiveElements = document.querySelectorAll('a, button, .service-option, .process-step, .form-control');
+        
+        interactiveElements.forEach(element => {
+            element.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'scale(1.5)';
+                cursorFollower.style.transform = 'scale(1.5)';
+            });
+            
+            element.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'scale(1)';
+                cursorFollower.style.transform = 'scale(1)';
+            });
+        });
+
+        // === SCROLL PROGRESS ===
+        function updateScrollProgress() {
+            const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (window.scrollY / windowHeight) * 100;
+            document.getElementById('scrollProgress').style.width = scrolled + '%';
+        }
+
+        // === PARALLAX EFFECT ===
+        function updateParallax() {
+            const scrolled = window.scrollY;
+            const bgElements = document.getElementById('bgElements');
+            
+            if (bgElements) {
+                const elements = bgElements.querySelectorAll('.bg-element');
+                elements.forEach((el, index) => {
+                    const speed = 0.1 + (index * 0.05);
+                    el.style.transform = `translateY(${scrolled * speed}px)`;
+                });
+            }
+
+            // Hero parallax
+            const heroSection = document.querySelector('.consultation-hero');
+            if (heroSection && scrolled < window.innerHeight) {
+                const heroContent = heroSection.querySelector('.consultation-hero-content');
+                if (heroContent) {
+                    heroContent.style.transform = `translateY(${scrolled * 0.3}px)`;
+                    heroContent.style.opacity = 1 - (scrolled / window.innerHeight) * 0.5;
+                }
+            }
+        }
+
+        // === HEADER SCROLL EFFECT ===
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                document.getElementById('header').classList.add('scrolled');
+            } else {
+                document.getElementById('header').classList.remove('scrolled');
+            }
+
+            updateScrollProgress();
+            requestAnimationFrame(updateParallax);
+        });
+
+        // === MOBILE MENU TOGGLE ===
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+
         mobileMenuBtn.addEventListener('click', () => {
             mainNav.classList.toggle('active');
             mobileMenuBtn.classList.toggle('active');
@@ -1374,9 +1784,11 @@
             });
         });
 
-        // Show toast notification
+        // === TOAST NOTIFICATION ===
         function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
             const toastIcon = toast.querySelector('.toast-icon');
+            
             toastIcon.textContent = type === 'success' ? '✓' : '⚠️';
             toastIcon.style.background = type === 'success' ? 'var(--accent-gold)' : '#dc2626';
             
@@ -1388,7 +1800,49 @@
             }, 4000);
         }
 
-        // Form validation
+        // === FADE IN ELEMENTS ON SCROLL ===
+        function checkFade() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach((element, index) => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+
+                if (elementTop < windowHeight * 0.85) {
+                    setTimeout(() => {
+                        element.classList.add('visible');
+                    }, index * 100);
+                }
+            });
+        }
+
+        window.addEventListener('scroll', checkFade);
+        window.addEventListener('load', checkFade);
+
+        // === MAGNETIC BUTTON EFFECT ===
+        function addMagneticEffect() {
+            const buttons = document.querySelectorAll('.btn, .service-option label');
+
+            buttons.forEach(button => {
+                button.addEventListener('mousemove', (e) => {
+                    const rect = button.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+
+                    button.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px) scale(1.03)`;
+                });
+
+                button.addEventListener('mouseleave', () => {
+                    button.style.transform = 'translate(0, 0) scale(1)';
+                });
+            });
+        }
+
+        // Initialize magnetic effect on desktop
+        if (window.innerWidth > 768) {
+            addMagneticEffect();
+        }
+
+        // === FORM VALIDATION ===
         function validateForm() {
             const email = document.getElementById('email').value;
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -1400,14 +1854,18 @@
             
             const projectDetails = document.getElementById('projectDetails').value;
             if (projectDetails.length < 20) {
-                showToast('Please provide more details about your project', 'error');
+                showToast('Please provide more details about your project vision', 'error');
                 return false;
             }
             
             return true;
         }
 
-        // Form submission
+        // === FORM SUBMISSION ===
+        const consultationForm = document.getElementById('consultationForm');
+        const formSuccess = document.getElementById('formSuccess');
+        const submitBtn = document.getElementById('submitBtn');
+
         consultationForm.addEventListener('submit', (e) => {
             e.preventDefault();
             
@@ -1455,29 +1913,25 @@
                 submitBtn.classList.remove('btn-loading');
                 
                 // Show success toast
-                showToast('Consultation request submitted successfully!');
+                showToast('Transformation initiated successfully!');
                 
                 // Reset form
                 consultationForm.reset();
             }, 2000);
         });
 
-        // Fade in elements on scroll
-        function checkFade() {
-            fadeElements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-                
-                if (elementTop < windowHeight * 0.85) {
-                    element.classList.add('visible');
-                }
+        // === ENHANCED FORM INTERACTIONS ===
+        document.querySelectorAll('.form-control').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'translateY(-2px)';
             });
-        }
-        
-        window.addEventListener('scroll', checkFade);
-        window.addEventListener('load', checkFade);
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'translateY(0)';
+            });
+        });
 
-        // Smooth scrolling for anchor links
+        // === SMOOTH SCROLLING ===
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1495,25 +1949,14 @@
             });
         });
 
-        // Enhanced form interactions
-        document.querySelectorAll('.form-control').forEach(input => {
-            input.addEventListener('focus', function() {
-                this.parentElement.style.transform = 'translateY(-2px)';
-            });
-            
-            input.addEventListener('blur', function() {
-                this.parentElement.style.transform = 'translateY(0)';
-            });
-        });
-
-        // Initialize on load
-        document.addEventListener('DOMContentLoaded', function() {
+        // === INITIALIZE ON LOAD ===
+        document.addEventListener('DOMContentLoaded', () => {
             checkFade();
             
             // Show welcome message after a short delay
             setTimeout(() => {
-                showToast('Welcome to DeepSeek v3 Consultation');
-            }, 1000);
+                showToast('Welcome to Alchemy Lumière Consultation');
+            }, 2000);
         });
     </script>
 </body>
