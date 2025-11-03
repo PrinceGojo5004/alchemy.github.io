@@ -769,6 +769,257 @@
             gap: 0.5rem;
         }
 
+        /* === PROJECT MANAGEMENT SECTION === */
+        .project-management {
+            margin-top: 3rem;
+        }
+
+        .project-management-header {
+            margin-bottom: 2rem;
+        }
+
+        .project-management-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .project-form {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: var(--border-radius-lg);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .project-form:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: var(--accent-gold);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+            color: var(--accent-gold);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
+            color: var(--primary-light);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition-fast);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 0 2px rgba(201, 169, 110, 0.2);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .project-preview {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: var(--border-radius-lg);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .project-preview:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: var(--accent-gold);
+        }
+
+        .preview-header {
+            margin-bottom: 2rem;
+        }
+
+        .preview-title {
+            font-size: 1.8rem;
+            color: var(--accent-gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .preview-metrics {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .preview-metric {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: var(--border-radius);
+        }
+
+        .preview-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .preview-label {
+            color: var(--accent-gold-light);
+            font-size: 0.9rem;
+        }
+
+        .preview-progress {
+            margin-top: 2rem;
+        }
+
+        .preview-progress-bar {
+            height: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        .preview-progress-fill {
+            height: 100%;
+            background: var(--gradient-primary);
+            border-radius: 5px;
+            transition: width 0.5s ease;
+        }
+
+        /* === TIMELINE MANAGEMENT === */
+        .timeline-management {
+            margin-top: 3rem;
+        }
+
+        .timeline-management-header {
+            margin-bottom: 2rem;
+        }
+
+        .timeline-form {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: var(--border-radius-lg);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .timeline-items {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .timeline-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .timeline-item-content h4 {
+            margin-bottom: 0.5rem;
+            color: var(--accent-gold);
+        }
+
+        .timeline-item-content p {
+            margin-bottom: 0;
+            font-size: 0.9rem;
+        }
+
+        .timeline-item-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        /* === UPDATES MANAGEMENT === */
+        .updates-management {
+            margin-top: 3rem;
+        }
+
+        .updates-management-header {
+            margin-bottom: 2rem;
+        }
+
+        .updates-form {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: var(--border-radius-lg);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .updates-list {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .update-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .update-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .update-title {
+            font-size: 1.2rem;
+            color: var(--accent-gold);
+            margin-bottom: 0;
+        }
+
+        .update-time {
+            font-size: 0.9rem;
+            color: var(--accent-gold-light);
+        }
+
+        .update-description {
+            margin-bottom: 0;
+            font-size: 0.95rem;
+        }
+
         /* === PREMIUM MODAL WITH ENHANCED UX === */
         .modal {
             display: none;
@@ -905,6 +1156,10 @@
             .main-content {
                 margin-left: 260px;
             }
+            
+            .project-management-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 992px) {
@@ -926,6 +1181,10 @@
             }
             
             .detail-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .preview-metrics {
                 grid-template-columns: 1fr;
             }
         }
@@ -1135,24 +1394,24 @@
             </a>
         </div>
         <div class="sidebar-nav">
-            <div class="nav-item active">
-                <i class="fas fa-chart-line nav-icon"></i>
-                <span>Dashboard</span>
-            </div>
-            <div class="nav-item">
+            <div class="nav-item" data-section="consultations">
                 <i class="fas fa-calendar-check nav-icon"></i>
                 <span>Consultations</span>
                 <span class="urgency-badge" id="newRequestsBadge">0 NEW</span>
             </div>
-            <div class="nav-item">
+            <div class="nav-item active" data-section="projects">
+                <i class="fas fa-project-diagram nav-icon"></i>
+                <span>Project Management</span>
+            </div>
+            <div class="nav-item" data-section="clients">
                 <i class="fas fa-users nav-icon"></i>
                 <span>Clients</span>
             </div>
-            <div class="nav-item">
+            <div class="nav-item" data-section="analytics">
                 <i class="fas fa-chart-bar nav-icon"></i>
                 <span>Analytics</span>
             </div>
-            <div class="nav-item">
+            <div class="nav-item" data-section="settings">
                 <i class="fas fa-cog nav-icon"></i>
                 <span>Settings</span>
             </div>
@@ -1165,88 +1424,276 @@
 
     <!-- Main Content -->
     <div class="main-content">
-        <div class="admin-header">
-            <div>
-                <button class="mobile-menu-btn" id="mobileMenuBtn">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <h1 class="admin-title">Consultation Requests</h1>
-                <p class="admin-subtitle">Manage and review all consultation submissions</p>
-                <div class="social-proof">
-                    <i class="fas fa-crown"></i>
-                    <span>Premium clients this week: <strong id="premiumClients">0</strong></span>
+        <!-- Consultation Requests Section -->
+        <section id="consultations-section" class="dashboard-section" style="display: none;">
+            <div class="admin-header">
+                <div>
+                    <button class="mobile-menu-btn" id="mobileMenuBtn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1 class="admin-title">Consultation Requests</h1>
+                    <p class="admin-subtitle">Manage and review all consultation submissions</p>
+                    <div class="social-proof">
+                        <i class="fas fa-crown"></i>
+                        <span>Premium clients this week: <strong id="premiumClients">0</strong></span>
+                    </div>
+                </div>
+                <div class="admin-actions">
+                    <button class="btn btn-outline" id="exportBtn">
+                        <i class="fas fa-download"></i>
+                        Export Data
+                    </button>
+                    <button class="btn" id="refreshBtn">
+                        <i class="fas fa-sync-alt"></i>
+                        Refresh
+                    </button>
                 </div>
             </div>
-            <div class="admin-actions">
-                <button class="btn btn-outline" id="exportBtn">
-                    <i class="fas fa-download"></i>
-                    Export Data
-                </button>
-                <button class="btn" id="refreshBtn">
-                    <i class="fas fa-sync-alt"></i>
-                    Refresh
-                </button>
-            </div>
-        </div>
 
-        <!-- Stats Overview -->
-        <div class="stats-container">
-            <div class="stat-card fade-in">
-                <div class="stat-value" id="totalRequests">0</div>
-                <div class="stat-label">Total Requests</div>
-                <div class="stat-progress">
-                    <div class="stat-progress-bar" id="totalProgress" style="width: 0%"></div>
+            <!-- Stats Overview -->
+            <div class="stats-container">
+                <div class="stat-card fade-in">
+                    <div class="stat-value" id="totalRequests">0</div>
+                    <div class="stat-label">Total Requests</div>
+                    <div class="stat-progress">
+                        <div class="stat-progress-bar" id="totalProgress" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="stat-card fade-in">
+                    <div class="stat-value" id="newRequests">0</div>
+                    <div class="stat-label">New This Week</div>
+                    <div class="stat-progress">
+                        <div class="stat-progress-bar" id="newProgress" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="stat-card fade-in">
+                    <div class="stat-value" id="contactedRequests">0</div>
+                    <div class="stat-label">Contacted</div>
+                    <div class="stat-progress">
+                        <div class="stat-progress-bar" id="contactedProgress" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="stat-card fade-in">
+                    <div class="stat-value" id="completedRequests">0</div>
+                    <div class="stat-label">Completed</div>
+                    <div class="stat-progress">
+                        <div class="stat-progress-bar" id="completedProgress" style="width: 0%"></div>
+                    </div>
                 </div>
             </div>
-            <div class="stat-card fade-in">
-                <div class="stat-value" id="newRequests">0</div>
-                <div class="stat-label">New This Week</div>
-                <div class="stat-progress">
-                    <div class="stat-progress-bar" id="newProgress" style="width: 0%"></div>
-                </div>
-            </div>
-            <div class="stat-card fade-in">
-                <div class="stat-value" id="contactedRequests">0</div>
-                <div class="stat-label">Contacted</div>
-                <div class="stat-progress">
-                    <div class="stat-progress-bar" id="contactedProgress" style="width: 0%"></div>
-                </div>
-            </div>
-            <div class="stat-card fade-in">
-                <div class="stat-value" id="completedRequests">0</div>
-                <div class="stat-label">Completed</div>
-                <div class="stat-progress">
-                    <div class="stat-progress-bar" id="completedProgress" style="width: 0%"></div>
-                </div>
-            </div>
-        </div>
 
-        <!-- Consultation Requests Table -->
-        <div class="table-container">
-            <div class="table-header">
-                <h2 class="table-title">Recent Requests</h2>
-                <div class="search-box">
-                    <input type="text" placeholder="Search requests..." id="searchInput">
-                    <i class="fas fa-search"></i>
+            <!-- Consultation Requests Table -->
+            <div class="table-container">
+                <div class="table-header">
+                    <h2 class="table-title">Recent Requests</h2>
+                    <div class="search-box">
+                        <input type="text" placeholder="Search requests..." id="searchInput">
+                        <i class="fas fa-search"></i>
+                    </div>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Company</th>
+                            <th>Service</th>
+                            <th>Budget</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="consultationTableBody">
+                        <!-- Table rows will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Project Management Section -->
+        <section id="projects-section" class="dashboard-section">
+            <div class="admin-header">
+                <div>
+                    <button class="mobile-menu-btn" id="mobileMenuBtn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1 class="admin-title">Project Management</h1>
+                    <p class="admin-subtitle">Manage client projects and track progress</p>
+                    <div class="social-proof">
+                        <i class="fas fa-rocket"></i>
+                        <span>Active projects: <strong id="activeProjects">1</strong></span>
+                    </div>
+                </div>
+                <div class="admin-actions">
+                    <button class="btn btn-outline" id="saveProjectBtn">
+                        <i class="fas fa-save"></i>
+                        Save Changes
+                    </button>
+                    <button class="btn" id="previewProjectBtn">
+                        <i class="fas fa-eye"></i>
+                        Preview
+                    </button>
                 </div>
             </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Company</th>
-                        <th>Service</th>
-                        <th>Budget</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody id="consultationTableBody">
-                    <!-- Table rows will be populated by JavaScript -->
-                </tbody>
-            </table>
-        </div>
+
+            <!-- Project Management Content -->
+            <div class="project-management">
+                <div class="project-management-header">
+                    <h2>Client Project Dashboard</h2>
+                    <p>Update project details, timeline, and progress for client visibility</p>
+                </div>
+
+                <div class="project-management-grid">
+                    <div class="project-form">
+                        <h3>Project Details</h3>
+                        <div class="form-group">
+                            <label class="form-label" for="projectName">Project Name</label>
+                            <input type="text" id="projectName" class="form-control" value="LuxeBrand Global Website">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="projectDescription">Project Description</label>
+                            <textarea id="projectDescription" class="form-control">Complete website redesign with e-commerce integration and AI-powered personalization</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="projectProgress">Overall Progress (%)</label>
+                            <input type="range" id="projectProgress" class="form-control" min="0" max="100" value="75">
+                            <div class="progress-percentage" id="progressValue">75%</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="daysRemaining">Days Remaining</label>
+                            <input type="number" id="daysRemaining" class="form-control" value="14">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="tasksCompleted">Tasks Completed</label>
+                            <input type="number" id="tasksCompleted" class="form-control" value="24">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="totalTasks">Total Tasks</label>
+                            <input type="number" id="totalTasks" class="form-control" value="32">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="teamMembers">Team Members</label>
+                            <input type="number" id="teamMembers" class="form-control" value="5">
+                        </div>
+                    </div>
+
+                    <div class="project-preview">
+                        <h3>Client Preview</h3>
+                        <div class="preview-header">
+                            <h4 class="preview-title" id="previewProjectName">LuxeBrand Global Website</h4>
+                            <p class="preview-description" id="previewProjectDescription">Complete website redesign with e-commerce integration and AI-powered personalization</p>
+                        </div>
+                        <div class="preview-metrics">
+                            <div class="preview-metric">
+                                <div class="preview-value" id="previewProgress">75%</div>
+                                <div class="preview-label">Overall Progress</div>
+                            </div>
+                            <div class="preview-metric">
+                                <div class="preview-value" id="previewDays">14</div>
+                                <div class="preview-label">Days Remaining</div>
+                            </div>
+                            <div class="preview-metric">
+                                <div class="preview-value" id="previewTasks">24/32</div>
+                                <div class="preview-label">Tasks Completed</div>
+                            </div>
+                            <div class="preview-metric">
+                                <div class="preview-value" id="previewTeam">5</div>
+                                <div class="preview-label">Team Members</div>
+                            </div>
+                        </div>
+                        <div class="preview-progress">
+                            <div class="progress-header">
+                                <span class="progress-label">Project Completion</span>
+                                <span class="progress-percentage" id="previewPercentage">75%</span>
+                            </div>
+                            <div class="preview-progress-bar">
+                                <div class="preview-progress-fill" id="previewProgressFill" style="width: 75%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline Management -->
+                <div class="timeline-management">
+                    <div class="timeline-management-header">
+                        <h3>Project Timeline</h3>
+                        <p>Manage project milestones and timeline for client visibility</p>
+                    </div>
+
+                    <div class="timeline-form">
+                        <h4>Add New Milestone</h4>
+                        <div class="form-group">
+                            <label class="form-label" for="milestoneTitle">Milestone Title</label>
+                            <input type="text" id="milestoneTitle" class="form-control" placeholder="Enter milestone title">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="milestoneDescription">Description</label>
+                            <textarea id="milestoneDescription" class="form-control" placeholder="Enter milestone description"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="milestoneDate">Date</label>
+                            <input type="date" id="milestoneDate" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="milestoneStatus">Status</label>
+                            <select id="milestoneStatus" class="form-control">
+                                <option value="upcoming">Upcoming</option>
+                                <option value="active">Active</option>
+                                <option value="completed">Completed</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-small" id="addMilestoneBtn">
+                            <i class="fas fa-plus"></i>
+                            Add Milestone
+                        </button>
+                    </div>
+
+                    <div class="timeline-items" id="timelineItems">
+                        <!-- Timeline items will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Updates Management -->
+                <div class="updates-management">
+                    <div class="updates-management-header">
+                        <h3>Project Updates</h3>
+                        <p>Post updates and notifications for the client</p>
+                    </div>
+
+                    <div class="updates-form">
+                        <h4>Add New Update</h4>
+                        <div class="form-group">
+                            <label class="form-label" for="updateTitle">Update Title</label>
+                            <input type="text" id="updateTitle" class="form-control" placeholder="Enter update title">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="updateDescription">Description</label>
+                            <textarea id="updateDescription" class="form-control" placeholder="Enter update description"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="updateIcon">Icon</label>
+                            <select id="updateIcon" class="form-control">
+                                <option value="fas fa-code">Code</option>
+                                <option value="fas fa-palette">Design</option>
+                                <option value="fas fa-file-alt">Document</option>
+                                <option value="fas fa-chart-line">Analytics</option>
+                                <option value="fas fa-sync-alt">Update</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-small" id="addUpdateBtn">
+                            <i class="fas fa-plus"></i>
+                            Add Update
+                        </button>
+                    </div>
+
+                    <div class="updates-list" id="updatesList">
+                        <!-- Updates will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Other sections (clients, analytics, settings) would go here -->
     </div>
 
     <!-- Consultation Detail Modal -->
@@ -1347,68 +1794,392 @@
             document.body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : 'auto';
         });
 
-        // === CONSULTATION DATA MANAGEMENT ===
-        // Get consultation requests from localStorage
-        function getConsultationRequests() {
-            return JSON.parse(localStorage.getItem('consultationRequests')) || [];
-        }
+        // === NAVIGATION BETWEEN SECTIONS ===
+        const navItems = document.querySelectorAll('.nav-item');
+        const sections = document.querySelectorAll('.dashboard-section');
 
-        // Save consultation requests to localStorage
-        function saveConsultationRequests(requests) {
-            localStorage.setItem('consultationRequests', JSON.stringify(requests));
-        }
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const sectionId = item.getAttribute('data-section') + '-section';
+                
+                // Update active nav item
+                navItems.forEach(nav => nav.classList.remove('active'));
+                item.classList.add('active');
+                
+                // Show corresponding section
+                sections.forEach(section => {
+                    section.style.display = 'none';
+                });
+                
+                document.getElementById(sectionId).style.display = 'block';
+                
+                // Close mobile menu
+                if (window.innerWidth < 992) {
+                    sidebar.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
 
-        // Update a consultation request
-        function updateConsultationRequest(id, updates) {
-            const requests = getConsultationRequests();
-            const index = requests.findIndex(request => request.id === id);
-            if (index !== -1) {
-                requests[index] = { ...requests[index], ...updates };
-                saveConsultationRequests(requests);
-                return true;
+        // === PROJECT DATA MANAGEMENT ===
+        // Get project data from localStorage
+        function getProjectData() {
+            const defaultProject = {
+                name: "LuxeBrand Global Website",
+                description: "Complete website redesign with e-commerce integration and AI-powered personalization",
+                progress: 75,
+                daysRemaining: 14,
+                tasksCompleted: 24,
+                totalTasks: 32,
+                teamMembers: 5,
+                timeline: [
+                    {
+                        id: 1,
+                        title: "Project Kickoff",
+                        description: "Initial meeting to establish project goals, timeline, and deliverables.",
+                        date: "2025-01-10",
+                        status: "completed"
+                    },
+                    {
+                        id: 2,
+                        title: "Design Phase",
+                        description: "Creation of wireframes, mockups, and design concepts for approval.",
+                        date: "2025-01-25",
+                        status: "completed"
+                    },
+                    {
+                        id: 3,
+                        title: "Development Phase",
+                        description: "Implementation of frontend and backend functionality.",
+                        date: "2025-02-15",
+                        status: "active"
+                    },
+                    {
+                        id: 4,
+                        title: "Content Integration",
+                        description: "Adding client-provided content and media to the website.",
+                        date: "2025-03-01",
+                        status: "upcoming"
+                    },
+                    {
+                        id: 5,
+                        title: "Testing & QA",
+                        description: "Comprehensive testing across devices and browsers.",
+                        date: "2025-03-15",
+                        status: "upcoming"
+                    },
+                    {
+                        id: 6,
+                        title: "Launch",
+                        description: "Final deployment and go-live of the completed website.",
+                        date: "2025-03-30",
+                        status: "upcoming"
+                    }
+                ],
+                updates: [
+                    {
+                        id: 1,
+                        title: "Development Milestone Reached",
+                        description: "The backend API integration has been completed successfully. Frontend development is now 80% complete.",
+                        time: "2 hours ago",
+                        icon: "fas fa-code"
+                    },
+                    {
+                        id: 2,
+                        title: "Design Review Completed",
+                        description: "Client feedback has been incorporated into the design revisions. Final mockups approved.",
+                        time: "1 day ago",
+                        icon: "fas fa-palette"
+                    },
+                    {
+                        id: 3,
+                        title: "Content Strategy Session",
+                        description: "Collaborative session to finalize content structure and SEO strategy.",
+                        time: "3 days ago",
+                        icon: "fas fa-file-alt"
+                    },
+                    {
+                        id: 4,
+                        title: "Project Status Update",
+                        description: "Weekly progress report sent to client. Project is on track for the March 30th launch date.",
+                        time: "5 days ago",
+                        icon: "fas fa-chart-line"
+                    }
+                ]
+            };
+
+            // Check if project data exists in localStorage
+            const storedProject = localStorage.getItem('clientProject');
+            if (storedProject) {
+                return JSON.parse(storedProject);
+            } else {
+                // Save default project data to localStorage
+                localStorage.setItem('clientProject', JSON.stringify(defaultProject));
+                return defaultProject;
             }
-            return false;
         }
 
-        // Delete a consultation request
-        function deleteConsultationRequest(id) {
-            const requests = getConsultationRequests();
-            const filteredRequests = requests.filter(request => request.id !== id);
-            saveConsultationRequests(filteredRequests);
-            return requests.length !== filteredRequests.length;
+        // Save project data to localStorage
+        function saveProjectData(projectData) {
+            localStorage.setItem('clientProject', JSON.stringify(projectData));
         }
 
-        // Format date for display
-        function formatDate(dateString) {
-            const options = { year: 'numeric', month: 'short', day: 'numeric' };
-            return new Date(dateString).toLocaleDateString('en-US', options);
+        // Update project form with current data
+        function updateProjectForm() {
+            const projectData = getProjectData();
+            
+            // Update form fields
+            document.getElementById('projectName').value = projectData.name;
+            document.getElementById('projectDescription').value = projectData.description;
+            document.getElementById('projectProgress').value = projectData.progress;
+            document.getElementById('progressValue').textContent = `${projectData.progress}%`;
+            document.getElementById('daysRemaining').value = projectData.daysRemaining;
+            document.getElementById('tasksCompleted').value = projectData.tasksCompleted;
+            document.getElementById('totalTasks').value = projectData.totalTasks;
+            document.getElementById('teamMembers').value = projectData.teamMembers;
+            
+            // Update preview
+            updateProjectPreview();
+            
+            // Update timeline
+            updateTimelineUI();
+            
+            // Update updates
+            updateUpdatesUI();
         }
 
-        // Get service display name
-        function getServiceName(serviceKey) {
-            const services = {
-                'discovery': 'Discovery & Strategy',
-                'signature': 'Signature Website',
-                'exclusive': 'Ultra Exclusive',
-                'custom': 'Custom Package'
+        // Update project preview
+        function updateProjectPreview() {
+            const projectData = getProjectData();
+            
+            document.getElementById('previewProjectName').textContent = projectData.name;
+            document.getElementById('previewProjectDescription').textContent = projectData.description;
+            document.getElementById('previewProgress').textContent = `${projectData.progress}%`;
+            document.getElementById('previewDays').textContent = projectData.daysRemaining;
+            document.getElementById('previewTasks').textContent = `${projectData.tasksCompleted}/${projectData.totalTasks}`;
+            document.getElementById('previewTeam').textContent = projectData.teamMembers;
+            document.getElementById('previewPercentage').textContent = `${projectData.progress}%`;
+            document.getElementById('previewProgressFill').style.width = `${projectData.progress}%`;
+        }
+
+        // Update timeline UI
+        function updateTimelineUI() {
+            const projectData = getProjectData();
+            const timelineContainer = document.getElementById('timelineItems');
+            timelineContainer.innerHTML = '';
+            
+            projectData.timeline.forEach(milestone => {
+                const timelineItem = document.createElement('div');
+                timelineItem.className = 'timeline-item';
+                timelineItem.innerHTML = `
+                    <div class="timeline-item-content">
+                        <h4>${milestone.title}</h4>
+                        <p>${milestone.description} - ${milestone.date}</p>
+                        <span class="status-badge status-${milestone.status}">${milestone.status.charAt(0).toUpperCase() + milestone.status.slice(1)}</span>
+                    </div>
+                    <div class="timeline-item-actions">
+                        <button class="btn btn-small btn-outline edit-milestone" data-id="${milestone.id}">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-small btn-danger delete-milestone" data-id="${milestone.id}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+                timelineContainer.appendChild(timelineItem);
+            });
+            
+            // Add event listeners for timeline actions
+            document.querySelectorAll('.edit-milestone').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const milestoneId = parseInt(e.target.closest('button').getAttribute('data-id'));
+                    editMilestone(milestoneId);
+                });
+            });
+            
+            document.querySelectorAll('.delete-milestone').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const milestoneId = parseInt(e.target.closest('button').getAttribute('data-id'));
+                    deleteMilestone(milestoneId);
+                });
+            });
+        }
+
+        // Update updates UI
+        function updateUpdatesUI() {
+            const projectData = getProjectData();
+            const updatesContainer = document.getElementById('updatesList');
+            updatesContainer.innerHTML = '';
+            
+            projectData.updates.forEach(update => {
+                const updateItem = document.createElement('div');
+                updateItem.className = 'update-item';
+                updateItem.innerHTML = `
+                    <div class="update-header">
+                        <h4 class="update-title">${update.title}</h4>
+                        <span class="update-time">${update.time}</span>
+                    </div>
+                    <p class="update-description">${update.description}</p>
+                    <div class="action-buttons" style="margin-top: 1rem;">
+                        <button class="btn btn-small btn-outline edit-update" data-id="${update.id}">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                        <button class="btn btn-small btn-danger delete-update" data-id="${update.id}">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>
+                    </div>
+                `;
+                updatesContainer.appendChild(updateItem);
+            });
+            
+            // Add event listeners for update actions
+            document.querySelectorAll('.edit-update').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const updateId = parseInt(e.target.closest('button').getAttribute('data-id'));
+                    editUpdate(updateId);
+                });
+            });
+            
+            document.querySelectorAll('.delete-update').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const updateId = parseInt(e.target.closest('button').getAttribute('data-id'));
+                    deleteUpdate(updateId);
+                });
+            });
+        }
+
+        // Save project changes
+        function saveProjectChanges() {
+            const projectData = getProjectData();
+            
+            // Update project data from form
+            projectData.name = document.getElementById('projectName').value;
+            projectData.description = document.getElementById('projectDescription').value;
+            projectData.progress = parseInt(document.getElementById('projectProgress').value);
+            projectData.daysRemaining = parseInt(document.getElementById('daysRemaining').value);
+            projectData.tasksCompleted = parseInt(document.getElementById('tasksCompleted').value);
+            projectData.totalTasks = parseInt(document.getElementById('totalTasks').value);
+            projectData.teamMembers = parseInt(document.getElementById('teamMembers').value);
+            
+            // Save to localStorage
+            saveProjectData(projectData);
+            
+            // Update preview
+            updateProjectPreview();
+            
+            // Show success message
+            showToast('Project changes saved successfully');
+        }
+
+        // Add new milestone
+        function addMilestone() {
+            const title = document.getElementById('milestoneTitle').value;
+            const description = document.getElementById('milestoneDescription').value;
+            const date = document.getElementById('milestoneDate').value;
+            const status = document.getElementById('milestoneStatus').value;
+            
+            if (!title || !description || !date) {
+                showToast('Please fill in all milestone fields', 'error');
+                return;
+            }
+            
+            const projectData = getProjectData();
+            const newMilestone = {
+                id: Date.now(),
+                title,
+                description,
+                date,
+                status
             };
-            return services[serviceKey] || serviceKey;
+            
+            projectData.timeline.push(newMilestone);
+            saveProjectData(projectData);
+            updateTimelineUI();
+            
+            // Clear form
+            document.getElementById('milestoneTitle').value = '';
+            document.getElementById('milestoneDescription').value = '';
+            document.getElementById('milestoneDate').value = '';
+            document.getElementById('milestoneStatus').value = 'upcoming';
+            
+            showToast('Milestone added successfully');
         }
 
-        // Get budget display text
-        function getBudgetText(budgetKey) {
-            const budgets = {
-                '5k-10k': '$5,000 - $10,000',
-                '10k-25k': '$10,000 - $25,000',
-                '25k-50k': '$25,000 - $50,000',
-                '50k-100k': '$50,000 - $100,000',
-                '100k-plus': '$100,000+',
-                'undecided': 'To be determined'
+        // Edit milestone
+        function editMilestone(milestoneId) {
+            // In a real application, this would open an edit form
+            showToast(`Editing milestone #${milestoneId}`);
+        }
+
+        // Delete milestone
+        function deleteMilestone(milestoneId) {
+            if (confirm('Are you sure you want to delete this milestone?')) {
+                const projectData = getProjectData();
+                projectData.timeline = projectData.timeline.filter(milestone => milestone.id !== milestoneId);
+                saveProjectData(projectData);
+                updateTimelineUI();
+                showToast('Milestone deleted successfully');
+            }
+        }
+
+        // Add new update
+        function addUpdate() {
+            const title = document.getElementById('updateTitle').value;
+            const description = document.getElementById('updateDescription').value;
+            const icon = document.getElementById('updateIcon').value;
+            
+            if (!title || !description) {
+                showToast('Please fill in all update fields', 'error');
+                return;
+            }
+            
+            const projectData = getProjectData();
+            const newUpdate = {
+                id: Date.now(),
+                title,
+                description,
+                time: "Just now",
+                icon
             };
-            return budgets[budgetKey] || budgetKey;
+            
+            projectData.updates.unshift(newUpdate);
+            saveProjectData(projectData);
+            updateUpdatesUI();
+            
+            // Clear form
+            document.getElementById('updateTitle').value = '';
+            document.getElementById('updateDescription').value = '';
+            document.getElementById('updateIcon').value = 'fas fa-code';
+            
+            showToast('Update added successfully');
         }
 
-        // Show toast notification
+        // Edit update
+        function editUpdate(updateId) {
+            // In a real application, this would open an edit form
+            showToast(`Editing update #${updateId}`);
+        }
+
+        // Delete update
+        function deleteUpdate(updateId) {
+            if (confirm('Are you sure you want to delete this update?')) {
+                const projectData = getProjectData();
+                projectData.updates = projectData.updates.filter(update => update.id !== updateId);
+                saveProjectData(projectData);
+                updateUpdatesUI();
+                showToast('Update deleted successfully');
+            }
+        }
+
+        // === PROGRESS SLIDER UPDATE ===
+        const progressSlider = document.getElementById('projectProgress');
+        const progressValue = document.getElementById('progressValue');
+
+        progressSlider.addEventListener('input', () => {
+            progressValue.textContent = `${progressSlider.value}%`;
+        });
+
+        // === TOAST NOTIFICATION ===
         function showToast(message, type = 'success') {
             const toast = document.getElementById('toast');
             const toastIcon = toast.querySelector('.toast-icon');
@@ -1423,340 +2194,6 @@
                 toast.classList.remove('active');
             }, 4000);
         }
-
-        // Update stats based on consultation requests
-        function updateStats() {
-            const requests = getConsultationRequests();
-            const totalRequests = requests.length;
-            const newRequests = requests.filter(req => req.status === 'new').length;
-            const contactedRequests = requests.filter(req => req.status === 'contacted').length;
-            const completedRequests = requests.filter(req => req.status === 'completed').length;
-            
-            // Get requests from this week
-            const oneWeekAgo = new Date();
-            oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
-            const newThisWeek = requests.filter(req => {
-                const requestDate = new Date(req.date);
-                return requestDate >= oneWeekAgo && req.status === 'new';
-            }).length;
-
-            // Update DOM elements
-            document.getElementById('totalRequests').textContent = totalRequests;
-            document.getElementById('newRequests').textContent = newThisWeek;
-            document.getElementById('contactedRequests').textContent = contactedRequests;
-            document.getElementById('completedRequests').textContent = completedRequests;
-
-            // Update progress bars
-            const totalProgress = totalRequests > 0 ? Math.min((totalRequests / 50) * 100, 100) : 0;
-            const newProgress = totalRequests > 0 ? (newThisWeek / totalRequests) * 100 : 0;
-            const contactedProgress = totalRequests > 0 ? (contactedRequests / totalRequests) * 100 : 0;
-            const completedProgress = totalRequests > 0 ? (completedRequests / totalRequests) * 100 : 0;
-
-            document.getElementById('totalProgress').style.width = `${totalProgress}%`;
-            document.getElementById('newProgress').style.width = `${newProgress}%`;
-            document.getElementById('contactedProgress').style.width = `${contactedProgress}%`;
-            document.getElementById('completedProgress').style.width = `${completedProgress}%`;
-
-            // Update badge
-            document.getElementById('newRequestsBadge').textContent = `${newRequests} NEW`;
-
-            // Update premium clients (clients with budgets over $25k)
-            const premiumClients = requests.filter(req => 
-                req.budget === '25k-50k' || req.budget === '50k-100k' || req.budget === '100k-plus'
-            ).length;
-            document.getElementById('premiumClients').textContent = premiumClients;
-        }
-
-        // Populate consultation table with enhanced UI
-        function populateConsultationTable(requests = getConsultationRequests()) {
-            const consultationTableBody = document.getElementById('consultationTableBody');
-            consultationTableBody.innerHTML = '';
-            
-            if (requests.length === 0) {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td colspan="7" style="text-align: center; padding: 2rem;">
-                        <p>No consultation requests found</p>
-                    </td>
-                `;
-                consultationTableBody.appendChild(row);
-                return;
-            }
-            
-            // Sort requests by date (newest first)
-            requests.sort((a, b) => new Date(b.date) - new Date(a.date));
-            
-            requests.forEach(request => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>
-                        <div style="font-weight: 600; color: var(--accent-gold);">${request.firstName} ${request.lastName}</div>
-                        ${request.urgency === 'high' ? '<div class="urgency-badge">URGENT</div>' : ''}
-                    </td>
-                    <td>${request.company}</td>
-                    <td>${getServiceName(request.service)}</td>
-                    <td>${getBudgetText(request.budget)}</td>
-                    <td>${formatDate(request.date)}</td>
-                    <td><span class="status-badge status-${request.status}">${request.status.charAt(0).toUpperCase() + request.status.slice(1)}</span></td>
-                    <td class="action-buttons">
-                        <button class="btn btn-small btn-outline view-detail" data-id="${request.id}">
-                            <i class="fas fa-eye"></i>
-                            View
-                        </button>
-                        <button class="btn btn-small edit-request" data-id="${request.id}">
-                            <i class="fas fa-edit"></i>
-                            Edit
-                        </button>
-                    </td>
-                `;
-                consultationTableBody.appendChild(row);
-            });
-
-            // Add event listeners to view buttons
-            document.querySelectorAll('.view-detail').forEach(button => {
-                button.addEventListener('click', (e) => {
-                    const requestId = parseInt(e.target.getAttribute('data-id'));
-                    showRequestDetail(requestId);
-                });
-            });
-
-            // Add event listeners to edit buttons
-            document.querySelectorAll('.edit-request').forEach(button => {
-                button.addEventListener('click', (e) => {
-                    const requestId = parseInt(e.target.getAttribute('data-id'));
-                    showToast(`Editing request #${requestId}`);
-                    // In a real app, this would open an edit form
-                });
-            });
-        }
-
-        // Show request detail in modal with enhanced UX
-        function showRequestDetail(requestId) {
-            const requests = getConsultationRequests();
-            const request = requests.find(r => r.id === requestId);
-            if (!request) return;
-
-            const modalBody = document.getElementById('modalBody');
-            modalBody.innerHTML = `
-                <div class="detail-grid">
-                    <div class="detail-item">
-                        <div class="detail-label">Name</div>
-                        <div class="detail-value">${request.firstName} ${request.lastName}</div>
-                    </div>
-                    <div class="detail-item">
-                        <div class="detail-label">Email</div>
-                        <div class="detail-value">${request.email}</div>
-                    </div>
-                    <div class="detail-item">
-                        <div class="detail-label">Phone</div>
-                        <div class="detail-value">${request.phone}</div>
-                    </div>
-                    <div class="detail-item">
-                        <div class="detail-label">Company</div>
-                        <div class="detail-value">${request.company}</div>
-                    </div>
-                    <div class="detail-item">
-                        <div class="detail-label">Website</div>
-                        <div class="detail-value">${request.website}</div>
-                    </div>
-                    <div class="detail-item">
-                        <div class="detail-label">Service Interest</div>
-                        <div class="detail-value">${getServiceName(request.service)}</div>
-                    </div>
-                    <div class="detail-item">
-                        <div class="detail-label">Timeline</div>
-                        <div class="detail-value">${request.timeline}</div>
-                    </div>
-                    <div class="detail-item">
-                        <div class="detail-label">Budget</div>
-                        <div class="detail-value">${getBudgetText(request.budget)}</div>
-                    </div>
-                    <div class="detail-item full-width">
-                        <div class="detail-label">Project Details</div>
-                        <div class="detail-value">${request.projectDetails}</div>
-                    </div>
-                    <div class="detail-item full-width">
-                        <div class="detail-label">Current Challenges</div>
-                        <div class="detail-value">${request.challenges}</div>
-                    </div>
-                    <div class="detail-item">
-                        <div class="detail-label">Referral Source</div>
-                        <div class="detail-value">${request.referral}</div>
-                    </div>
-                    <div class="detail-item">
-                        <div class="detail-label">Submission Date</div>
-                        <div class="detail-value">${formatDate(request.date)}</div>
-                    </div>
-                    <div class="detail-item">
-                        <div class="detail-label">Status</div>
-                        <div class="detail-value"><span class="status-badge status-${request.status}">${request.status.charAt(0).toUpperCase() + request.status.slice(1)}</span></div>
-                    </div>
-                </div>
-                <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
-                    <button class="btn mark-contacted" data-id="${request.id}">
-                        <i class="fas fa-check-circle"></i>
-                        Mark as Contacted
-                    </button>
-                    <button class="btn btn-outline send-email" data-id="${request.id}">
-                        <i class="fas fa-envelope"></i>
-                        Send Email
-                    </button>
-                    <button class="btn mark-completed" data-id="${request.id}">
-                        <i class="fas fa-flag-checkered"></i>
-                        Mark Completed
-                    </button>
-                    <button class="btn btn-danger delete-request" data-id="${request.id}">
-                        <i class="fas fa-trash"></i>
-                        Delete Request
-                    </button>
-                </div>
-            `;
-
-            // Add event listeners to modal buttons
-            document.querySelector('.mark-contacted').addEventListener('click', (e) => {
-                const id = parseInt(e.target.getAttribute('data-id'));
-                if (updateConsultationRequest(id, { status: 'contacted' })) {
-                    showToast(`Request #${id} marked as contacted`);
-                    detailModal.classList.remove('active');
-                    setTimeout(() => {
-                        detailModal.style.display = 'none';
-                        refreshDashboard();
-                    }, 300);
-                }
-            });
-
-            document.querySelector('.mark-completed').addEventListener('click', (e) => {
-                const id = parseInt(e.target.getAttribute('data-id'));
-                if (updateConsultationRequest(id, { status: 'completed' })) {
-                    showToast(`Request #${id} marked as completed`);
-                    detailModal.classList.remove('active');
-                    setTimeout(() => {
-                        detailModal.style.display = 'none';
-                        refreshDashboard();
-                    }, 300);
-                }
-            });
-
-            document.querySelector('.send-email').addEventListener('click', (e) => {
-                const id = parseInt(e.target.getAttribute('data-id'));
-                showToast(`Email sent for request #${id}`);
-            });
-
-            document.querySelector('.delete-request').addEventListener('click', (e) => {
-                const id = parseInt(e.target.getAttribute('data-id'));
-                if (confirm('Are you sure you want to delete this request?')) {
-                    if (deleteConsultationRequest(id)) {
-                        showToast(`Request #${id} deleted`);
-                        detailModal.classList.remove('active');
-                        setTimeout(() => {
-                            detailModal.style.display = 'none';
-                            refreshDashboard();
-                        }, 300);
-                    }
-                }
-            });
-
-            const detailModal = document.getElementById('detailModal');
-            detailModal.style.display = 'flex';
-            setTimeout(() => {
-                detailModal.classList.add('active');
-            }, 10);
-        }
-
-        // Close modal with enhanced animation
-        const modalClose = document.getElementById('modalClose');
-        const detailModal = document.getElementById('detailModal');
-
-        modalClose.addEventListener('click', () => {
-            detailModal.classList.remove('active');
-            setTimeout(() => {
-                detailModal.style.display = 'none';
-            }, 300);
-        });
-
-        // Close modal when clicking outside
-        detailModal.addEventListener('click', (e) => {
-            if (e.target === detailModal) {
-                detailModal.classList.remove('active');
-                setTimeout(() => {
-                    detailModal.style.display = 'none';
-                }, 300);
-            }
-        });
-
-        // Search functionality with debouncing
-        let searchTimeout;
-        const searchInput = document.getElementById('searchInput');
-        searchInput.addEventListener('input', (e) => {
-            clearTimeout(searchTimeout);
-            searchTimeout = setTimeout(() => {
-                const searchTerm = e.target.value.toLowerCase();
-                const allRequests = getConsultationRequests();
-                if (searchTerm) {
-                    const filteredRequests = allRequests.filter(request => 
-                        request.firstName.toLowerCase().includes(searchTerm) ||
-                        request.lastName.toLowerCase().includes(searchTerm) ||
-                        request.company.toLowerCase().includes(searchTerm) ||
-                        request.service.toLowerCase().includes(searchTerm)
-                    );
-                    populateConsultationTable(filteredRequests);
-                } else {
-                    populateConsultationTable();
-                }
-            }, 300);
-        });
-
-        // Refresh dashboard
-        function refreshDashboard() {
-            updateStats();
-            populateConsultationTable();
-            showToast('Dashboard refreshed');
-        }
-
-        // Export data functionality
-        const exportBtn = document.getElementById('exportBtn');
-        exportBtn.addEventListener('click', () => {
-            const requests = getConsultationRequests();
-            if (requests.length === 0) {
-                showToast('No data to export', 'error');
-                return;
-            }
-            
-            // Convert to CSV
-            const headers = ['Name', 'Company', 'Email', 'Service', 'Budget', 'Timeline', 'Date', 'Status'];
-            const csvData = requests.map(req => [
-                `${req.firstName} ${req.lastName}`,
-                req.company,
-                req.email,
-                getServiceName(req.service),
-                getBudgetText(req.budget),
-                req.timeline,
-                formatDate(req.date),
-                req.status
-            ]);
-            
-            const csvContent = [
-                headers.join(','),
-                ...csvData.map(row => row.join(','))
-            ].join('\n');
-            
-            // Create download link
-            const blob = new Blob([csvContent], { type: 'text/csv' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `consultation-requests-${new Date().toISOString().split('T')[0]}.csv`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-            
-            showToast('Data exported successfully');
-        });
-
-        // Refresh button
-        const refreshBtn = document.getElementById('refreshBtn');
-        refreshBtn.addEventListener('click', refreshDashboard);
 
         // === FADE IN ELEMENTS ON SCROLL ===
         function checkFade() {
@@ -1776,23 +2213,21 @@
         window.addEventListener('scroll', checkFade);
         window.addEventListener('load', checkFade);
 
-        // Initialize the dashboard
-        function initDashboard() {
-            updateStats();
-            populateConsultationTable();
+        // === EVENT LISTENERS ===
+        document.getElementById('saveProjectBtn').addEventListener('click', saveProjectChanges);
+        document.getElementById('addMilestoneBtn').addEventListener('click', addMilestone);
+        document.getElementById('addUpdateBtn').addEventListener('click', addUpdate);
+
+        // === INITIALIZE ON LOAD ===
+        document.addEventListener('DOMContentLoaded', () => {
+            checkFade();
+            updateProjectForm();
             
-            // Animate progress bars on load
-            setTimeout(() => {
-                document.querySelectorAll('.stat-progress-bar').forEach(bar => {
-                    bar.style.width = bar.style.width;
-                });
-            }, 500);
-            
-            // Show welcome message
+            // Show welcome message after a short delay
             setTimeout(() => {
                 showToast('Welcome to your Alchemy Lumière dashboard');
             }, 1000);
-        }
+        });
 
         // Close sidebar when clicking on a nav item on mobile
         document.querySelectorAll('.nav-item').forEach(item => {
@@ -1803,20 +2238,6 @@
                 }
             });
         });
-
-        // Initialize dashboard on load
-        document.addEventListener('DOMContentLoaded', initDashboard);
-
-        // Auto-refresh dashboard every 30 seconds to check for new submissions
-        setInterval(() => {
-            const previousCount = getConsultationRequests().length;
-            const currentCount = getConsultationRequests().length;
-            
-            if (currentCount > previousCount) {
-                refreshDashboard();
-                showToast('New consultation request received!');
-            }
-        }, 30000);
     </script>
 </body>
 </html>
