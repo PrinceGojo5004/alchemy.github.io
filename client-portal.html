@@ -18,9 +18,23 @@
             --accent-bronze: #8B7355;
             --accent-silver: #C0C0C0;
             --accent-emerald: #143627;
+            --accent-deep-purple: #2D1B69;
+            --accent-electric-blue: #0066FF;
+            --accent-neon-pink: #FF00FF;
+            --accent-cyber-teal: #00FFE0;
+            
             --gradient-primary: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-bronze) 100%);
             --gradient-dark: linear-gradient(135deg, var(--primary-dark) 0%, #1a1a1a 100%);
-            --gradient-hero: linear-gradient(135deg, #0A0A0A 0%, #143627 50%, #0A0A0A 100%);
+            --gradient-hero: linear-gradient(135deg, #0A0A0A 0%, #143627 50%, #2D1B69 100%);
+            --gradient-luxury: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-emerald) 50%, var(--accent-deep-purple) 100%);
+            --gradient-rainbow: linear-gradient(90deg, #C9A96E, #8B7355, #143627, #2D1B69, #0066FF);
+            --gradient-neon: linear-gradient(45deg, var(--accent-gold), var(--accent-electric-blue), var(--accent-neon-pink), var(--accent-cyber-teal));
+            --gradient-holographic: linear-gradient(45deg, 
+                rgba(201, 169, 110, 0.8) 0%, 
+                rgba(0, 102, 255, 0.6) 25%, 
+                rgba(255, 0, 255, 0.6) 50%, 
+                rgba(0, 255, 224, 0.6) 75%, 
+                rgba(201, 169, 110, 0.8) 100%);
             
             --transition-slow: 0.8s cubic-bezier(0.19, 1, 0.22, 1);
             --transition-medium: 0.5s cubic-bezier(0.19, 1, 0.22, 1);
@@ -31,14 +45,17 @@
             --shadow-intense: 0 30px 60px rgba(0, 0, 0, 0.18);
             --shadow-glow: 0 0 60px rgba(201, 169, 110, 0.15);
             --shadow-gold-intense: 0 0 100px rgba(201, 169, 110, 0.3);
+            --shadow-electric: 0 0 30px rgba(0, 102, 255, 0.5);
+            --shadow-neon: 0 0 20px rgba(255, 0, 255, 0.7), 0 0 40px rgba(0, 255, 224, 0.5);
             
             --border-radius: 16px;
             --border-radius-lg: 24px;
             --border-radius-xl: 36px;
             
-            --section-padding: clamp(6rem, 12vw, 12rem) 0;
+            --section-padding: clamp(8rem, 15vw, 15rem) 0;
             --glass-bg: rgba(255, 255, 255, 0.08);
             --glass-border: rgba(255, 255, 255, 0.12);
+            --hologram-bg: rgba(255, 255, 255, 0.1);
         }
 
         * {
@@ -64,6 +81,7 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             position: relative;
+            cursor: none;
         }
 
         /* === CUSTOM CURSOR === */
@@ -77,6 +95,7 @@
             z-index: 9999;
             mix-blend-mode: difference;
             transition: transform 0.2s ease;
+            filter: drop-shadow(0 0 10px rgba(201, 169, 110, 0.7));
         }
 
         .cursor-follower {
@@ -88,6 +107,7 @@
             pointer-events: none;
             z-index: 9998;
             transition: all 0.6s ease;
+            backdrop-filter: blur(5px);
         }
 
         /* === SCROLL PROGRESS === */
@@ -97,9 +117,10 @@
             left: 0;
             width: 0%;
             height: 4px;
-            background: var(--gradient-primary);
+            background: var(--gradient-neon);
             z-index: 10000;
             transition: width 0.1s ease-out;
+            box-shadow: var(--shadow-neon);
         }
 
         /* === PRELOADER === */
@@ -124,13 +145,28 @@
 
         .preloader-logo {
             font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
+            font-size: 4rem;
             font-weight: 700;
-            margin-bottom: 2rem;
-            background: var(--gradient-primary);
+            margin-bottom: 3rem;
+            background: var(--gradient-neon);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            position: relative;
+            animation: textGlow 2s ease-in-out infinite alternate;
+        }
+
+        .preloader-logo::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--gradient-neon);
+            border-radius: 3px;
+            animation: widthPulse 2s ease-in-out infinite;
         }
 
         .loader {
@@ -140,13 +176,81 @@
             border-radius: 50%;
             border-top-color: var(--accent-gold);
             animation: spin 1s ease-in-out infinite;
-            margin: 0 auto 2rem;
+            margin: 0 auto 3rem;
+            position: relative;
+        }
+
+        .loader::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: var(--accent-emerald);
+            animation: spin 1.5s ease-in-out infinite;
+        }
+
+        .loader::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: var(--accent-deep-purple);
+            animation: spin 2s ease-in-out infinite;
         }
 
         .preloader-text {
             font-size: 1.2rem;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             text-transform: uppercase;
+            background: var(--gradient-neon);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+            animation: textGlow 2s ease-in-out infinite alternate;
+        }
+
+        .loading-bar {
+            width: 300px;
+            height: 4px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 2px;
+            margin: 2rem auto 0;
+            overflow: hidden;
+        }
+
+        .loading-progress {
+            width: 0%;
+            height: 100%;
+            background: var(--gradient-neon);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+            box-shadow: var(--shadow-neon);
+        }
+
+        /* === HOLOGRAM BACKGROUND EFFECT === */
+        .hologram-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            pointer-events: none;
+            opacity: 0.03;
+            background: 
+                linear-gradient(90deg, transparent 50%, rgba(201, 169, 110, 0.1) 50%),
+                linear-gradient(transparent 50%, rgba(0, 102, 255, 0.1) 50%);
+            background-size: 50px 50px;
+            animation: hologramMove 20s linear infinite;
         }
 
         /* === ENHANCED ANIMATED BACKGROUND === */
@@ -212,17 +316,17 @@
         }
 
         h1 {
-            font-size: clamp(3.5rem, 7vw, 7rem);
+            font-size: clamp(4rem, 8vw, 8rem);
             letter-spacing: -0.02em;
         }
 
         h2 {
-            font-size: clamp(2.8rem, 5vw, 5rem);
+            font-size: clamp(3rem, 6vw, 6rem);
             position: relative;
         }
 
         h3 {
-            font-size: clamp(2rem, 3.5vw, 3.5rem);
+            font-size: clamp(2.2rem, 4vw, 4rem);
         }
 
         p {
@@ -240,9 +344,9 @@
         /* === LAYOUT === */
         .container {
             width: 100%;
-            max-width: 1600px;
+            max-width: 1800px;
             margin: 0 auto;
-            padding: 0 clamp(1.5rem, 4vw, 3rem);
+            padding: 0 clamp(1.5rem, 4vw, 4rem);
         }
 
         section {
@@ -259,7 +363,7 @@
         }
 
         .section-header {
-            margin-bottom: 6rem;
+            margin-bottom: 8rem;
         }
 
         .section-header h2 {
@@ -269,11 +373,13 @@
         .section-header h2:after {
             content: '';
             position: absolute;
-            bottom: -10px;
+            bottom: -15px;
             left: 0;
-            width: 60px;
-            height: 3px;
-            background: var(--accent-gold);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient-neon);
+            border-radius: 4px;
+            box-shadow: var(--shadow-neon);
         }
 
         .text-center .section-header h2:after {
@@ -292,7 +398,7 @@
             border: none;
             border-radius: var(--border-radius);
             font-weight: 700;
-            cursor: pointer;
+            cursor: none;
             transition: var(--transition-medium);
             position: relative;
             overflow: hidden;
@@ -314,7 +420,7 @@
             left: 0;
             width: 0;
             height: 100%;
-            background: var(--gradient-dark);
+            background: var(--gradient-neon);
             transition: var(--transition-medium);
             z-index: -1;
         }
@@ -337,10 +443,11 @@
         }
 
         .btn:hover {
-            color: var(--accent-gold);
+            color: var(--primary-dark);
             transform: translateY(-5px);
             box-shadow:
                 0 15px 40px rgba(201, 169, 110, 0.5),
+                var(--shadow-neon),
                 inset 0 1px 0 rgba(255, 255, 255, 0.4);
         }
 
@@ -381,7 +488,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(30px) saturate(180%);
             -webkit-backdrop-filter: blur(30px) saturate(180%);
             z-index: 1000;
@@ -396,7 +503,9 @@
             box-shadow:
                 0 4px 30px rgba(0, 0, 0, 0.08),
                 0 0 1px rgba(201, 169, 110, 0.2);
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(40px) saturate(200%);
+            -webkit-backdrop-filter: blur(40px) saturate(200%);
         }
 
         .header-content {
@@ -423,7 +532,7 @@
             width: 48px;
             height: 48px;
             margin-right: 0.85rem;
-            background: var(--gradient-primary);
+            background: var(--gradient-neon);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -434,10 +543,12 @@
             font-family: 'Playfair Display', serif;
             box-shadow:
                 0 6px 20px rgba(201, 169, 110, 0.4),
+                var(--shadow-neon),
                 inset 0 -2px 8px rgba(0, 0, 0, 0.1),
                 inset 0 2px 8px rgba(255, 255, 255, 0.3);
             transition: var(--transition-medium);
             position: relative;
+            animation: logoFloat 3s ease-in-out infinite;
         }
 
         .logo-icon::before {
@@ -445,7 +556,7 @@
             position: absolute;
             inset: -2px;
             border-radius: 50%;
-            background: linear-gradient(45deg, var(--accent-gold), var(--accent-silver), var(--accent-bronze), var(--accent-gold));
+            background: var(--gradient-neon);
             background-size: 300% 300%;
             animation: gradientRotate 4s linear infinite;
             z-index: -1;
@@ -458,8 +569,10 @@
             transform: scale(1.1) rotate(360deg);
             box-shadow:
                 0 8px 25px rgba(201, 169, 110, 0.6),
+                var(--shadow-neon),
                 inset 0 -2px 8px rgba(0, 0, 0, 0.15),
                 inset 0 2px 8px rgba(255, 255, 255, 0.4);
+            animation: none;
         }
 
         .logo:hover .logo-icon::before {
@@ -486,7 +599,7 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: var(--accent-gold);
+            background: var(--gradient-neon);
             transition: var(--transition-medium);
         }
 
@@ -498,7 +611,7 @@
             display: none;
             background: none;
             border: none;
-            cursor: pointer;
+            cursor: none;
             color: var(--primary-dark);
             z-index: 1001;
             width: 30px;
@@ -524,7 +637,6 @@
             overflow: hidden;
             background: var(--gradient-hero);
             color: var(--primary-light);
-            margin-top: 0;
         }
 
         .client-hero::before {
@@ -551,7 +663,7 @@
 
         .hero-badge {
             display: inline-block;
-            background: var(--gradient-primary);
+            background: var(--gradient-neon);
             color: var(--primary-dark);
             padding: 0.75rem 1.5rem;
             border-radius: 25px;
@@ -560,18 +672,34 @@
             margin-bottom: 2rem;
             box-shadow:
                 0 6px 20px rgba(201, 169, 110, 0.4),
+                var(--shadow-neon),
                 inset 0 1px 0 rgba(255, 255, 255, 0.3);
             animation: badgePulse 2s ease-in-out infinite;
             text-transform: uppercase;
             letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-badge::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: shine 3s infinite;
         }
 
         .client-hero h1 {
             margin-bottom: 2rem;
-            background: linear-gradient(135deg, var(--primary-light) 0%, var(--accent-gold) 100%);
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--accent-gold) 50%, var(--accent-electric-blue) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            text-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            animation: textShimmer 3s ease-in-out infinite alternate;
         }
 
         .client-hero-description {
@@ -579,6 +707,14 @@
             margin-bottom: 3rem;
             color: var(--accent-gold-light);
             max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
         }
 
         .hero-bg {
@@ -658,15 +794,16 @@
         }
 
         .project-overview {
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--glass-bg);
             backdrop-filter: blur(30px) saturate(180%);
             -webkit-backdrop-filter: blur(30px) saturate(180%);
             border-radius: var(--border-radius-xl);
             padding: 3.5rem;
             box-shadow: var(--shadow-medium);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--glass-border);
             position: relative;
             overflow: hidden;
+            transition: var(--transition-medium);
         }
 
         .project-overview:before {
@@ -676,7 +813,15 @@
             left: 0;
             width: 6px;
             height: 100%;
-            background: var(--accent-gold);
+            background: var(--gradient-neon);
+        }
+
+        .project-overview:hover {
+            transform: translateY(-10px);
+            box-shadow: 
+                var(--shadow-intense),
+                var(--shadow-electric),
+                var(--shadow-neon);
         }
 
         .project-header {
@@ -702,12 +847,12 @@
         }
 
         .metric-card {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.05);
             padding: 1.5rem;
             border-radius: var(--border-radius);
             text-align: center;
             transition: var(--transition-medium);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .metric-card:hover {
@@ -721,6 +866,7 @@
             font-weight: 700;
             color: var(--accent-gold);
             margin-bottom: 0.5rem;
+            text-shadow: 0 2px 10px rgba(201, 169, 110, 0.3);
         }
 
         .metric-label {
@@ -760,7 +906,7 @@
 
         .progress-fill {
             height: 100%;
-            background: var(--gradient-primary);
+            background: var(--gradient-neon);
             border-radius: 6px;
             transition: width 1.5s ease-in-out;
             position: relative;
@@ -778,15 +924,16 @@
         }
 
         .project-timeline {
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--glass-bg);
             backdrop-filter: blur(30px) saturate(180%);
             -webkit-backdrop-filter: blur(30px) saturate(180%);
             border-radius: var(--border-radius-xl);
             padding: 3.5rem;
             box-shadow: var(--shadow-medium);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--glass-border);
             position: relative;
             overflow: hidden;
+            transition: var(--transition-medium);
         }
 
         .project-timeline:before {
@@ -796,7 +943,15 @@
             left: 0;
             width: 6px;
             height: 100%;
-            background: var(--accent-gold);
+            background: var(--gradient-neon);
+        }
+
+        .project-timeline:hover {
+            transform: translateY(-10px);
+            box-shadow: 
+                var(--shadow-intense),
+                var(--shadow-electric),
+                var(--shadow-neon);
         }
 
         .timeline-header {
@@ -826,7 +981,7 @@
             top: 0;
             height: 100%;
             width: 2px;
-            background: var(--accent-gold);
+            background: var(--gradient-neon);
         }
 
         .timeline-item {
@@ -940,15 +1095,23 @@
         }
 
         .updates-feed {
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--glass-bg);
             backdrop-filter: blur(30px) saturate(180%);
             -webkit-backdrop-filter: blur(30px) saturate(180%);
             border-radius: var(--border-radius-xl);
             padding: 3rem;
             box-shadow: var(--shadow-medium);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--glass-border);
             max-height: 600px;
             overflow-y: auto;
+            transition: var(--transition-medium);
+        }
+
+        .updates-feed:hover {
+            box-shadow: 
+                var(--shadow-intense),
+                var(--shadow-electric),
+                var(--shadow-neon);
         }
 
         .update-item {
@@ -973,13 +1136,14 @@
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background: var(--accent-gold);
+            background: var(--gradient-neon);
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--primary-dark);
             font-size: 1.2rem;
             flex-shrink: 0;
+            box-shadow: var(--shadow-glow);
         }
 
         .update-content {
@@ -1042,14 +1206,14 @@
         }
 
         .support-card {
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--glass-bg);
             backdrop-filter: blur(30px) saturate(180%);
             -webkit-backdrop-filter: blur(30px) saturate(180%);
             border-radius: var(--border-radius-lg);
             padding: 3rem 2.5rem;
             text-align: center;
             transition: var(--transition-medium);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--glass-border);
             position: relative;
             overflow: hidden;
         }
@@ -1061,7 +1225,7 @@
             left: 0;
             width: 100%;
             height: 0;
-            background: var(--gradient-primary);
+            background: var(--gradient-holographic);
             transition: var(--transition-medium);
             z-index: -1;
         }
@@ -1072,7 +1236,9 @@
 
         .support-card:hover {
             transform: translateY(-15px);
-            box-shadow: var(--shadow-intense);
+            box-shadow: 
+                var(--shadow-intense),
+                var(--shadow-neon);
         }
 
         .support-card:hover .support-icon,
@@ -1086,6 +1252,8 @@
             margin-bottom: 2rem;
             color: var(--accent-gold);
             transition: var(--transition-medium);
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));
+            animation: iconFloat 3s ease-in-out infinite;
         }
 
         .support-card h3 {
@@ -1101,7 +1269,7 @@
         footer {
             background: var(--primary-dark);
             color: var(--primary-light);
-            padding: 6rem 0 3rem;
+            padding: 8rem 0 4rem;
         }
 
         .footer-content {
@@ -1141,10 +1309,14 @@
         .footer-links a {
             color: var(--accent-gold-light);
             transition: var(--transition-fast);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .footer-links a:hover {
             color: var(--accent-gold);
+            transform: translateX(5px);
         }
 
         .footer-bottom {
@@ -1236,6 +1408,41 @@
             100% { background-position: 0% 50%; }
         }
 
+        @keyframes textGlow {
+            0% { text-shadow: 0 0 20px rgba(201, 169, 110, 0.5); }
+            100% { text-shadow: 0 0 30px rgba(201, 169, 110, 0.8), 0 0 40px rgba(0, 102, 255, 0.6); }
+        }
+
+        @keyframes textShimmer {
+            0% { background-position: -100% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        @keyframes widthPulse {
+            0%, 100% { width: 100px; }
+            50% { width: 150px; }
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        @keyframes hologramMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 50px 50px; }
+        }
+
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
         .fade-in {
             opacity: 0;
             transform: translateY(30px);
@@ -1265,6 +1472,9 @@
             opacity: 0;
             transition: transform var(--transition-medium), opacity var(--transition-medium);
             max-width: 400px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(201, 169, 110, 0.2);
         }
 
         .toast.active {
@@ -1276,12 +1486,13 @@
             width: 24px;
             height: 24px;
             border-radius: 50%;
-            background: var(--accent-gold);
+            background: var(--gradient-neon);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 0.8rem;
             color: var(--primary-dark);
+            font-weight: bold;
         }
 
         /* === MEDIA QUERIES === */
@@ -1296,6 +1507,10 @@
         }
 
         @media (max-width: 768px) {
+            body {
+                cursor: auto;
+            }
+            
             .header-content {
                 position: relative;
             }
@@ -1305,15 +1520,15 @@
                 top: 100%;
                 left: 0;
                 width: 100%;
-                background: white;
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
                 box-shadow: var(--shadow-medium);
                 padding: 2rem 0;
                 transform: translateY(-10px);
                 opacity: 0;
                 visibility: hidden;
                 transition: var(--transition-medium);
-                backdrop-filter: blur(20px);
-                -webkit-backdrop-filter: blur(20px);
             }
             
             nav.active {
@@ -1366,7 +1581,7 @@
             .project-overview,
             .project-timeline,
             .support-card {
-                padding: 2.5rem 2rem;
+                padding: 3rem 2rem;
             }
             
             .update-item {
@@ -1385,17 +1600,21 @@
             }
             
             section {
-                padding: 4rem 0;
+                padding: 5rem 0;
             }
             
             .project-overview,
             .project-timeline,
             .support-card {
-                padding: 2rem 1.5rem;
+                padding: 2.5rem 1.5rem;
             }
             
             .updates-feed {
                 padding: 2rem 1.5rem;
+            }
+            
+            .client-hero h1 {
+                font-size: clamp(3rem, 10vw, 5rem);
             }
         }
     </style>
@@ -1406,9 +1625,15 @@
         <div class="preloader-content">
             <div class="preloader-logo">Alchemy Lumière</div>
             <div class="loader"></div>
+            <div class="loading-bar">
+                <div class="loading-progress" id="loadingProgress"></div>
+            </div>
             <div class="preloader-text">Accessing Your Portal</div>
         </div>
     </div>
+
+    <!-- Hologram Background -->
+    <div class="hologram-bg"></div>
 
     <!-- Custom Cursor -->
     <div class="cursor"></div>
@@ -1485,7 +1710,7 @@
                 <div class="project-overview fade-in">
                     <div class="project-header">
                         <h3 class="project-title" id="projectName">LuxeBrand Global Website</h3>
-                        <p class="project-description">Complete website redesign with e-commerce integration and AI-powered personalization</p>
+                        <p class="project-description" id="projectDescription">Complete website redesign with e-commerce integration and AI-powered personalization</p>
                     </div>
                     <div class="project-metrics">
                         <div class="metric-card">
@@ -1626,28 +1851,158 @@
     </div>
 
     <script>
+        // === DATA MANAGEMENT ===
+        class AppData {
+            // Project Data
+            static getProjectData() {
+                const defaultProject = {
+                    name: "LuxeBrand Global Website",
+                    description: "Complete website redesign with e-commerce integration and AI-powered personalization",
+                    progress: 75,
+                    daysRemaining: 14,
+                    tasksCompleted: 24,
+                    totalTasks: 32,
+                    teamMembers: 5,
+                    timeline: [
+                        {
+                            id: 1,
+                            title: "Project Kickoff",
+                            description: "Initial meeting to establish project goals, timeline, and deliverables.",
+                            date: "2025-01-10",
+                            status: "completed"
+                        },
+                        {
+                            id: 2,
+                            title: "Design Phase",
+                            description: "Creation of wireframes, mockups, and design concepts for approval.",
+                            date: "2025-01-25",
+                            status: "completed"
+                        },
+                        {
+                            id: 3,
+                            title: "Development Phase",
+                            description: "Implementation of frontend and backend functionality.",
+                            date: "2025-02-15",
+                            status: "active"
+                        },
+                        {
+                            id: 4,
+                            title: "Content Integration",
+                            description: "Adding client-provided content and media to the website.",
+                            date: "2025-03-01",
+                            status: "upcoming"
+                        }
+                    ],
+                    updates: [
+                        {
+                            id: 1,
+                            title: "Development Milestone Reached",
+                            description: "The backend API integration has been completed successfully. Frontend development is now 80% complete.",
+                            time: "2 hours ago",
+                            icon: "fas fa-code"
+                        },
+                        {
+                            id: 2,
+                            title: "Design Review Completed",
+                            description: "Client feedback has been incorporated into the design revisions. Final mockups approved.",
+                            time: "1 day ago",
+                            icon: "fas fa-palette"
+                        }
+                    ]
+                };
+
+                const storedProject = localStorage.getItem('clientProject');
+                return storedProject ? JSON.parse(storedProject) : defaultProject;
+            }
+        }
+
+        // === REAL-TIME UPDATES ===
+        class RealTimeUpdates {
+            static listeners = new Set();
+
+            static subscribe(callback) {
+                this.listeners.add(callback);
+            }
+
+            static unsubscribe(callback) {
+                this.listeners.delete(callback);
+            }
+
+            static notify(data) {
+                this.listeners.forEach(callback => callback(data));
+            }
+
+            static startPolling() {
+                // Simulate real-time updates every 5 seconds
+                setInterval(() => {
+                    const projectData = AppData.getProjectData();
+                    this.notify({ type: 'projectUpdate', data: projectData });
+                }, 5000);
+            }
+        }
+
+        // === COMMON UI FUNCTIONS ===
+        class UIHelper {
+            static showToast(message, type = 'success') {
+                const toast = document.getElementById('toast');
+                if (!toast) return;
+
+                const toastIcon = toast.querySelector('.toast-icon');
+                toastIcon.innerHTML = type === 'success' ? '<i class="fas fa-check"></i>' : '<i class="fas fa-exclamation"></i>';
+                toastIcon.style.background = type === 'success' ? 'var(--accent-gold)' : '#dc2626';
+                
+                toast.querySelector('.toast-message').textContent = message;
+                toast.classList.add('active');
+                
+                setTimeout(() => {
+                    toast.classList.remove('active');
+                }, 4000);
+            }
+
+            static formatDate(dateString) {
+                const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                return new Date(dateString).toLocaleDateString(undefined, options);
+            }
+
+            static getTimeAgo(timestamp) {
+                const now = new Date();
+                const diff = now - new Date(timestamp);
+                const minutes = Math.floor(diff / 60000);
+                const hours = Math.floor(diff / 3600000);
+                const days = Math.floor(diff / 86400000);
+
+                if (days > 0) return `${days} day${days > 1 ? 's' : ''} ago`;
+                if (hours > 0) return `${hours} hour${hours > 1 ? 's' : ''} ago`;
+                if (minutes > 0) return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+                return 'Just now';
+            }
+        }
+
         // === PRELOADER ===
         window.addEventListener('load', function() {
             const preloader = document.getElementById('preloader');
+            const loadingProgress = document.getElementById('loadingProgress');
+            
+            // Simulate loading progress
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 15;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                }
+                loadingProgress.style.width = progress + '%';
+            }, 200);
+            
             setTimeout(() => {
                 preloader.style.opacity = '0';
                 preloader.style.visibility = 'hidden';
-            }, 1500);
+            }, 2500);
         });
 
         // === CUSTOM CURSOR ===
         const cursor = document.querySelector('.cursor');
         const cursorFollower = document.querySelector('.cursor-follower');
-
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-            
-            setTimeout(() => {
-                cursorFollower.style.left = e.clientX + 'px';
-                cursorFollower.style.top = e.clientY + 'px';
-            }, 100);
-        });
 
         document.addEventListener('mousemove', (e) => {
             cursor.style.left = e.clientX + 'px';
@@ -1746,13 +2101,91 @@
             });
         });
 
+        // === PROJECT DATA MANAGEMENT ===
+        // Update the UI with project data
+        function updateProjectUI() {
+            const projectData = AppData.getProjectData();
+            
+            // Update project overview
+            document.getElementById('projectName').textContent = projectData.name;
+            document.getElementById('projectDescription').textContent = projectData.description;
+            document.getElementById('overallProgress').textContent = `${projectData.progress}%`;
+            document.getElementById('daysRemaining').textContent = projectData.daysRemaining;
+            document.getElementById('tasksCompleted').textContent = `${projectData.tasksCompleted}/${projectData.totalTasks}`;
+            document.getElementById('teamMembers').textContent = projectData.teamMembers;
+            document.getElementById('progressPercentage').textContent = `${projectData.progress}%`;
+            document.getElementById('progressFill').style.width = `${projectData.progress}%`;
+            
+            // Update timeline
+            updateTimelineUI(projectData.timeline);
+            
+            // Update live updates
+            updateUpdatesUI(projectData.updates);
+        }
+
+        function updateTimelineUI(timeline) {
+            const timelineContainer = document.getElementById('projectTimeline');
+            timelineContainer.innerHTML = '';
+            
+            timeline.forEach(milestone => {
+                const timelineItem = document.createElement('div');
+                timelineItem.className = `timeline-item ${milestone.status}`;
+                timelineItem.innerHTML = `
+                    <div class="timeline-content">
+                        <div class="timeline-date">${UIHelper.formatDate(milestone.date)}</div>
+                        <h4 class="timeline-title">${milestone.title}</h4>
+                        <p class="timeline-description">${milestone.description}</p>
+                        <span class="status-badge status-${milestone.status}">${milestone.status.charAt(0).toUpperCase() + milestone.status.slice(1)}</span>
+                    </div>
+                `;
+                timelineContainer.appendChild(timelineItem);
+            });
+        }
+
+        function updateUpdatesUI(updates) {
+            const updatesContainer = document.getElementById('updatesFeed');
+            updatesContainer.innerHTML = '';
+            
+            updates.forEach(update => {
+                const updateItem = document.createElement('div');
+                updateItem.className = 'update-item';
+                updateItem.innerHTML = `
+                    <div class="update-icon">
+                        <i class="${update.icon}"></i>
+                    </div>
+                    <div class="update-content">
+                        <div class="update-header">
+                            <h4 class="update-title">${update.title}</h4>
+                            <span class="update-time">${update.time}</span>
+                        </div>
+                        <p class="update-description">${update.description}</p>
+                    </div>
+                `;
+                updatesContainer.appendChild(updateItem);
+            });
+        }
+
+        // === REAL-TIME UPDATES ===
+        function setupRealTimeUpdates() {
+            RealTimeUpdates.subscribe((data) => {
+                if (data.type === 'projectUpdate') {
+                    updateProjectUI();
+                    UIHelper.showToast('Project updated in real-time!');
+                } else if (data.type === 'newUpdate') {
+                    const projectData = AppData.getProjectData();
+                    updateUpdatesUI(projectData.updates);
+                    UIHelper.showToast('New project update received!');
+                }
+            });
+        }
+
         // === TOAST NOTIFICATION ===
         function showToast(message, type = 'success') {
             const toast = document.getElementById('toast');
             const toastIcon = toast.querySelector('.toast-icon');
             
             toastIcon.textContent = type === 'success' ? '✓' : '⚠️';
-            toastIcon.style.background = type === 'success' ? 'var(--accent-gold)' : '#dc2626';
+            toastIcon.style.background = type === 'success' ? 'var(--gradient-neon)' : '#dc2626';
             
             toast.querySelector('.toast-message').textContent = message;
             toast.classList.add('active');
@@ -1780,186 +2213,6 @@
         window.addEventListener('scroll', checkFade);
         window.addEventListener('load', checkFade);
 
-        // === PROJECT DATA MANAGEMENT ===
-        // Get project data from localStorage
-        function getProjectData() {
-            // Check if project data exists in localStorage
-            const storedProject = localStorage.getItem('clientProject');
-            if (storedProject) {
-                return JSON.parse(storedProject);
-            } else {
-                // Return default data if nothing is stored
-                return {
-                    name: "LuxeBrand Global Website",
-                    progress: 75,
-                    daysRemaining: 14,
-                    tasksCompleted: 24,
-                    totalTasks: 32,
-                    teamMembers: 5,
-                    timeline: [
-                        {
-                            id: 1,
-                            title: "Project Kickoff",
-                            description: "Initial meeting to establish project goals, timeline, and deliverables.",
-                            date: "2025-01-10",
-                            status: "completed"
-                        },
-                        {
-                            id: 2,
-                            title: "Design Phase",
-                            description: "Creation of wireframes, mockups, and design concepts for approval.",
-                            date: "2025-01-25",
-                            status: "completed"
-                        },
-                        {
-                            id: 3,
-                            title: "Development Phase",
-                            description: "Implementation of frontend and backend functionality.",
-                            date: "2025-02-15",
-                            status: "active"
-                        },
-                        {
-                            id: 4,
-                            title: "Content Integration",
-                            description: "Adding client-provided content and media to the website.",
-                            date: "2025-03-01",
-                            status: "upcoming"
-                        },
-                        {
-                            id: 5,
-                            title: "Testing & QA",
-                            description: "Comprehensive testing across devices and browsers.",
-                            date: "2025-03-15",
-                            status: "upcoming"
-                        },
-                        {
-                            id: 6,
-                            title: "Launch",
-                            description: "Final deployment and go-live of the completed website.",
-                            date: "2025-03-30",
-                            status: "upcoming"
-                        }
-                    ],
-                    updates: [
-                        {
-                            id: 1,
-                            title: "Development Milestone Reached",
-                            description: "The backend API integration has been completed successfully. Frontend development is now 80% complete.",
-                            time: "2 hours ago",
-                            icon: "fas fa-code"
-                        },
-                        {
-                            id: 2,
-                            title: "Design Review Completed",
-                            description: "Client feedback has been incorporated into the design revisions. Final mockups approved.",
-                            time: "1 day ago",
-                            icon: "fas fa-palette"
-                        },
-                        {
-                            id: 3,
-                            title: "Content Strategy Session",
-                            description: "Collaborative session to finalize content structure and SEO strategy.",
-                            time: "3 days ago",
-                            icon: "fas fa-file-alt"
-                        },
-                        {
-                            id: 4,
-                            title: "Project Status Update",
-                            description: "Weekly progress report sent to client. Project is on track for the March 30th launch date.",
-                            time: "5 days ago",
-                            icon: "fas fa-chart-line"
-                        }
-                    ]
-                };
-            }
-        }
-
-        // Update the UI with project data
-        function updateProjectUI() {
-            const projectData = getProjectData();
-            
-            // Update project overview
-            document.getElementById('projectName').textContent = projectData.name;
-            document.getElementById('overallProgress').textContent = `${projectData.progress}%`;
-            document.getElementById('daysRemaining').textContent = projectData.daysRemaining;
-            document.getElementById('tasksCompleted').textContent = `${projectData.tasksCompleted}/${projectData.totalTasks}`;
-            document.getElementById('teamMembers').textContent = projectData.teamMembers;
-            document.getElementById('progressPercentage').textContent = `${projectData.progress}%`;
-            document.getElementById('progressFill').style.width = `${projectData.progress}%`;
-            
-            // Update timeline
-            const timelineContainer = document.getElementById('projectTimeline');
-            timelineContainer.innerHTML = '';
-            
-            projectData.timeline.forEach(milestone => {
-                const timelineItem = document.createElement('div');
-                timelineItem.className = `timeline-item ${milestone.status}`;
-                timelineItem.innerHTML = `
-                    <div class="timeline-content">
-                        <div class="timeline-date">${milestone.date}</div>
-                        <h4 class="timeline-title">${milestone.title}</h4>
-                        <p class="timeline-description">${milestone.description}</p>
-                        <span class="status-badge status-${milestone.status}">${milestone.status.charAt(0).toUpperCase() + milestone.status.slice(1)}</span>
-                    </div>
-                `;
-                timelineContainer.appendChild(timestoneItem);
-            });
-            
-            // Update live updates
-            const updatesContainer = document.getElementById('updatesFeed');
-            updatesContainer.innerHTML = '';
-            
-            projectData.updates.forEach(update => {
-                const updateItem = document.createElement('div');
-                updateItem.className = 'update-item';
-                updateItem.innerHTML = `
-                    <div class="update-icon">
-                        <i class="${update.icon}"></i>
-                    </div>
-                    <div class="update-content">
-                        <div class="update-header">
-                            <h4 class="update-title">${update.title}</h4>
-                            <span class="update-time">${update.time}</span>
-                        </div>
-                        <p class="update-description">${update.description}</p>
-                    </div>
-                `;
-                updatesContainer.appendChild(updateItem);
-            });
-        }
-
-        // === REAL-TIME UPDATES ===
-        function checkForUpdates() {
-            // Check for updates every 5 seconds
-            setInterval(() => {
-                updateProjectUI();
-            }, 5000);
-        }
-
-        // === MAGNETIC BUTTON EFFECT ===
-        function addMagneticEffect() {
-            const buttons = document.querySelectorAll('.btn, .support-card, .metric-card');
-
-            buttons.forEach(button => {
-                button.addEventListener('mousemove', (e) => {
-                    const rect = button.getBoundingClientRect();
-                    const x = e.clientX - rect.left - rect.width / 2;
-                    const y = e.clientY - rect.top - rect.height / 2;
-
-                    button.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px) scale(1.03)`;
-                });
-
-                button.addEventListener('mouseleave', () => {
-                    button.style.transform = 'translate(0, 0) scale(1)';
-                });
-            });
-        }
-
-        // Initialize magnetic effect on desktop
-        if (window.innerWidth > 768) {
-            addMagneticEffect();
-        }
-
         // === SMOOTH SCROLLING ===
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -1978,11 +2231,14 @@
             });
         });
 
-        // === INITIALIZE ON LOAD ===
+        // === INITIALIZATION ===
         document.addEventListener('DOMContentLoaded', () => {
             checkFade();
             updateProjectUI();
-            checkForUpdates();
+            setupRealTimeUpdates();
+            
+            // Start real-time polling
+            RealTimeUpdates.startPolling();
             
             // Show welcome message after a short delay
             setTimeout(() => {

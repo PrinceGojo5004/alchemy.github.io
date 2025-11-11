@@ -18,9 +18,23 @@
             --accent-bronze: #8B7355;
             --accent-silver: #C0C0C0;
             --accent-emerald: #143627;
+            --accent-deep-purple: #2D1B69;
+            --accent-electric-blue: #0066FF;
+            --accent-neon-pink: #FF00FF;
+            --accent-cyber-teal: #00FFE0;
+            
             --gradient-primary: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-bronze) 100%);
             --gradient-dark: linear-gradient(135deg, var(--primary-dark) 0%, #1a1a1a 100%);
-            --gradient-hero: linear-gradient(135deg, #0A0A0A 0%, #143627 50%, #0A0A0A 100%);
+            --gradient-hero: linear-gradient(135deg, #0A0A0A 0%, #143627 50%, #2D1B69 100%);
+            --gradient-luxury: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-emerald) 50%, var(--accent-deep-purple) 100%);
+            --gradient-rainbow: linear-gradient(90deg, #C9A96E, #8B7355, #143627, #2D1B69, #0066FF);
+            --gradient-neon: linear-gradient(45deg, var(--accent-gold), var(--accent-electric-blue), var(--accent-neon-pink), var(--accent-cyber-teal));
+            --gradient-holographic: linear-gradient(45deg, 
+                rgba(201, 169, 110, 0.8) 0%, 
+                rgba(0, 102, 255, 0.6) 25%, 
+                rgba(255, 0, 255, 0.6) 50%, 
+                rgba(0, 255, 224, 0.6) 75%, 
+                rgba(201, 169, 110, 0.8) 100%);
             
             --transition-slow: 0.8s cubic-bezier(0.19, 1, 0.22, 1);
             --transition-medium: 0.5s cubic-bezier(0.19, 1, 0.22, 1);
@@ -31,14 +45,17 @@
             --shadow-intense: 0 30px 60px rgba(0, 0, 0, 0.18);
             --shadow-glow: 0 0 60px rgba(201, 169, 110, 0.15);
             --shadow-gold-intense: 0 0 100px rgba(201, 169, 110, 0.3);
+            --shadow-electric: 0 0 30px rgba(0, 102, 255, 0.5);
+            --shadow-neon: 0 0 20px rgba(255, 0, 255, 0.7), 0 0 40px rgba(0, 255, 224, 0.5);
             
             --border-radius: 16px;
             --border-radius-lg: 24px;
             --border-radius-xl: 36px;
             
-            --section-padding: clamp(6rem, 12vw, 12rem) 0;
+            --section-padding: clamp(8rem, 15vw, 15rem) 0;
             --glass-bg: rgba(255, 255, 255, 0.08);
             --glass-border: rgba(255, 255, 255, 0.12);
+            --hologram-bg: rgba(255, 255, 255, 0.1);
         }
 
         * {
@@ -62,6 +79,7 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             position: relative;
+            cursor: none;
         }
 
         /* === CUSTOM CURSOR === */
@@ -75,6 +93,7 @@
             z-index: 9999;
             mix-blend-mode: difference;
             transition: transform 0.2s ease;
+            filter: drop-shadow(0 0 10px rgba(201, 169, 110, 0.7));
         }
 
         .cursor-follower {
@@ -86,6 +105,7 @@
             pointer-events: none;
             z-index: 9998;
             transition: all 0.6s ease;
+            backdrop-filter: blur(5px);
         }
 
         /* === SCROLL PROGRESS === */
@@ -95,9 +115,10 @@
             left: 0;
             width: 0%;
             height: 4px;
-            background: var(--gradient-primary);
+            background: var(--gradient-neon);
             z-index: 10000;
             transition: width 0.1s ease-out;
+            box-shadow: var(--shadow-neon);
         }
 
         /* === PRELOADER === */
@@ -122,13 +143,28 @@
 
         .preloader-logo {
             font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
+            font-size: 4rem;
             font-weight: 700;
-            margin-bottom: 2rem;
-            background: var(--gradient-primary);
+            margin-bottom: 3rem;
+            background: var(--gradient-neon);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            position: relative;
+            animation: textGlow 2s ease-in-out infinite alternate;
+        }
+
+        .preloader-logo::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--gradient-neon);
+            border-radius: 3px;
+            animation: widthPulse 2s ease-in-out infinite;
         }
 
         .loader {
@@ -138,13 +174,81 @@
             border-radius: 50%;
             border-top-color: var(--accent-gold);
             animation: spin 1s ease-in-out infinite;
-            margin: 0 auto 2rem;
+            margin: 0 auto 3rem;
+            position: relative;
+        }
+
+        .loader::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: var(--accent-emerald);
+            animation: spin 1.5s ease-in-out infinite;
+        }
+
+        .loader::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: var(--accent-deep-purple);
+            animation: spin 2s ease-in-out infinite;
         }
 
         .preloader-text {
             font-size: 1.2rem;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             text-transform: uppercase;
+            background: var(--gradient-neon);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+            animation: textGlow 2s ease-in-out infinite alternate;
+        }
+
+        .loading-bar {
+            width: 300px;
+            height: 4px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 2px;
+            margin: 2rem auto 0;
+            overflow: hidden;
+        }
+
+        .loading-progress {
+            width: 0%;
+            height: 100%;
+            background: var(--gradient-neon);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+            box-shadow: var(--shadow-neon);
+        }
+
+        /* === HOLOGRAM BACKGROUND EFFECT === */
+        .hologram-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            pointer-events: none;
+            opacity: 0.03;
+            background: 
+                linear-gradient(90deg, transparent 50%, rgba(201, 169, 110, 0.1) 50%),
+                linear-gradient(transparent 50%, rgba(0, 102, 255, 0.1) 50%);
+            background-size: 50px 50px;
+            animation: hologramMove 20s linear infinite;
         }
 
         /* === ENHANCED ANIMATED BACKGROUND === */
@@ -210,17 +314,17 @@
         }
 
         h1 {
-            font-size: clamp(3.5rem, 7vw, 7rem);
+            font-size: clamp(4rem, 8vw, 8rem);
             letter-spacing: -0.02em;
         }
 
         h2 {
-            font-size: clamp(2.8rem, 5vw, 5rem);
+            font-size: clamp(3rem, 6vw, 6rem);
             position: relative;
         }
 
         h3 {
-            font-size: clamp(2rem, 3.5vw, 3.5rem);
+            font-size: clamp(2.2rem, 4vw, 4rem);
         }
 
         p {
@@ -238,9 +342,9 @@
         /* === LAYOUT === */
         .container {
             width: 100%;
-            max-width: 1600px;
+            max-width: 1800px;
             margin: 0 auto;
-            padding: 0 clamp(1.5rem, 4vw, 3rem);
+            padding: 0 clamp(1.5rem, 4vw, 4rem);
         }
 
         section {
@@ -257,7 +361,7 @@
         }
 
         .section-header {
-            margin-bottom: 6rem;
+            margin-bottom: 8rem;
         }
 
         .section-header h2 {
@@ -267,11 +371,13 @@
         .section-header h2:after {
             content: '';
             position: absolute;
-            bottom: -10px;
+            bottom: -15px;
             left: 0;
-            width: 60px;
-            height: 3px;
-            background: var(--accent-gold);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient-neon);
+            border-radius: 4px;
+            box-shadow: var(--shadow-neon);
         }
 
         .text-center .section-header h2:after {
@@ -290,7 +396,7 @@
             border: none;
             border-radius: var(--border-radius);
             font-weight: 700;
-            cursor: pointer;
+            cursor: none;
             transition: var(--transition-medium);
             position: relative;
             overflow: hidden;
@@ -312,7 +418,7 @@
             left: 0;
             width: 0;
             height: 100%;
-            background: var(--gradient-dark);
+            background: var(--gradient-neon);
             transition: var(--transition-medium);
             z-index: -1;
         }
@@ -335,10 +441,11 @@
         }
 
         .btn:hover {
-            color: var(--accent-gold);
+            color: var(--primary-dark);
             transform: translateY(-5px);
             box-shadow:
                 0 15px 40px rgba(201, 169, 110, 0.5),
+                var(--shadow-neon),
                 inset 0 1px 0 rgba(255, 255, 255, 0.4);
         }
 
@@ -379,7 +486,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(30px) saturate(180%);
             -webkit-backdrop-filter: blur(30px) saturate(180%);
             z-index: 1000;
@@ -394,7 +501,9 @@
             box-shadow:
                 0 4px 30px rgba(0, 0, 0, 0.08),
                 0 0 1px rgba(201, 169, 110, 0.2);
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(40px) saturate(200%);
+            -webkit-backdrop-filter: blur(40px) saturate(200%);
         }
 
         .header-content {
@@ -421,7 +530,7 @@
             width: 48px;
             height: 48px;
             margin-right: 0.85rem;
-            background: var(--gradient-primary);
+            background: var(--gradient-neon);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -432,10 +541,12 @@
             font-family: 'Playfair Display', serif;
             box-shadow:
                 0 6px 20px rgba(201, 169, 110, 0.4),
+                var(--shadow-neon),
                 inset 0 -2px 8px rgba(0, 0, 0, 0.1),
                 inset 0 2px 8px rgba(255, 255, 255, 0.3);
             transition: var(--transition-medium);
             position: relative;
+            animation: logoFloat 3s ease-in-out infinite;
         }
 
         .logo-icon::before {
@@ -443,7 +554,7 @@
             position: absolute;
             inset: -2px;
             border-radius: 50%;
-            background: linear-gradient(45deg, var(--accent-gold), var(--accent-silver), var(--accent-bronze), var(--accent-gold));
+            background: var(--gradient-neon);
             background-size: 300% 300%;
             animation: gradientRotate 4s linear infinite;
             z-index: -1;
@@ -456,8 +567,10 @@
             transform: scale(1.1) rotate(360deg);
             box-shadow:
                 0 8px 25px rgba(201, 169, 110, 0.6),
+                var(--shadow-neon),
                 inset 0 -2px 8px rgba(0, 0, 0, 0.15),
                 inset 0 2px 8px rgba(255, 255, 255, 0.4);
+            animation: none;
         }
 
         .logo:hover .logo-icon::before {
@@ -484,7 +597,7 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: var(--accent-gold);
+            background: var(--gradient-neon);
             transition: var(--transition-medium);
         }
 
@@ -496,7 +609,7 @@
             display: none;
             background: none;
             border: none;
-            cursor: pointer;
+            cursor: none;
             color: var(--primary-dark);
             z-index: 1001;
             width: 30px;
@@ -522,7 +635,6 @@
             overflow: hidden;
             background: var(--gradient-hero);
             color: var(--primary-light);
-            margin-top: 0;
         }
 
         .consultation-hero::before {
@@ -549,7 +661,7 @@
 
         .hero-badge {
             display: inline-block;
-            background: var(--gradient-primary);
+            background: var(--gradient-neon);
             color: var(--primary-dark);
             padding: 0.75rem 1.5rem;
             border-radius: 25px;
@@ -558,18 +670,34 @@
             margin-bottom: 2rem;
             box-shadow:
                 0 6px 20px rgba(201, 169, 110, 0.4),
+                var(--shadow-neon),
                 inset 0 1px 0 rgba(255, 255, 255, 0.3);
             animation: badgePulse 2s ease-in-out infinite;
             text-transform: uppercase;
             letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-badge::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: shine 3s infinite;
         }
 
         .consultation-hero h1 {
             margin-bottom: 2rem;
-            background: linear-gradient(135deg, var(--primary-light) 0%, var(--accent-gold) 100%);
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--accent-gold) 50%, var(--accent-electric-blue) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            text-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            animation: textShimmer 3s ease-in-out infinite alternate;
         }
 
         .hero-description {
@@ -577,6 +705,7 @@
             margin-bottom: 3rem;
             color: var(--accent-gold-light);
             max-width: 700px;
+            line-height: 1.6;
         }
 
         .trust-indicators {
@@ -595,6 +724,9 @@
             font-weight: 700;
             color: var(--accent-gold);
             margin-bottom: 0.5rem;
+            text-shadow: 0 2px 10px rgba(201, 169, 110, 0.3);
+            animation: countUp 2s ease-out forwards;
+            opacity: 0;
         }
 
         .trust-label {
@@ -684,22 +816,25 @@
 
         .process-steps {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
             gap: 3rem;
-            margin-top: 3rem;
         }
 
         .process-step {
             text-align: center;
             padding: 4rem 3rem;
-            background: var(--primary-light);
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(30px) saturate(180%);
+            -webkit-backdrop-filter: blur(30px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.4);
             border-radius: var(--border-radius-xl);
-            box-shadow: var(--shadow-soft);
+            box-shadow:
+                var(--shadow-soft),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5);
             transition: var(--transition-medium);
             position: relative;
             overflow: hidden;
             z-index: 1;
-            border: 1px solid rgba(201, 169, 110, 0.1);
         }
 
         .process-step:before {
@@ -709,7 +844,7 @@
             left: 0;
             width: 100%;
             height: 0;
-            background: var(--gradient-primary);
+            background: var(--gradient-holographic);
             transition: var(--transition-medium);
             z-index: -1;
         }
@@ -719,8 +854,13 @@
         }
 
         .process-step:hover {
-            transform: translateY(-15px);
-            box-shadow: var(--shadow-intense);
+            transform: translateY(-15px) scale(1.03);
+            box-shadow:
+                var(--shadow-intense),
+                0 0 40px rgba(201, 169, 110, 0.2),
+                var(--shadow-neon),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            border-color: rgba(201, 169, 110, 0.3);
         }
 
         .process-step:hover .step-number,
@@ -733,7 +873,7 @@
             width: 80px;
             height: 80px;
             border-radius: 50%;
-            background: var(--accent-gold);
+            background: var(--gradient-neon);
             color: var(--primary-dark);
             display: flex;
             align-items: center;
@@ -772,6 +912,7 @@
             box-shadow:
                 var(--shadow-intense),
                 var(--shadow-glow),
+                var(--shadow-neon),
                 inset 0 1px 0 rgba(255, 255, 255, 0.1);
             overflow: hidden;
             position: relative;
@@ -781,7 +922,7 @@
         }
 
         .form-header {
-            background: var(--gradient-primary);
+            background: var(--gradient-neon);
             color: var(--primary-dark);
             padding: 4rem 3.5rem;
             text-align: center;
@@ -796,7 +937,7 @@
             left: 0;
             width: 100%;
             height: 4px;
-            background: linear-gradient(90deg, var(--accent-gold), var(--accent-bronze), var(--accent-silver), var(--accent-gold));
+            background: linear-gradient(90deg, var(--accent-gold), var(--accent-electric-blue), var(--accent-neon-pink), var(--accent-cyber-teal), var(--accent-gold));
             background-size: 200% 100%;
             animation: gradientSlide 3s linear infinite;
         }
@@ -939,7 +1080,7 @@
             left: 0;
             width: 0;
             height: 100%;
-            background: var(--accent-gold);
+            background: var(--gradient-neon);
             transition: var(--transition-medium);
             z-index: -1;
         }
@@ -1026,7 +1167,7 @@
         .success-icon {
             width: 100px;
             height: 100px;
-            background: var(--accent-gold);
+            background: var(--gradient-neon);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -1042,7 +1183,7 @@
         footer {
             background: var(--primary-dark);
             color: var(--primary-light);
-            padding: 6rem 0 3rem;
+            padding: 8rem 0 4rem;
         }
 
         .footer-content {
@@ -1082,10 +1223,14 @@
         .footer-links a {
             color: var(--accent-gold-light);
             transition: var(--transition-fast);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .footer-links a:hover {
             color: var(--accent-gold);
+            transform: translateX(5px);
         }
 
         .footer-bottom {
@@ -1177,6 +1322,59 @@
             100% { background-position: 200% 50%; }
         }
 
+        @keyframes bounce {
+            0%, 20%, 60%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-20px);
+            }
+            80% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        @keyframes textGlow {
+            0% { text-shadow: 0 0 20px rgba(201, 169, 110, 0.5); }
+            100% { text-shadow: 0 0 30px rgba(201, 169, 110, 0.8), 0 0 40px rgba(0, 102, 255, 0.6); }
+        }
+
+        @keyframes textShimmer {
+            0% { background-position: -100% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        @keyframes widthPulse {
+            0%, 100% { width: 100px; }
+            50% { width: 150px; }
+        }
+
+        @keyframes countUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes hologramMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 50px 50px; }
+        }
+
         .fade-in {
             opacity: 0;
             transform: translateY(30px);
@@ -1206,6 +1404,9 @@
             opacity: 0;
             transition: transform var(--transition-medium), opacity var(--transition-medium);
             max-width: 400px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(201, 169, 110, 0.2);
         }
 
         .toast.active {
@@ -1217,12 +1418,13 @@
             width: 24px;
             height: 24px;
             border-radius: 50%;
-            background: var(--accent-gold);
+            background: var(--gradient-neon);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 0.8rem;
             color: var(--primary-dark);
+            font-weight: bold;
         }
 
         /* === MEDIA QUERIES === */
@@ -1233,6 +1435,10 @@
         }
 
         @media (max-width: 768px) {
+            body {
+                cursor: auto;
+            }
+            
             .header-content {
                 position: relative;
             }
@@ -1242,15 +1448,15 @@
                 top: 100%;
                 left: 0;
                 width: 100%;
-                background: white;
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
                 box-shadow: var(--shadow-medium);
                 padding: 2rem 0;
                 transform: translateY(-10px);
                 opacity: 0;
                 visibility: hidden;
                 transition: var(--transition-medium);
-                backdrop-filter: blur(20px);
-                -webkit-backdrop-filter: blur(20px);
             }
             
             nav.active {
@@ -1326,7 +1532,7 @@
             }
             
             section {
-                padding: 4rem 0;
+                padding: 5rem 0;
             }
             
             .process-step,
@@ -1342,9 +1548,15 @@
         <div class="preloader-content">
             <div class="preloader-logo">Alchemy Lumière</div>
             <div class="loader"></div>
+            <div class="loading-bar">
+                <div class="loading-progress" id="loadingProgress"></div>
+            </div>
             <div class="preloader-text">Preparing Your Consultation</div>
         </div>
     </div>
+
+    <!-- Hologram Background -->
+    <div class="hologram-bg"></div>
 
     <!-- Custom Cursor -->
     <div class="cursor"></div>
@@ -1673,14 +1885,30 @@
         <div class="toast-message">Action completed successfully</div>
     </div>
 
+    <!-- Include the shared app.js file -->
+    <script src="app.js"></script>
+    
     <script>
         // === PRELOADER ===
         window.addEventListener('load', function() {
             const preloader = document.getElementById('preloader');
+            const loadingProgress = document.getElementById('loadingProgress');
+            
+            // Simulate loading progress
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 15;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                }
+                loadingProgress.style.width = progress + '%';
+            }, 200);
+            
             setTimeout(() => {
                 preloader.style.opacity = '0';
                 preloader.style.visibility = 'hidden';
-            }, 1500);
+            }, 2500);
         });
 
         // === CUSTOM CURSOR ===
@@ -1784,22 +2012,6 @@
             });
         });
 
-        // === TOAST NOTIFICATION ===
-        function showToast(message, type = 'success') {
-            const toast = document.getElementById('toast');
-            const toastIcon = toast.querySelector('.toast-icon');
-            
-            toastIcon.textContent = type === 'success' ? '✓' : '⚠️';
-            toastIcon.style.background = type === 'success' ? 'var(--accent-gold)' : '#dc2626';
-            
-            toast.querySelector('.toast-message').textContent = message;
-            toast.classList.add('active');
-            
-            setTimeout(() => {
-                toast.classList.remove('active');
-            }, 4000);
-        }
-
         // === FADE IN ELEMENTS ON SCROLL ===
         function checkFade() {
             const fadeElements = document.querySelectorAll('.fade-in');
@@ -1842,95 +2054,6 @@
             addMagneticEffect();
         }
 
-        // === FORM VALIDATION ===
-        function validateForm() {
-            const email = document.getElementById('email').value;
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            
-            if (!emailRegex.test(email)) {
-                showToast('Please enter a valid email address', 'error');
-                return false;
-            }
-            
-            const projectDetails = document.getElementById('projectDetails').value;
-            if (projectDetails.length < 20) {
-                showToast('Please provide more details about your project vision', 'error');
-                return false;
-            }
-            
-            return true;
-        }
-
-        // === FORM SUBMISSION ===
-        const consultationForm = document.getElementById('consultationForm');
-        const formSuccess = document.getElementById('formSuccess');
-        const submitBtn = document.getElementById('submitBtn');
-
-        consultationForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            if (!validateForm()) return;
-            
-            // Show loading state
-            submitBtn.classList.add('btn-loading');
-            
-            // Create consultation request object
-            const consultationRequest = {
-                id: Date.now(), // Unique ID based on timestamp
-                firstName: document.getElementById('firstName').value,
-                lastName: document.getElementById('lastName').value,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
-                company: document.getElementById('company').value,
-                website: document.getElementById('website').value,
-                service: document.querySelector('input[name="service"]:checked').value,
-                timeline: document.getElementById('timeline').value,
-                budget: document.getElementById('budget').value,
-                projectDetails: document.getElementById('projectDetails').value,
-                challenges: document.getElementById('challenges').value,
-                referral: document.getElementById('referral').value,
-                date: new Date().toISOString().split('T')[0], // Current date in YYYY-MM-DD format
-                status: 'new',
-                urgency: document.getElementById('timeline').value === 'immediate' ? 'high' : 'medium'
-            };
-
-            // Get existing requests from localStorage or initialize empty array
-            const existingRequests = JSON.parse(localStorage.getItem('consultationRequests')) || [];
-            
-            // Add new request to the array
-            existingRequests.push(consultationRequest);
-            
-            // Save back to localStorage
-            localStorage.setItem('consultationRequests', JSON.stringify(existingRequests));
-            
-            // Simulate API call delay
-            setTimeout(() => {
-                // Show success message
-                consultationForm.style.display = 'none';
-                formSuccess.style.display = 'block';
-                
-                // Reset button
-                submitBtn.classList.remove('btn-loading');
-                
-                // Show success toast
-                showToast('Transformation initiated successfully!');
-                
-                // Reset form
-                consultationForm.reset();
-            }, 2000);
-        });
-
-        // === ENHANCED FORM INTERACTIONS ===
-        document.querySelectorAll('.form-control').forEach(input => {
-            input.addEventListener('focus', function() {
-                this.parentElement.style.transform = 'translateY(-2px)';
-            });
-            
-            input.addEventListener('blur', function() {
-                this.parentElement.style.transform = 'translateY(0)';
-            });
-        });
-
         // === SMOOTH SCROLLING ===
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -1949,13 +2072,119 @@
             });
         });
 
+        // === TRUST INDICATORS COUNT UP ===
+        function animateTrustIndicators() {
+            const trustValues = document.querySelectorAll('.trust-value');
+            trustValues.forEach((value, index) => {
+                setTimeout(() => {
+                    value.style.animation = 'countUp 1s ease-out forwards';
+                }, index * 200);
+            });
+        }
+
+        // === ENHANCED FORM INTERACTIONS ===
+        document.querySelectorAll('.form-control').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'translateY(-2px)';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'translateY(0)';
+            });
+        });
+
+        // === DYNAMIC FORM SUBMISSION ===
+        const consultationForm = document.getElementById('consultationForm');
+        const formSuccess = document.getElementById('formSuccess');
+
+        consultationForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            if (!validateForm()) return;
+            
+            // Show loading state
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.classList.add('btn-loading');
+            
+            // Create consultation request
+            const consultationRequest = {
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                company: document.getElementById('company').value,
+                website: document.getElementById('website').value,
+                service: document.querySelector('input[name="service"]:checked').value,
+                timeline: document.getElementById('timeline').value,
+                budget: document.getElementById('budget').value,
+                projectDetails: document.getElementById('projectDetails').value,
+                challenges: document.getElementById('challenges').value,
+                referral: document.getElementById('referral').value
+            };
+
+            // Save to localStorage using AppData
+            const savedRequest = AppData.saveConsultationRequest(consultationRequest);
+            
+            // Simulate API call delay
+            setTimeout(() => {
+                // Show success message
+                consultationForm.style.display = 'none';
+                formSuccess.style.display = 'block';
+                
+                // Reset button
+                submitBtn.classList.remove('btn-loading');
+                
+                // Show success toast
+                UIHelper.showToast('Consultation request submitted successfully!');
+                
+                // Notify admin dashboard in real-time
+                RealTimeUpdates.notify({ 
+                    type: 'newConsultation', 
+                    data: savedRequest 
+                });
+            }, 2000);
+        });
+
+        function validateForm() {
+            const email = document.getElementById('email').value;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            if (!emailRegex.test(email)) {
+                UIHelper.showToast('Please enter a valid email address', 'error');
+                return false;
+            }
+            
+            const projectDetails = document.getElementById('projectDetails').value;
+            if (projectDetails.length < 20) {
+                UIHelper.showToast('Please provide more details about your project vision', 'error');
+                return false;
+            }
+            
+            return true;
+        }
+
+        // === REAL-TIME UPDATES ===
+        function setupRealTimeUpdates() {
+            RealTimeUpdates.subscribe((data) => {
+                if (data.type === 'projectUpdate') {
+                    // You could update any real-time elements on the page if needed
+                    console.log('Project updated:', data.data);
+                }
+            });
+        }
+
         // === INITIALIZE ON LOAD ===
         document.addEventListener('DOMContentLoaded', () => {
             checkFade();
+            animateTrustIndicators();
+            setupRealTimeUpdates();
+            
+            // Start real-time polling
+            RealTimeUpdates.startPolling();
             
             // Show welcome message after a short delay
             setTimeout(() => {
-                showToast('Welcome to Alchemy Lumière Consultation');
+                UIHelper.showToast('Welcome to Alchemy Lumière Consultation');
             }, 2000);
         });
     </script>

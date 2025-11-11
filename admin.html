@@ -18,9 +18,23 @@
             --accent-bronze: #8B7355;
             --accent-silver: #C0C0C0;
             --accent-emerald: #143627;
+            --accent-deep-purple: #2D1B69;
+            --accent-electric-blue: #0066FF;
+            --accent-neon-pink: #FF00FF;
+            --accent-cyber-teal: #00FFE0;
+            
             --gradient-primary: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-bronze) 100%);
             --gradient-dark: linear-gradient(135deg, var(--primary-dark) 0%, #1a1a1a 100%);
-            --gradient-hero: linear-gradient(135deg, #0A0A0A 0%, #143627 50%, #0A0A0A 100%);
+            --gradient-hero: linear-gradient(135deg, #0A0A0A 0%, #143627 50%, #2D1B69 100%);
+            --gradient-luxury: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-emerald) 50%, var(--accent-deep-purple) 100%);
+            --gradient-rainbow: linear-gradient(90deg, #C9A96E, #8B7355, #143627, #2D1B69, #0066FF);
+            --gradient-neon: linear-gradient(45deg, var(--accent-gold), var(--accent-electric-blue), var(--accent-neon-pink), var(--accent-cyber-teal));
+            --gradient-holographic: linear-gradient(45deg, 
+                rgba(201, 169, 110, 0.8) 0%, 
+                rgba(0, 102, 255, 0.6) 25%, 
+                rgba(255, 0, 255, 0.6) 50%, 
+                rgba(0, 255, 224, 0.6) 75%, 
+                rgba(201, 169, 110, 0.8) 100%);
             
             --transition-slow: 0.8s cubic-bezier(0.19, 1, 0.22, 1);
             --transition-medium: 0.5s cubic-bezier(0.19, 1, 0.22, 1);
@@ -31,6 +45,8 @@
             --shadow-intense: 0 30px 60px rgba(0, 0, 0, 0.18);
             --shadow-glow: 0 0 60px rgba(201, 169, 110, 0.15);
             --shadow-gold-intense: 0 0 100px rgba(201, 169, 110, 0.3);
+            --shadow-electric: 0 0 30px rgba(0, 102, 255, 0.5);
+            --shadow-neon: 0 0 20px rgba(255, 0, 255, 0.7), 0 0 40px rgba(0, 255, 224, 0.5);
             
             --border-radius: 16px;
             --border-radius-lg: 24px;
@@ -39,6 +55,7 @@
             --section-padding: clamp(6rem, 12vw, 12rem) 0;
             --glass-bg: rgba(255, 255, 255, 0.08);
             --glass-border: rgba(255, 255, 255, 0.12);
+            --hologram-bg: rgba(255, 255, 255, 0.1);
         }
 
         * {
@@ -66,6 +83,137 @@
             display: flex;
             min-height: 100vh;
             position: relative;
+            cursor: none;
+        }
+
+        /* === PRELOADER === */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100000;
+            transition: opacity 0.8s var(--transition-slow), visibility 0.8s var(--transition-slow);
+        }
+
+        .preloader-content {
+            text-align: center;
+            color: var(--primary-light);
+        }
+
+        .preloader-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            background: var(--gradient-neon);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            animation: textGlow 2s ease-in-out infinite alternate;
+        }
+
+        .preloader-logo::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--gradient-neon);
+            border-radius: 3px;
+            animation: widthPulse 2s ease-in-out infinite;
+        }
+
+        .loader {
+            width: 80px;
+            height: 80px;
+            border: 3px solid rgba(201, 169, 110, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--accent-gold);
+            animation: spin 1s ease-in-out infinite;
+            margin: 0 auto 3rem;
+            position: relative;
+        }
+
+        .loader::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: var(--accent-emerald);
+            animation: spin 1.5s ease-in-out infinite;
+        }
+
+        .loader::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: var(--accent-deep-purple);
+            animation: spin 2s ease-in-out infinite;
+        }
+
+        .preloader-text {
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            background: var(--gradient-neon);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+            animation: textGlow 2s ease-in-out infinite alternate;
+        }
+
+        .loading-bar {
+            width: 300px;
+            height: 4px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 2px;
+            margin: 2rem auto 0;
+            overflow: hidden;
+        }
+
+        .loading-progress {
+            width: 0%;
+            height: 100%;
+            background: var(--gradient-neon);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+            box-shadow: var(--shadow-neon);
+        }
+
+        /* === HOLOGRAM BACKGROUND EFFECT === */
+        .hologram-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            pointer-events: none;
+            opacity: 0.03;
+            background: 
+                linear-gradient(90deg, transparent 50%, rgba(201, 169, 110, 0.1) 50%),
+                linear-gradient(transparent 50%, rgba(0, 102, 255, 0.1) 50%);
+            background-size: 50px 50px;
+            animation: hologramMove 20s linear infinite;
         }
 
         /* === CUSTOM CURSOR === */
@@ -79,6 +227,7 @@
             z-index: 9999;
             mix-blend-mode: difference;
             transition: transform 0.2s ease;
+            filter: drop-shadow(0 0 10px rgba(201, 169, 110, 0.7));
         }
 
         .cursor-follower {
@@ -90,6 +239,7 @@
             pointer-events: none;
             z-index: 9998;
             transition: all 0.6s ease;
+            backdrop-filter: blur(5px);
         }
 
         /* === SCROLL PROGRESS === */
@@ -99,9 +249,10 @@
             left: 0;
             width: 0%;
             height: 4px;
-            background: var(--gradient-primary);
+            background: var(--gradient-neon);
             z-index: 10000;
             transition: width 0.1s ease-out;
+            box-shadow: var(--shadow-neon);
         }
 
         /* === ENHANCED ANIMATED BACKGROUND === */
@@ -246,7 +397,7 @@
             border: none;
             border-radius: var(--border-radius);
             font-weight: 700;
-            cursor: pointer;
+            cursor: none;
             transition: var(--transition-medium);
             position: relative;
             overflow: hidden;
@@ -268,7 +419,7 @@
             left: 0;
             width: 0;
             height: 100%;
-            background: var(--gradient-dark);
+            background: var(--gradient-neon);
             transition: var(--transition-medium);
             z-index: -1;
         }
@@ -291,10 +442,11 @@
         }
 
         .btn:hover {
-            color: var(--accent-gold);
+            color: var(--primary-dark);
             transform: translateY(-5px);
             box-shadow:
                 0 15px 40px rgba(201, 169, 110, 0.5),
+                var(--shadow-neon),
                 inset 0 1px 0 rgba(255, 255, 255, 0.4);
         }
 
@@ -365,7 +517,7 @@
 
         /* === PREMIUM GLASS SIDEBAR === */
         .sidebar {
-            width: 300px;
+            width: 320px;
             background: rgba(10, 10, 10, 0.85);
             backdrop-filter: blur(30px) saturate(180%);
             -webkit-backdrop-filter: blur(30px) saturate(180%);
@@ -379,10 +531,11 @@
             overflow-y: auto;
             border-right: 1px solid var(--glass-border);
             box-shadow: 10px 0 30px rgba(0, 0, 0, 0.1);
+            padding: 2rem 0;
         }
 
         .sidebar-header {
-            padding: 2.5rem 2rem;
+            padding: 0 2rem 2rem;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             position: relative;
             overflow: hidden;
@@ -432,6 +585,7 @@
                 inset 0 2px 8px rgba(255, 255, 255, 0.3);
             transition: var(--transition-medium);
             position: relative;
+            animation: logoFloat 3s ease-in-out infinite;
         }
 
         .logo-icon::before {
@@ -439,7 +593,7 @@
             position: absolute;
             inset: -2px;
             border-radius: 50%;
-            background: linear-gradient(45deg, var(--accent-gold), var(--accent-silver), var(--accent-bronze), var(--accent-gold));
+            background: var(--gradient-neon);
             background-size: 300% 300%;
             animation: gradientRotate 4s linear infinite;
             z-index: -1;
@@ -452,8 +606,10 @@
             transform: scale(1.1) rotate(360deg);
             box-shadow:
                 0 8px 25px rgba(201, 169, 110, 0.6),
+                var(--shadow-neon),
                 inset 0 -2px 8px rgba(0, 0, 0, 0.15),
                 inset 0 2px 8px rgba(255, 255, 255, 0.4);
+            animation: none;
         }
 
         .logo:hover .logo-icon::before {
@@ -465,7 +621,7 @@
         }
 
         .nav-item {
-            padding: 1rem 2rem;
+            padding: 1.25rem 2rem;
             display: flex;
             align-items: center;
             transition: var(--transition-medium);
@@ -473,6 +629,7 @@
             position: relative;
             overflow: hidden;
             border-left: 4px solid transparent;
+            margin-bottom: 0.5rem;
         }
 
         .nav-item:before {
@@ -510,7 +667,7 @@
         /* === MAIN CONTENT WITH GLASS EFFECT === */
         .main-content {
             flex: 1;
-            margin-left: 300px;
+            margin-left: 320px;
             padding: 2.5rem;
             transition: var(--transition-medium);
             position: relative;
@@ -521,7 +678,7 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 2.5rem;
-            padding: 2rem;
+            padding: 2.5rem;
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
@@ -1131,95 +1288,21 @@
             display: none;
             background: none;
             border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
+            cursor: none;
             color: var(--primary-light);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition-fast);
-            background: rgba(255, 255, 255, 0.05);
+            z-index: 1001;
+            width: 30px;
+            height: 30px;
+            position: relative;
         }
 
-        .mobile-menu-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        /* === ENHANCED RESPONSIVE DESIGN === */
-        @media (max-width: 1200px) {
-            .sidebar {
-                width: 260px;
-            }
-            
-            .main-content {
-                margin-left: 260px;
-            }
-            
-            .project-management-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 992px) {
-            .sidebar {
-                transform: translateX(-100%);
-                width: 300px;
-            }
-            
-            .sidebar.active {
-                transform: translateX(0);
-            }
-            
-            .main-content {
-                margin-left: 0;
-            }
-            
-            .mobile-menu-btn {
-                display: flex;
-            }
-            
-            .detail-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .preview-metrics {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .admin-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 1.5rem;
-            }
-            
-            .admin-actions {
-                width: 100%;
-                justify-content: space-between;
-            }
-            
-            .stats-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .table-container {
-                overflow-x: auto;
-            }
-            
-            table {
-                min-width: 800px;
-            }
-            
-            .search-box input {
-                width: 180px;
-            }
-            
-            .main-content {
-                padding: 1.5rem;
-            }
+        .mobile-menu-btn span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background: var(--primary-light);
+            margin: 6px 0;
+            transition: var(--transition-medium);
         }
 
         /* === PSYCHOLOGICAL PERSUASION ELEMENTS === */
@@ -1357,6 +1440,36 @@
             }
         }
 
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        @keyframes textGlow {
+            0% { text-shadow: 0 0 20px rgba(201, 169, 110, 0.5); }
+            100% { text-shadow: 0 0 30px rgba(201, 169, 110, 0.8), 0 0 40px rgba(0, 102, 255, 0.6); }
+        }
+
+        @keyframes widthPulse {
+            0%, 100% { width: 100px; }
+            50% { width: 150px; }
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes hologramMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 50px 50px; }
+        }
+
         .fade-in {
             opacity: 0;
             transform: translateY(30px);
@@ -1367,9 +1480,115 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* === ENHANCED RESPONSIVE DESIGN === */
+        @media (max-width: 1200px) {
+            .sidebar {
+                width: 280px;
+            }
+            
+            .main-content {
+                margin-left: 280px;
+            }
+            
+            .project-management-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .sidebar {
+                transform: translateX(-100%);
+                width: 320px;
+            }
+            
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .mobile-menu-btn {
+                display: flex;
+            }
+            
+            .detail-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .preview-metrics {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                cursor: auto;
+            }
+            
+            .admin-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1.5rem;
+            }
+            
+            .admin-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .table-container {
+                overflow-x: auto;
+            }
+            
+            table {
+                min-width: 800px;
+            }
+            
+            .search-box input {
+                width: 180px;
+            }
+            
+            .main-content {
+                padding: 1.5rem;
+            }
+
+            .mobile-menu-btn.active span:nth-child(1) {
+                transform: rotate(45deg) translate(6px, 6px);
+            }
+
+            .mobile-menu-btn.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .mobile-menu-btn.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(6px, -6px);
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <div class="preloader-logo">Alchemy Lumière</div>
+            <div class="loader"></div>
+            <div class="loading-bar">
+                <div class="loading-progress" id="loadingProgress"></div>
+            </div>
+            <div class="preloader-text">Initializing Executive Dashboard</div>
+        </div>
+    </div>
+
+    <!-- Hologram Background -->
+    <div class="hologram-bg"></div>
+
     <!-- Custom Cursor -->
     <div class="cursor"></div>
     <div class="cursor-follower"></div>
@@ -1394,12 +1613,12 @@
             </a>
         </div>
         <div class="sidebar-nav">
-            <div class="nav-item" data-section="consultations">
+            <div class="nav-item active" data-section="consultations">
                 <i class="fas fa-calendar-check nav-icon"></i>
                 <span>Consultations</span>
                 <span class="urgency-badge" id="newRequestsBadge">0 NEW</span>
             </div>
-            <div class="nav-item active" data-section="projects">
+            <div class="nav-item" data-section="projects">
                 <i class="fas fa-project-diagram nav-icon"></i>
                 <span>Project Management</span>
             </div>
@@ -1425,11 +1644,13 @@
     <!-- Main Content -->
     <div class="main-content">
         <!-- Consultation Requests Section -->
-        <section id="consultations-section" class="dashboard-section" style="display: none;">
+        <section id="consultations-section" class="dashboard-section">
             <div class="admin-header">
                 <div>
                     <button class="mobile-menu-btn" id="mobileMenuBtn">
-                        <i class="fas fa-bars"></i>
+                        <span></span>
+                        <span></span>
+                        <span></span>
                     </button>
                     <h1 class="admin-title">Consultation Requests</h1>
                     <p class="admin-subtitle">Manage and review all consultation submissions</p>
@@ -1511,11 +1732,13 @@
         </section>
 
         <!-- Project Management Section -->
-        <section id="projects-section" class="dashboard-section">
+        <section id="projects-section" class="dashboard-section" style="display: none;">
             <div class="admin-header">
                 <div>
                     <button class="mobile-menu-btn" id="mobileMenuBtn">
-                        <i class="fas fa-bars"></i>
+                        <span></span>
+                        <span></span>
+                        <span></span>
                     </button>
                     <h1 class="admin-title">Project Management</h1>
                     <p class="admin-subtitle">Manage client projects and track progress</p>
@@ -1720,6 +1943,207 @@
     </div>
 
     <script>
+        // === DATA MANAGEMENT ===
+        class AppData {
+            // Consultation Requests
+            static getConsultationRequests() {
+                return JSON.parse(localStorage.getItem('consultationRequests')) || [];
+            }
+
+            static saveConsultationRequest(request) {
+                const requests = this.getConsultationRequests();
+                request.id = Date.now();
+                request.status = 'new';
+                request.date = new Date().toISOString();
+                requests.push(request);
+                localStorage.setItem('consultationRequests', JSON.stringify(requests));
+                return request;
+            }
+
+            static updateConsultationStatus(requestId, status) {
+                const requests = this.getConsultationRequests();
+                const request = requests.find(req => req.id === requestId);
+                if (request) {
+                    request.status = status;
+                    localStorage.setItem('consultationRequests', JSON.stringify(requests));
+                }
+            }
+
+            // Project Data
+            static getProjectData() {
+                const defaultProject = {
+                    name: "LuxeBrand Global Website",
+                    description: "Complete website redesign with e-commerce integration and AI-powered personalization",
+                    progress: 75,
+                    daysRemaining: 14,
+                    tasksCompleted: 24,
+                    totalTasks: 32,
+                    teamMembers: 5,
+                    timeline: [
+                        {
+                            id: 1,
+                            title: "Project Kickoff",
+                            description: "Initial meeting to establish project goals, timeline, and deliverables.",
+                            date: "2025-01-10",
+                            status: "completed"
+                        },
+                        {
+                            id: 2,
+                            title: "Design Phase",
+                            description: "Creation of wireframes, mockups, and design concepts for approval.",
+                            date: "2025-01-25",
+                            status: "completed"
+                        },
+                        {
+                            id: 3,
+                            title: "Development Phase",
+                            description: "Implementation of frontend and backend functionality.",
+                            date: "2025-02-15",
+                            status: "active"
+                        },
+                        {
+                            id: 4,
+                            title: "Content Integration",
+                            description: "Adding client-provided content and media to the website.",
+                            date: "2025-03-01",
+                            status: "upcoming"
+                        }
+                    ],
+                    updates: [
+                        {
+                            id: 1,
+                            title: "Development Milestone Reached",
+                            description: "The backend API integration has been completed successfully. Frontend development is now 80% complete.",
+                            time: "2 hours ago",
+                            icon: "fas fa-code"
+                        },
+                        {
+                            id: 2,
+                            title: "Design Review Completed",
+                            description: "Client feedback has been incorporated into the design revisions. Final mockups approved.",
+                            time: "1 day ago",
+                            icon: "fas fa-palette"
+                        }
+                    ]
+                };
+
+                const storedProject = localStorage.getItem('clientProject');
+                return storedProject ? JSON.parse(storedProject) : defaultProject;
+            }
+
+            static saveProjectData(projectData) {
+                localStorage.setItem('clientProject', JSON.stringify(projectData));
+            }
+
+            static addProjectUpdate(update) {
+                const projectData = this.getProjectData();
+                update.id = Date.now();
+                update.time = "Just now";
+                projectData.updates.unshift(update);
+                this.saveProjectData(projectData);
+                return update;
+            }
+
+            static addTimelineItem(item) {
+                const projectData = this.getProjectData();
+                item.id = Date.now();
+                projectData.timeline.push(item);
+                this.saveProjectData(projectData);
+                return item;
+            }
+
+            static updateProjectProgress(progressData) {
+                const projectData = this.getProjectData();
+                Object.assign(projectData, progressData);
+                this.saveProjectData(projectData);
+                return projectData;
+            }
+        }
+
+        // === REAL-TIME UPDATES ===
+        class RealTimeUpdates {
+            static listeners = new Set();
+
+            static subscribe(callback) {
+                this.listeners.add(callback);
+            }
+
+            static unsubscribe(callback) {
+                this.listeners.delete(callback);
+            }
+
+            static notify(data) {
+                this.listeners.forEach(callback => callback(data));
+            }
+
+            static startPolling() {
+                // Simulate real-time updates every 5 seconds
+                setInterval(() => {
+                    const projectData = AppData.getProjectData();
+                    this.notify({ type: 'projectUpdate', data: projectData });
+                }, 5000);
+            }
+        }
+
+        // === COMMON UI FUNCTIONS ===
+        class UIHelper {
+            static showToast(message, type = 'success') {
+                const toast = document.getElementById('toast');
+                if (!toast) return;
+
+                const toastIcon = toast.querySelector('.toast-icon');
+                toastIcon.innerHTML = type === 'success' ? '<i class="fas fa-check"></i>' : '<i class="fas fa-exclamation"></i>';
+                toastIcon.style.background = type === 'success' ? 'var(--accent-gold)' : '#dc2626';
+                
+                toast.querySelector('.toast-message').textContent = message;
+                toast.classList.add('active');
+                
+                setTimeout(() => {
+                    toast.classList.remove('active');
+                }, 4000);
+            }
+
+            static formatDate(dateString) {
+                const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                return new Date(dateString).toLocaleDateString(undefined, options);
+            }
+
+            static getTimeAgo(timestamp) {
+                const now = new Date();
+                const diff = now - new Date(timestamp);
+                const minutes = Math.floor(diff / 60000);
+                const hours = Math.floor(diff / 3600000);
+                const days = Math.floor(diff / 86400000);
+
+                if (days > 0) return `${days} day${days > 1 ? 's' : ''} ago`;
+                if (hours > 0) return `${hours} hour${hours > 1 ? 's' : ''} ago`;
+                if (minutes > 0) return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+                return 'Just now';
+            }
+        }
+
+        // === PRELOADER ===
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            const loadingProgress = document.getElementById('loadingProgress');
+            
+            // Simulate loading progress
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 15;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                }
+                loadingProgress.style.width = progress + '%';
+            }, 200);
+            
+            setTimeout(() => {
+                preloader.style.opacity = '0';
+                preloader.style.visibility = 'hidden';
+            }, 2500);
+        });
+
         // === CUSTOM CURSOR ===
         const cursor = document.querySelector('.cursor');
         const cursorFollower = document.querySelector('.cursor-follower');
@@ -1792,6 +2216,7 @@
         mobileMenuBtn.addEventListener('click', () => {
             sidebar.classList.toggle('active');
             document.body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : 'auto';
+            mobileMenuBtn.classList.toggle('active');
         });
 
         // === NAVIGATION BETWEEN SECTIONS ===
@@ -1817,116 +2242,136 @@
                 if (window.innerWidth < 992) {
                     sidebar.classList.remove('active');
                     document.body.style.overflow = 'auto';
+                    mobileMenuBtn.classList.remove('active');
                 }
             });
         });
 
-        // === PROJECT DATA MANAGEMENT ===
-        // Get project data from localStorage
-        function getProjectData() {
-            const defaultProject = {
-                name: "LuxeBrand Global Website",
-                description: "Complete website redesign with e-commerce integration and AI-powered personalization",
-                progress: 75,
-                daysRemaining: 14,
-                tasksCompleted: 24,
-                totalTasks: 32,
-                teamMembers: 5,
-                timeline: [
-                    {
-                        id: 1,
-                        title: "Project Kickoff",
-                        description: "Initial meeting to establish project goals, timeline, and deliverables.",
-                        date: "2025-01-10",
-                        status: "completed"
-                    },
-                    {
-                        id: 2,
-                        title: "Design Phase",
-                        description: "Creation of wireframes, mockups, and design concepts for approval.",
-                        date: "2025-01-25",
-                        status: "completed"
-                    },
-                    {
-                        id: 3,
-                        title: "Development Phase",
-                        description: "Implementation of frontend and backend functionality.",
-                        date: "2025-02-15",
-                        status: "active"
-                    },
-                    {
-                        id: 4,
-                        title: "Content Integration",
-                        description: "Adding client-provided content and media to the website.",
-                        date: "2025-03-01",
-                        status: "upcoming"
-                    },
-                    {
-                        id: 5,
-                        title: "Testing & QA",
-                        description: "Comprehensive testing across devices and browsers.",
-                        date: "2025-03-15",
-                        status: "upcoming"
-                    },
-                    {
-                        id: 6,
-                        title: "Launch",
-                        description: "Final deployment and go-live of the completed website.",
-                        date: "2025-03-30",
-                        status: "upcoming"
-                    }
-                ],
-                updates: [
-                    {
-                        id: 1,
-                        title: "Development Milestone Reached",
-                        description: "The backend API integration has been completed successfully. Frontend development is now 80% complete.",
-                        time: "2 hours ago",
-                        icon: "fas fa-code"
-                    },
-                    {
-                        id: 2,
-                        title: "Design Review Completed",
-                        description: "Client feedback has been incorporated into the design revisions. Final mockups approved.",
-                        time: "1 day ago",
-                        icon: "fas fa-palette"
-                    },
-                    {
-                        id: 3,
-                        title: "Content Strategy Session",
-                        description: "Collaborative session to finalize content structure and SEO strategy.",
-                        time: "3 days ago",
-                        icon: "fas fa-file-alt"
-                    },
-                    {
-                        id: 4,
-                        title: "Project Status Update",
-                        description: "Weekly progress report sent to client. Project is on track for the March 30th launch date.",
-                        time: "5 days ago",
-                        icon: "fas fa-chart-line"
-                    }
-                ]
-            };
+        // === CONSULTATION REQUESTS MANAGEMENT ===
+        function loadConsultationRequests() {
+            const requests = AppData.getConsultationRequests();
+            const tbody = document.getElementById('consultationTableBody');
+            
+            if (!tbody) return;
 
-            // Check if project data exists in localStorage
-            const storedProject = localStorage.getItem('clientProject');
-            if (storedProject) {
-                return JSON.parse(storedProject);
-            } else {
-                // Save default project data to localStorage
-                localStorage.setItem('clientProject', JSON.stringify(defaultProject));
-                return defaultProject;
+            tbody.innerHTML = '';
+
+            requests.forEach(request => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${request.firstName} ${request.lastName}</td>
+                    <td>${request.company}</td>
+                    <td>${request.service}</td>
+                    <td>${request.budget}</td>
+                    <td>${UIHelper.formatDate(request.date)}</td>
+                    <td>
+                        <span class="status-badge status-${request.status}">
+                            ${request.status.charAt(0).toUpperCase() + request.status.slice(1)}
+                        </span>
+                    </td>
+                    <td class="action-buttons">
+                        <button class="btn btn-small btn-outline" onclick="viewRequestDetails(${request.id})">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="btn btn-small" onclick="updateRequestStatus(${request.id}, 'contacted')">
+                            <i class="fas fa-check"></i>
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+
+            updateConsultationStats(requests);
+        }
+
+        function updateConsultationStats(requests) {
+            const totalRequests = requests.length;
+            const newRequests = requests.filter(req => req.status === 'new').length;
+            const contactedRequests = requests.filter(req => req.status === 'contacted').length;
+            const completedRequests = requests.filter(req => req.status === 'completed').length;
+
+            document.getElementById('totalRequests').textContent = totalRequests;
+            document.getElementById('newRequests').textContent = newRequests;
+            document.getElementById('contactedRequests').textContent = contactedRequests;
+            document.getElementById('completedRequests').textContent = completedRequests;
+            document.getElementById('newRequestsBadge').textContent = `${newRequests} NEW`;
+
+            // Update progress bars
+            document.getElementById('totalProgress').style.width = '100%';
+            document.getElementById('newProgress').style.width = `${(newRequests / totalRequests) * 100}%`;
+            document.getElementById('contactedProgress').style.width = `${(contactedRequests / totalRequests) * 100}%`;
+            document.getElementById('completedProgress').style.width = `${(completedRequests / totalRequests) * 100}%`;
+        }
+
+        function viewRequestDetails(requestId) {
+            const requests = AppData.getConsultationRequests();
+            const request = requests.find(req => req.id === requestId);
+            
+            if (request) {
+                const modalBody = document.getElementById('modalBody');
+                modalBody.innerHTML = `
+                    <div class="detail-grid">
+                        <div class="detail-item">
+                            <div class="detail-label">Name</div>
+                            <div class="detail-value">${request.firstName} ${request.lastName}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Email</div>
+                            <div class="detail-value">${request.email}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Phone</div>
+                            <div class="detail-value">${request.phone}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Company</div>
+                            <div class="detail-value">${request.company}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Service</div>
+                            <div class="detail-value">${request.service}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Timeline</div>
+                            <div class="detail-value">${request.timeline}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Budget</div>
+                            <div class="detail-value">${request.budget}</div>
+                        </div>
+                        <div class="detail-item full-width">
+                            <div class="detail-label">Project Details</div>
+                            <div class="detail-value">${request.projectDetails}</div>
+                        </div>
+                        <div class="detail-item full-width">
+                            <div class="detail-label">Challenges</div>
+                            <div class="detail-value">${request.challenges}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Referral Source</div>
+                            <div class="detail-value">${request.referral}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Submission Date</div>
+                            <div class="detail-value">${UIHelper.formatDate(request.date)}</div>
+                        </div>
+                    </div>
+                `;
+                
+                const modal = document.getElementById('detailModal');
+                modal.classList.add('active');
             }
         }
 
-        // Save project data to localStorage
-        function saveProjectData(projectData) {
-            localStorage.setItem('clientProject', JSON.stringify(projectData));
+        function updateRequestStatus(requestId, status) {
+            AppData.updateConsultationStatus(requestId, status);
+            loadConsultationRequests();
+            UIHelper.showToast(`Request status updated to ${status}`);
         }
 
-        // Update project form with current data
-        function updateProjectForm() {
-            const projectData = getProjectData();
+        // === PROJECT MANAGEMENT ===
+        function loadProjectData() {
+            const projectData = AppData.getProjectData();
             
             // Update form fields
             document.getElementById('projectName').value = projectData.name;
@@ -1938,19 +2383,13 @@
             document.getElementById('totalTasks').value = projectData.totalTasks;
             document.getElementById('teamMembers').value = projectData.teamMembers;
             
-            // Update preview
             updateProjectPreview();
-            
-            // Update timeline
             updateTimelineUI();
-            
-            // Update updates
             updateUpdatesUI();
         }
 
-        // Update project preview
         function updateProjectPreview() {
-            const projectData = getProjectData();
+            const projectData = AppData.getProjectData();
             
             document.getElementById('previewProjectName').textContent = projectData.name;
             document.getElementById('previewProjectDescription').textContent = projectData.description;
@@ -1962,9 +2401,53 @@
             document.getElementById('previewProgressFill').style.width = `${projectData.progress}%`;
         }
 
-        // Update timeline UI
+        function saveProjectChanges() {
+            const projectData = {
+                name: document.getElementById('projectName').value,
+                description: document.getElementById('projectDescription').value,
+                progress: parseInt(document.getElementById('projectProgress').value),
+                daysRemaining: parseInt(document.getElementById('daysRemaining').value),
+                tasksCompleted: parseInt(document.getElementById('tasksCompleted').value),
+                totalTasks: parseInt(document.getElementById('totalTasks').value),
+                teamMembers: parseInt(document.getElementById('teamMembers').value)
+            };
+
+            AppData.updateProjectProgress(projectData);
+            updateProjectPreview();
+            UIHelper.showToast('Project changes saved successfully');
+            
+            // Notify client portal
+            RealTimeUpdates.notify({ 
+                type: 'projectUpdate', 
+                data: AppData.getProjectData() 
+            });
+        }
+
+        function addMilestone() {
+            const title = document.getElementById('milestoneTitle').value;
+            const description = document.getElementById('milestoneDescription').value;
+            const date = document.getElementById('milestoneDate').value;
+            const status = document.getElementById('milestoneStatus').value;
+            
+            if (!title || !description || !date) {
+                UIHelper.showToast('Please fill in all milestone fields', 'error');
+                return;
+            }
+            
+            const milestone = { title, description, date, status };
+            AppData.addTimelineItem(milestone);
+            updateTimelineUI();
+            
+            // Clear form
+            document.getElementById('milestoneTitle').value = '';
+            document.getElementById('milestoneDescription').value = '';
+            document.getElementById('milestoneDate').value = '';
+            
+            UIHelper.showToast('Milestone added successfully');
+        }
+
         function updateTimelineUI() {
-            const projectData = getProjectData();
+            const projectData = AppData.getProjectData();
             const timelineContainer = document.getElementById('timelineItems');
             timelineContainer.innerHTML = '';
             
@@ -1974,40 +2457,53 @@
                 timelineItem.innerHTML = `
                     <div class="timeline-item-content">
                         <h4>${milestone.title}</h4>
-                        <p>${milestone.description} - ${milestone.date}</p>
-                        <span class="status-badge status-${milestone.status}">${milestone.status.charAt(0).toUpperCase() + milestone.status.slice(1)}</span>
+                        <p>${milestone.description} - ${UIHelper.formatDate(milestone.date)}</p>
+                        <span class="status-badge status-${milestone.status}">
+                            ${milestone.status.charAt(0).toUpperCase() + milestone.status.slice(1)}
+                        </span>
                     </div>
                     <div class="timeline-item-actions">
-                        <button class="btn btn-small btn-outline edit-milestone" data-id="${milestone.id}">
+                        <button class="btn btn-small btn-outline" onclick="editMilestone(${milestone.id})">
                             <i class="fas fa-edit"></i>
                         </button>
-                        <button class="btn btn-small btn-danger delete-milestone" data-id="${milestone.id}">
+                        <button class="btn btn-small btn-danger" onclick="deleteMilestone(${milestone.id})">
                             <i class="fas fa-trash"></i>
                         </button>
                     </div>
                 `;
                 timelineContainer.appendChild(timelineItem);
             });
+        }
+
+        function addUpdate() {
+            const title = document.getElementById('updateTitle').value;
+            const description = document.getElementById('updateDescription').value;
+            const icon = document.getElementById('updateIcon').value;
             
-            // Add event listeners for timeline actions
-            document.querySelectorAll('.edit-milestone').forEach(button => {
-                button.addEventListener('click', (e) => {
-                    const milestoneId = parseInt(e.target.closest('button').getAttribute('data-id'));
-                    editMilestone(milestoneId);
-                });
-            });
+            if (!title || !description) {
+                UIHelper.showToast('Please fill in all update fields', 'error');
+                return;
+            }
             
-            document.querySelectorAll('.delete-milestone').forEach(button => {
-                button.addEventListener('click', (e) => {
-                    const milestoneId = parseInt(e.target.closest('button').getAttribute('data-id'));
-                    deleteMilestone(milestoneId);
-                });
+            const update = { title, description, icon };
+            AppData.addProjectUpdate(update);
+            updateUpdatesUI();
+            
+            // Clear form
+            document.getElementById('updateTitle').value = '';
+            document.getElementById('updateDescription').value = '';
+            
+            UIHelper.showToast('Update added successfully');
+            
+            // Notify client portal
+            RealTimeUpdates.notify({ 
+                type: 'newUpdate', 
+                data: update 
             });
         }
 
-        // Update updates UI
         function updateUpdatesUI() {
-            const projectData = getProjectData();
+            const projectData = AppData.getProjectData();
             const updatesContainer = document.getElementById('updatesList');
             updatesContainer.innerHTML = '';
             
@@ -2021,179 +2517,59 @@
                     </div>
                     <p class="update-description">${update.description}</p>
                     <div class="action-buttons" style="margin-top: 1rem;">
-                        <button class="btn btn-small btn-outline edit-update" data-id="${update.id}">
+                        <button class="btn btn-small btn-outline" onclick="editUpdate(${update.id})">
                             <i class="fas fa-edit"></i> Edit
                         </button>
-                        <button class="btn btn-small btn-danger delete-update" data-id="${update.id}">
+                        <button class="btn btn-small btn-danger" onclick="deleteUpdate(${update.id})">
                             <i class="fas fa-trash"></i> Delete
                         </button>
                     </div>
                 `;
                 updatesContainer.appendChild(updateItem);
             });
+        }
+
+        // === EVENT LISTENERS ===
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load initial data
+            loadConsultationRequests();
+            loadProjectData();
             
-            // Add event listeners for update actions
-            document.querySelectorAll('.edit-update').forEach(button => {
-                button.addEventListener('click', (e) => {
-                    const updateId = parseInt(e.target.closest('button').getAttribute('data-id'));
-                    editUpdate(updateId);
-                });
+            // Set up real-time updates
+            RealTimeUpdates.subscribe((data) => {
+                if (data.type === 'newConsultation') {
+                    loadConsultationRequests();
+                    UIHelper.showToast('New consultation request received!');
+                }
             });
-            
-            document.querySelectorAll('.delete-update').forEach(button => {
-                button.addEventListener('click', (e) => {
-                    const updateId = parseInt(e.target.closest('button').getAttribute('data-id'));
-                    deleteUpdate(updateId);
-                });
+
+            // Project form event listeners
+            document.getElementById('saveProjectBtn').addEventListener('click', saveProjectChanges);
+            document.getElementById('addMilestoneBtn').addEventListener('click', addMilestone);
+            document.getElementById('addUpdateBtn').addEventListener('click', addUpdate);
+
+            // Progress slider
+            const progressSlider = document.getElementById('projectProgress');
+            progressSlider.addEventListener('input', () => {
+                document.getElementById('progressValue').textContent = `${progressSlider.value}%`;
             });
-        }
 
-        // Save project changes
-        function saveProjectChanges() {
-            const projectData = getProjectData();
-            
-            // Update project data from form
-            projectData.name = document.getElementById('projectName').value;
-            projectData.description = document.getElementById('projectDescription').value;
-            projectData.progress = parseInt(document.getElementById('projectProgress').value);
-            projectData.daysRemaining = parseInt(document.getElementById('daysRemaining').value);
-            projectData.tasksCompleted = parseInt(document.getElementById('tasksCompleted').value);
-            projectData.totalTasks = parseInt(document.getElementById('totalTasks').value);
-            projectData.teamMembers = parseInt(document.getElementById('teamMembers').value);
-            
-            // Save to localStorage
-            saveProjectData(projectData);
-            
-            // Update preview
-            updateProjectPreview();
-            
-            // Show success message
-            showToast('Project changes saved successfully');
-        }
+            // Modal close
+            document.getElementById('modalClose').addEventListener('click', () => {
+                document.getElementById('detailModal').classList.remove('active');
+            });
 
-        // Add new milestone
-        function addMilestone() {
-            const title = document.getElementById('milestoneTitle').value;
-            const description = document.getElementById('milestoneDescription').value;
-            const date = document.getElementById('milestoneDate').value;
-            const status = document.getElementById('milestoneStatus').value;
-            
-            if (!title || !description || !date) {
-                showToast('Please fill in all milestone fields', 'error');
-                return;
-            }
-            
-            const projectData = getProjectData();
-            const newMilestone = {
-                id: Date.now(),
-                title,
-                description,
-                date,
-                status
-            };
-            
-            projectData.timeline.push(newMilestone);
-            saveProjectData(projectData);
-            updateTimelineUI();
-            
-            // Clear form
-            document.getElementById('milestoneTitle').value = '';
-            document.getElementById('milestoneDescription').value = '';
-            document.getElementById('milestoneDate').value = '';
-            document.getElementById('milestoneStatus').value = 'upcoming';
-            
-            showToast('Milestone added successfully');
-        }
+            // Refresh button
+            document.getElementById('refreshBtn').addEventListener('click', () => {
+                loadConsultationRequests();
+                UIHelper.showToast('Data refreshed successfully');
+            });
 
-        // Edit milestone
-        function editMilestone(milestoneId) {
-            // In a real application, this would open an edit form
-            showToast(`Editing milestone #${milestoneId}`);
-        }
-
-        // Delete milestone
-        function deleteMilestone(milestoneId) {
-            if (confirm('Are you sure you want to delete this milestone?')) {
-                const projectData = getProjectData();
-                projectData.timeline = projectData.timeline.filter(milestone => milestone.id !== milestoneId);
-                saveProjectData(projectData);
-                updateTimelineUI();
-                showToast('Milestone deleted successfully');
-            }
-        }
-
-        // Add new update
-        function addUpdate() {
-            const title = document.getElementById('updateTitle').value;
-            const description = document.getElementById('updateDescription').value;
-            const icon = document.getElementById('updateIcon').value;
-            
-            if (!title || !description) {
-                showToast('Please fill in all update fields', 'error');
-                return;
-            }
-            
-            const projectData = getProjectData();
-            const newUpdate = {
-                id: Date.now(),
-                title,
-                description,
-                time: "Just now",
-                icon
-            };
-            
-            projectData.updates.unshift(newUpdate);
-            saveProjectData(projectData);
-            updateUpdatesUI();
-            
-            // Clear form
-            document.getElementById('updateTitle').value = '';
-            document.getElementById('updateDescription').value = '';
-            document.getElementById('updateIcon').value = 'fas fa-code';
-            
-            showToast('Update added successfully');
-        }
-
-        // Edit update
-        function editUpdate(updateId) {
-            // In a real application, this would open an edit form
-            showToast(`Editing update #${updateId}`);
-        }
-
-        // Delete update
-        function deleteUpdate(updateId) {
-            if (confirm('Are you sure you want to delete this update?')) {
-                const projectData = getProjectData();
-                projectData.updates = projectData.updates.filter(update => update.id !== updateId);
-                saveProjectData(projectData);
-                updateUpdatesUI();
-                showToast('Update deleted successfully');
-            }
-        }
-
-        // === PROGRESS SLIDER UPDATE ===
-        const progressSlider = document.getElementById('projectProgress');
-        const progressValue = document.getElementById('progressValue');
-
-        progressSlider.addEventListener('input', () => {
-            progressValue.textContent = `${progressSlider.value}%`;
+            UIHelper.showToast('Admin dashboard loaded successfully');
         });
 
-        // === TOAST NOTIFICATION ===
-        function showToast(message, type = 'success') {
-            const toast = document.getElementById('toast');
-            const toastIcon = toast.querySelector('.toast-icon');
-            
-            toastIcon.innerHTML = type === 'success' ? '<i class="fas fa-check"></i>' : '<i class="fas fa-exclamation"></i>';
-            toastIcon.style.background = type === 'success' ? 'var(--accent-gold)' : '#dc2626';
-            
-            toast.querySelector('.toast-message').textContent = message;
-            toast.classList.add('active');
-            
-            setTimeout(() => {
-                toast.classList.remove('active');
-            }, 4000);
-        }
+        // Start real-time polling
+        RealTimeUpdates.startPolling();
 
         // === FADE IN ELEMENTS ON SCROLL ===
         function checkFade() {
@@ -2213,28 +2589,13 @@
         window.addEventListener('scroll', checkFade);
         window.addEventListener('load', checkFade);
 
-        // === EVENT LISTENERS ===
-        document.getElementById('saveProjectBtn').addEventListener('click', saveProjectChanges);
-        document.getElementById('addMilestoneBtn').addEventListener('click', addMilestone);
-        document.getElementById('addUpdateBtn').addEventListener('click', addUpdate);
-
-        // === INITIALIZE ON LOAD ===
-        document.addEventListener('DOMContentLoaded', () => {
-            checkFade();
-            updateProjectForm();
-            
-            // Show welcome message after a short delay
-            setTimeout(() => {
-                showToast('Welcome to your Alchemy Lumière dashboard');
-            }, 1000);
-        });
-
         // Close sidebar when clicking on a nav item on mobile
         document.querySelectorAll('.nav-item').forEach(item => {
             item.addEventListener('click', () => {
                 if (window.innerWidth < 992) {
                     sidebar.classList.remove('active');
                     document.body.style.overflow = 'auto';
+                    mobileMenuBtn.classList.remove('active');
                 }
             });
         });
